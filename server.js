@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
-// const customRoutes = require('./routes/custom.routes');
+// const productsRoutes = require('./routes/products.routes');
 
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 /* API ENDPOINTS */
-// app.use('/api', customRoutes);
+app.use('/api', require('./routes/products.routes'));
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
