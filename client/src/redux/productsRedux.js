@@ -4,6 +4,11 @@ import { API_URL } from '../config';
 /* selectors */
 export const getAll = ({ products }) => products.data;
 
+export const getProductById = ({ products }, productId) => {
+  const filteredProduct = products.data.filter(product => product._id === productId);
+  return filteredProduct.length ? filteredProduct[0] : { error: true };
+};
+
 /* action name creator */
 const reducerName = 'products';
 const createActionName = name => `app/${reducerName}/${name}`;
