@@ -1,0 +1,35 @@
+@import "../../../styles/settings.scss";
+
+.root {
+  border-radius: 2px;
+  // background-color: $color-light;
+  margin: 20px 10px;
+  transition: $transition-transform;
+
+  &:hover {
+    transform: translate(-5px, 5px);
+  }
+
+  h3 {
+    font-size: 1.8rem;
+  }
+
+  img {
+    object-fit: cover;
+    overflow: hidden;
+    height: 250px;
+    width: 100%;
+  }
+
+  a,
+  a:hover {
+    // color: $color-secondary;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 1.1rem;
+    opacity: 0.6;
+  }
+}

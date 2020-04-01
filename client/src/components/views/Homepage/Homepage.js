@@ -1,37 +1,50 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
+import { getAll, loadProductsRequest } from '../../../redux/productsRedux.js';
+import { ProductCard } from '../../features/ProductCard/ProductCard';
 import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
+import Grid from '@material-ui/core/Grid';
 import styles from './Homepage.module.scss';
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>Homepage</h2>
-    {children}
-  </div>
-);
+class Component extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+    products: PropTypes.array,
+    loadProducts: PropTypes.func,
+  };
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
+  componentWillMount() {
+    this.props.loadProducts();
+  }
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+  render() {
+    const { className, products } = this.props;
+    return (
+      <div className={clsx(className, styles.root)}>
+        <Grid container>
+          {products.map(product => (
+            <ProductCard key={product._id} {...product} />
+          ))}
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+        </Grid>
+      </div>
+    );
+  }
+}
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const mapStateToProps = state => ({
+  products: getAll(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadProducts: () => dispatch(loadProductsRequest()),
+});
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as Homepage,
-  // Container as Homepage,
+  // Component as Homepage,
+  Container as Homepage,
   Component as HomepageComponent,
 };
