@@ -14,9 +14,9 @@ const clientSchema = new mongoose.Schema({
 });
 
 const orderSchema = new mongoose.Schema({
-  orderedProducts: [orderedProductsSchema],
-  client: [clientSchema],
-  orderValue: { type: Number, required: true },
+  products: [orderedProductsSchema],
+  client: { clientSchema },
+  total: { type: Number, required: true },
 },
   { versionKey: false }
 );

@@ -6,4 +6,9 @@ export const initialState = {
       error: false,
     },
   },
+  order: {
+    products: [],
+    client: null,
+    total: 0,
+  },
 };
