@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import { Cart } from '../../features/Cart/Cart';
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -8,9 +8,10 @@ import clsx from 'clsx';
 
 import styles from './Header.module.scss';
 
-const Component = ({className, children}) => (
+const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
-    <h2>Header</h2>
+    <h1>Natural Beauty Shop</h1>
+    <Cart />
     {children}
   </div>
 );
