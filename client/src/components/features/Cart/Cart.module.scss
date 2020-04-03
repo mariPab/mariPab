@@ -9,7 +9,6 @@
 
 .head {
   height: 40px;
-  padding: 5px 15px;
 }
 .expand {
   transform: rotate(0deg);
@@ -19,4 +18,17 @@
 
 .expandOpen {
   transform: rotate(180deg);
+}
+
+.items {
+  padding: 5px;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  span {
+    padding: 3px 7px;
+    font-size: 0.8rem;
+  }
 }
