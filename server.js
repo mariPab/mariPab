@@ -3,8 +3,6 @@ const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
 
-// const productsRoutes = require('./routes/products.routes');
-
 const app = express();
 
 /* MIDDLEWARE */
@@ -16,6 +14,7 @@ app.use(express.static(path.join(__dirname, './public')));
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
+app.use('/api', require('./routes/order.routes'));
 
 /* API ERROR PAGES */
 app.use('/api', (req, res) => {
