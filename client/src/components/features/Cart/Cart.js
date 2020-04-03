@@ -8,13 +8,14 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+import { connect } from 'react-redux';
+import { getOrder } from '../../../redux/orderRedux.js';
 
 import styles from './Cart.module.scss';
-
-const Component = ({ className, children }) => {
+import { CartItem } from '../CartItem/CartItem';
+const Component = ({ className, children, order }) => {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -25,6 +26,8 @@ const Component = ({ className, children }) => {
   return (
     <Card className={clsx(className, styles.root)}>
       <CardActions className={styles.head} disableSpacing>
+        <ShoppingCartIcon />
+        <span>{order.total} zł</span>
         <IconButton
           className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
           onClick={handleExpandClick}
@@ -35,7 +38,10 @@ const Component = ({ className, children }) => {
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
+        <CardContent className={styles.items}>
+          {order.products.map(product => (
+            <CartItem id={product._id} key={product._id} />
+          ))}
           <Typography>
             Podsumowanie zamówienia
           </Typography>
@@ -48,20 +54,21 @@ const Component = ({ className, children }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
+  order: PropTypes.object,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+const mapStateToProps = state => ({
+  order: getOrder(state),
+});
 
 // const mapDispatchToProps = dispatch => ({
 //   someAction: arg => dispatch(reduxActionCreator(arg)),
 // });
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, null)(Component);
 
 export {
-  Component as Cart,
-  // Container as Cart,
+  // Component as Cart,
+  Container as Cart,
   Component as CartComponent,
 };
