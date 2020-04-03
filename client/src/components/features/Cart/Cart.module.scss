@@ -1,14 +1,19 @@
 @import "../../../styles/settings.scss";
 
 .root {
-  width: 250px;
+  width: 300px;
   position: absolute;
   left: 50px;
   top: 250px;
+  border-bottom: 1px solid $color-decorator;
 }
 
 .head {
   height: 40px;
+  & > span {
+    font-weight: 700;
+    margin-left: 15px;
+  }
 }
 .expand {
   transform: rotate(0deg);
@@ -20,15 +25,33 @@
   transform: rotate(180deg);
 }
 
-.items {
-  padding: 5px;
+p {
+  color: $color-decorator;
+  font-size: 0.8rem;
+  font-weight: 700;
 }
 
 .summary {
   display: flex;
   justify-content: space-between;
   span {
-    padding: 3px 7px;
+    padding: 3px 0;
     font-size: 0.8rem;
+  }
+}
+
+.link {
+  display: block;
+  color: $color-light;
+  padding: 10px 15px;
+  background-color: $color-decorator;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 3px;
+  text-decoration: none;
+  margin: 15px 5px 10px 0;
+  float: right;
+  &:hover {
+    background-color: lighten($color-decorator, 5%);
   }
 }

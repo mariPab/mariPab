@@ -8,12 +8,12 @@ import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import { getOrder } from '../../../redux/orderRedux.js';
 import { NavLink } from 'react-router-dom';
-import styles from './Cart.module.scss';
 import { CartItem } from '../CartItem/CartItem';
+import styles from './Cart.module.scss';
+
 const Component = ({ className, children, order }) => {
 
   const [expanded, setExpanded] = useState(false);
@@ -25,7 +25,7 @@ const Component = ({ className, children, order }) => {
   return (
     <Card className={clsx(className, styles.root)}>
       <CardActions className={styles.head} disableSpacing>
-        <ShoppingCartIcon />
+        <ShoppingCartIcon color="secondary" />
         <span>{order.total} zł</span>
         <IconButton
           className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
@@ -38,9 +38,15 @@ const Component = ({ className, children, order }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={styles.items}>
-          {order.products.map(product => (
+          {order.products.length ? (order.products.map(product => (
             <CartItem id={product._id} key={product._id} />
-          ))}
+          ))) :
+            (
+              <small className={styles.noProducts}>
+                <i>Brak produktów w koszyku</i>
+              </small>
+            )
+          }
           <p>
             Podsumowanie zamówienia
           </p>
@@ -52,11 +58,9 @@ const Component = ({ className, children, order }) => {
             <span>Wartość zamówienia: </span>
             <span>{order.total} zł</span>
           </div>
-          <Button variant="outlined" color="primary">
-            <NavLink exact to="/order">
-              Składam zamówienie
-            </NavLink>
-          </Button>
+          <NavLink className={styles.link} exact to="/order">
+            zamawiam
+          </NavLink>
         </CardContent>
       </Collapse>
     </Card>
