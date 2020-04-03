@@ -15,8 +15,10 @@ const Component = ({ product }) => {
           alt={product.name}
         />
       </div>
-      <span>{product.name}</span>
-      <span>{product.price}</span>
+      <div className={styles.productData}>
+        <span>{product.name}</span>
+        <small>{product.price} zł</small>
+      </div>
     </div>
   );
 };
