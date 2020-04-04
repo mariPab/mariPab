@@ -4,11 +4,13 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
+import Fab from '@material-ui/core/Fab';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { IMAGES_URL } from '../../../config';
 import Grid from '@material-ui/core/Grid';
 import styles from './ProductCard.module.scss';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const Component = ({ className, _id, name, images, manufacturer, price }) => (
   <Grid item xs={10} sm={5} lg={3} className={clsx(className, styles.root)}>
@@ -20,15 +22,18 @@ const Component = ({ className, _id, name, images, manufacturer, price }) => (
           title={name}
         />
         <CardContent>
-          <Typography component="h4">
+          <span>
             {manufacturer}
-          </Typography>
-          <Typography component="h3">
+          </span>
+          <h3>
             {name}
-          </Typography>
-          <Typography component="p">
-            {price}
-          </Typography>
+          </h3>
+          <small>
+            {price} zł
+          </small>
+          <Fab color="secondary" size="small">
+            <ShoppingCartIcon />
+          </Fab>
         </CardContent>
       </Card>
     </NavLink>
