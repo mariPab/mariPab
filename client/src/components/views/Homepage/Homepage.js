@@ -21,14 +21,11 @@ class Component extends React.Component {
   render() {
     const { className, products } = this.props;
     return (
-      <div className={clsx(className, styles.root)}>
-        <Grid container>
-          {products.map(product => (
-            <ProductCard key={product._id} {...product} />
-          ))}
-
-        </Grid>
-      </div>
+      <Grid container>
+        {products.map(product => (
+          <ProductCard key={product._id} {...product} />
+        ))}
+      </Grid>
     );
   }
 }
