@@ -1,9 +1,9 @@
 /* selectors */
-export const getOrder = ({ order }) => order;
-export const getProductFromOrderData = ({ order }, productId) => order.products.filter(product => product._id === productId)[0];
+export const getCart = ({ cart }) => cart;
+export const getProductFromCart = ({ cart }, productId) => cart.products.filter(product => product._id === productId)[0];
 
 /* action name creator */
-const reducerName = 'order';
+const reducerName = 'cart';
 const createActionName = name => `app/${reducerName}/${name}`;
 
 /* action types */
@@ -54,7 +54,7 @@ export const reducer = (statePart = [], action = {}) => {
     case ADD_TO_CART: {
       return {
         ...statePart,
-        order: {
+        cart: {
           products: [...statePart, { ...action.payload }],
           total: statePart.total + action.payload.price,
         },

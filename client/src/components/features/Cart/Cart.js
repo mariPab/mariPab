@@ -9,12 +9,12 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
-import { getOrder } from '../../../redux/orderRedux.js';
+import { getCart } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
 import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 
-const Component = ({ className, children, order }) => {
+const Component = ({ className, children, cart }) => {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -26,7 +26,7 @@ const Component = ({ className, children, order }) => {
     <Card className={clsx(className, styles.root)}>
       <CardActions className={styles.head} disableSpacing>
         <ShoppingCartIcon color="secondary" />
-        <span>{order.total} zł</span>
+        <span>{cart.total} zł</span>
         <IconButton
           className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
           onClick={handleExpandClick}
@@ -38,7 +38,7 @@ const Component = ({ className, children, order }) => {
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={styles.items}>
-          {order.products.length ? (order.products.map(product => (
+          {cart.products.length ? (cart.products.map(product => (
             <CartItem id={product._id} key={product._id} />
           ))) :
             (
@@ -52,11 +52,11 @@ const Component = ({ className, children, order }) => {
           </p>
           <div className={styles.summary}>
             <span>ilość produktów:</span>
-            <span>{order.products.length}</span>
+            <span>{cart.products.length}</span>
           </div>
           <div className={styles.summary}>
             <span>Wartość zamówienia: </span>
-            <span>{order.total} zł</span>
+            <span>{cart.total} zł</span>
           </div>
           <NavLink className={styles.link} exact to="/order">
             zamawiam
@@ -70,11 +70,11 @@ const Component = ({ className, children, order }) => {
 Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
-  order: PropTypes.object,
+  cart: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
-  order: getOrder(state),
+  cart: getCart(state),
 });
 
 // const mapDispatchToProps = dispatch => ({

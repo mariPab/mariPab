@@ -4,7 +4,7 @@ import { IMAGES_URL } from '../../../config';
 import styles from './CartItem.module.scss';
 
 import { connect } from 'react-redux';
-import { getProductFromOrderData } from '../../../redux/orderRedux.js';
+import { getProductFromCart } from '../../../redux/cartRedux.js';
 
 const Component = ({ product }) => {
   return (
@@ -28,7 +28,7 @@ Component.propTypes = {
 };
 
 const mapStateToProps = (state, props) => ({
-  product: getProductFromOrderData(state, props.id),
+  product: getProductFromCart(state, props.id),
 });
 
 // const mapDispatchToProps = dispatch => ({

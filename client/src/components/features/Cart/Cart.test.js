@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { CartComponent } from './Cart';
 
 const mockProps = {
-  order: {
+  cart: {
     products: [{
       name: 'cosmetic name',
       images: ['anc.jpeg'],
