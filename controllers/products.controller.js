@@ -12,8 +12,7 @@ exports.loadAll = async (req, res) => {
 
 exports.loadProductById = async (req, res) => {
   try {
-    console.log(req.params);
-    const product = await Product.find({ _id: req.params.id });
+    const product = await Product.findOne({ _id: req.params.id });
     if (!product) res.status(404).json({ product: 'Not Found' });
     else res.json(product);
   } catch (err) {

@@ -3,11 +3,7 @@ import { API_URL } from '../config';
 
 /* selectors */
 export const getAll = ({ products }) => products.data;
-
-export const getProductById = ({ products }, productId) => {
-  const filteredProduct = products.data.filter(product => product._id === productId);
-  return filteredProduct.length ? filteredProduct[0] : { error: true };
-};
+export const getProductById = ({ products }) => products.opened;
 
 /* action name creator */
 const reducerName = 'products';
@@ -17,11 +13,13 @@ const createActionName = name => `app/${reducerName}/${name}`;
 const FETCH_START = createActionName('FETCH_START');
 const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
+const FETCH_PRODUCT_BY_ID = createActionName('FETCH_PRODUCT_BY_ID');
 
 /* action creators */
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
+export const fetchPostById = payload => ({ payload, type: FETCH_PRODUCT_BY_ID });
 
 /* thunk creators */
 export const loadProductsRequest = () => {
@@ -30,6 +28,19 @@ export const loadProductsRequest = () => {
     try {
       let res = await axios.get(`${API_URL}/products`);
       dispatch(fetchSuccess(res.data));
+    } catch (e) {
+      dispatch(fetchError(e.message || true));
+    }
+  };
+};
+
+export const loadProductByIdRequest = id => {
+  return async dispatch => {
+    dispatch(fetchStarted());
+    try {
+      let res = await axios.get(`${API_URL}/products/${id}`);
+      console.log(res.data);
+      dispatch(fetchPostById(res.data));
     } catch (e) {
       dispatch(fetchError(e.message || true));
     }
@@ -49,6 +60,7 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCH_SUCCESS: {
+      console.log(action.payload);
       return {
         ...statePart,
         loading: {
@@ -56,6 +68,17 @@ export const reducer = (statePart = [], action = {}) => {
           error: false,
         },
         data: action.payload,
+      };
+    }
+    case FETCH_PRODUCT_BY_ID: {
+      console.log(action.payload);
+      return {
+        ...statePart,
+        loading: {
+          active: false,
+          error: false,
+        },
+        opened: action.payload,
       };
     }
     case FETCH_ERROR: {
