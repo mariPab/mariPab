@@ -6,7 +6,6 @@ export const initialState = {
       error: false,
     },
   },
-  openedProduct: null,
   cart: {
     products: [],
     total: 0,
