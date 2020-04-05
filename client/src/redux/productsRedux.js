@@ -39,7 +39,6 @@ export const loadProductByIdRequest = id => {
     dispatch(fetchStarted());
     try {
       let res = await axios.get(`${API_URL}/products/${id}`);
-      console.log(res.data);
       dispatch(fetchPostById(res.data));
     } catch (e) {
       dispatch(fetchError(e.message || true));
@@ -60,7 +59,6 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCH_SUCCESS: {
-      console.log(action.payload);
       return {
         ...statePart,
         loading: {
@@ -71,7 +69,6 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCH_PRODUCT_BY_ID: {
-      console.log(action.payload);
       return {
         ...statePart,
         loading: {
