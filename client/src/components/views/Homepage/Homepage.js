@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getAll, loadProductsRequest } from '../../../redux/productsRedux.js';
 import { ProductCard } from '../../features/ProductCard/ProductCard';
-import clsx from 'clsx';
 import Grid from '@material-ui/core/Grid';
-import styles from './Homepage.module.scss';
 
 class Component extends React.Component {
   static propTypes = {
@@ -19,7 +17,7 @@ class Component extends React.Component {
   }
 
   render() {
-    const { className, products } = this.props;
+    const { products } = this.props;
     return (
       <Grid container>
         {products.map(product => (
