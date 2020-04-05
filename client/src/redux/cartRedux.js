@@ -55,11 +55,24 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
-      return {
-        ...statePart,
-        products: statePart.products.length ? [...statePart.products, { ...action.payload, amount: 1 }] : [{ ...action.payload, amount: 1 }],
-        total: statePart.total + action.payload.price,
-      };
+      const { products, total } = statePart;
+      if (products.length) {
+        let isProductInCart = false;
+        for (let item of products) {
+          if (item._id === action.payload._id) isProductInCart = true;
+        }
+        return {
+          ...statePart,
+          products: isProductInCart ? [...products] : [...products, { ...action.payload, amount: 1 }],
+          total: isProductInCart ? total : total + action.payload.price,
+        };
+      } else {
+        return {
+          ...statePart,
+          products: [{ ...action.payload, amount: 1 }],
+          total: total + action.payload.price,
+        };
+      }
     }
     case CHANGE_AMOUNT: {
       return {
