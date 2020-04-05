@@ -13,10 +13,11 @@ import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
 import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
+import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 
-const countProductsInCart = productsList => {
-  return productsList.reduce((total, product) => product.amount + total, 0);
-};
+// const countProductsInCart = productsList => {
+//   return productsList.reduce((total, product) => product.amount + total, 0);
+// };
 
 const Component = ({ className, cart, total }) => {
 
