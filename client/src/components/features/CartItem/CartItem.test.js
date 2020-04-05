@@ -11,6 +11,7 @@ const mockProps = {
     price: 40,
   },
   changeAmount: jest.fn(),
+  removeProduct: jest.fn(),
 };
 
 describe('Component CartItem', () => {

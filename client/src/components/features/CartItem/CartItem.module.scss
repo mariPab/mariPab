@@ -36,3 +36,18 @@
   display: flex;
   justify-content: space-between;
 }
+
+.manageItems {
+  display: flex;
+  margin-left: 10px;
+  input {
+    width: 45px;
+    padding: 5px;
+  }
+  button {
+    padding: 0;
+  }
+  span {
+    padding: 0;
+  }
+}
