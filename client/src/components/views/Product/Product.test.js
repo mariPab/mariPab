@@ -15,6 +15,7 @@ const mockProps = {
     },
   },
   loadProduct: jest.fn(),
+  addToCart: jest.fn(),
 };
 
 describe('Component Product', () => {

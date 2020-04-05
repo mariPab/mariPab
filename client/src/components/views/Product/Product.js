@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import EditIcon from '@material-ui/icons/Edit';
-// import Fab from '@material-ui/core/Fab';
+import Fab from '@material-ui/core/Fab';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { IMAGES_URL } from '../../../config';
 import { NotFound } from '../../views/NotFound/NotFound';
 import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
 import { connect } from 'react-redux';
 import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
+import { addProductToCart } from '../../../redux/cartRedux.js';
 
 import styles from './Product.module.scss';
 
@@ -21,6 +22,7 @@ class Component extends React.Component {
         id: PropTypes.string,
       }),
     }),
+    addToCart: PropTypes.func,
   }
 
   componentDidMount() {
@@ -28,7 +30,7 @@ class Component extends React.Component {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, addToCart } = this.props;
     return (
       product && product._id ? (
         <div className={styles.wrapper}>
@@ -43,6 +45,9 @@ class Component extends React.Component {
               &nbsp;{product.name}
             </h3>
             <span>{product.price} zł</span>
+            <Fab onClick={() => addToCart(product)}>
+              <ShoppingCartIcon />
+            </Fab>
             <p>{product.description}</p>
           </div>
         </div>
@@ -60,6 +65,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProduct: id => dispatch(loadProductByIdRequest(id)),
+  addToCart: data => dispatch(addProductToCart(data)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

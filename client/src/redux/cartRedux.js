@@ -16,7 +16,7 @@ const ADD_TO_CART = createActionName('ADD_TO_CART');
 export const fetchStarted = payload => ({ payload, type: FETCH_START });
 export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
-export const addToCart = payload => ({ payload, type: ADD_TO_CART });
+export const addProductToCart = payload => ({ payload, type: ADD_TO_CART });
 
 /* thunk creators */
 
@@ -52,12 +52,11 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
+      console.log(statePart);
       return {
         ...statePart,
-        cart: {
-          products: [...statePart, { ...action.payload }],
-          total: statePart.total + action.payload.price,
-        },
+        products: statePart.products.length ? [...statePart.products, { ...action.payload, amount: 1 }] : [{ ...action.payload, amount: 1 }],
+        total: statePart.total + action.payload.price,
       };
     }
     default:
