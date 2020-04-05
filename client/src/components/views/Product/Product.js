@@ -1,37 +1,71 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import clsx from 'clsx';
-
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
+// import EditIcon from '@material-ui/icons/Edit';
+// import Fab from '@material-ui/core/Fab';
+import { IMAGES_URL } from '../../../config';
+import { NotFound } from '../../views/NotFound/NotFound';
+import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
+import { connect } from 'react-redux';
+import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
 
 import styles from './Product.module.scss';
 
-const Component = ({ className, children }) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>Product</h2>
-    {children}
-  </div>
-);
+class Component extends React.Component {
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-};
+  static propTypes = {
+    className: PropTypes.string,
+    product: PropTypes.array,
+    loadProduct: PropTypes.func,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        id: PropTypes.string,
+      }),
+    }),
+  }
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
+  componentDidMount() {
+    this.props.loadProduct(this.props.match.params.id);
+  }
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
+  render() {
+    const { product } = this.props;
+    return (
+      product && product._id ? (
+        <div className={styles.wrapper}>
+          <div className={styles.gallery}>
+            {product.images.map(image => (
+              <GalleryPic key={image} alt={product.name} src={`${IMAGES_URL}/${image}`} />
+            ))}
+          </div>
+          <div className={styles.content}>
+            <h3>
+              <small>{product.manufacturer}</small>
+              &nbsp;{product.name}
+            </h3>
+            <span>{product.price} zł</span>
+            <p>{product.description}</p>
+          </div>
+        </div>
+      ) :
+        (
+          <NotFound />
+        )
+    );
+  }
+}
 
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const mapStateToProps = state => ({
+  product: getProductById(state),
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadProduct: id => dispatch(loadProductByIdRequest(id)),
+});
+
+const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  Component as Product,
-  // Container as Product,
+  // Component as Product,
+  Container as Product,
   Component as ProductComponent,
 };
