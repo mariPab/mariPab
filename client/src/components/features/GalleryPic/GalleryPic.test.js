@@ -4,7 +4,7 @@ import { GalleryPicComponent } from './GalleryPic';
 
 describe('Component GalleryPic', () => {
   it('should render without crashing', () => {
-    const component = shallow(<GalleryPicComponent src="abc.jpg" />);
+    const component = shallow(<GalleryPicComponent src="abc.jpg" alt="picture" />);
     expect(component).toBeTruthy();
   });
 });
