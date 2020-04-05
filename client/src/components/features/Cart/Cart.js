@@ -9,12 +9,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import clsx from 'clsx';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
-import { getCart } from '../../../redux/cartRedux.js';
+import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
 import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 
-const Component = ({ className, children, cart }) => {
+const countProductsInCart = productsList => {
+  return productsList.reduce((total, product) => product.amount + total, 0);
+};
+
+const Component = ({ className, cart, total }) => {
 
   const [expanded, setExpanded] = useState(false);
 
@@ -26,7 +30,7 @@ const Component = ({ className, children, cart }) => {
     <Card className={clsx(className, styles.root)}>
       <CardActions className={styles.head} disableSpacing>
         <ShoppingCartIcon color="secondary" />
-        <span>{cart.total} zł</span>
+        <span>{total} zł</span>
         <IconButton
           className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
           onClick={handleExpandClick}
@@ -52,11 +56,11 @@ const Component = ({ className, children, cart }) => {
           </p>
           <div className={styles.summary}>
             <span>ilość produktów:</span>
-            <span>{cart.products.length}</span>
+            <span>{countProductsInCart(cart.products)}</span>
           </div>
           <div className={styles.summary}>
             <span>Wartość zamówienia: </span>
-            <span>{cart.total} zł</span>
+            <span>{total} zł</span>
           </div>
           <NavLink className={styles.link} exact to="/order">
             zamawiam
@@ -71,10 +75,12 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   cart: PropTypes.object,
+  total: PropTypes.number,
 };
 
 const mapStateToProps = state => ({
   cart: getCart(state),
+  total: getTotalPrice(state),
 });
 
 // const mapDispatchToProps = dispatch => ({

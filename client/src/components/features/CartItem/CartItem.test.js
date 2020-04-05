@@ -10,6 +10,7 @@ const mockProps = {
     manufacturer: 'manuf',
     price: 40,
   },
+  changeAmount: jest.fn(),
 };
 
 describe('Component CartItem', () => {
