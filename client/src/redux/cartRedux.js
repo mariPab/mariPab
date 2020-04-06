@@ -120,10 +120,8 @@ export const reducer = (statePart = [], action = {}) => {
     case SEND_ORDER: {
       return {
         ...statePart,
-        order: {
-          products: [],
-          total: 0,
-        },
+        products: [],
+        total: 0,
       };
     }
     default:
