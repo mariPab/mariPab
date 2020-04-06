@@ -1,18 +1,22 @@
 const Order = require('../models/order.model');
+const validateInputs = require('../utils/validateInputs.js');
 
 exports.sendOrder = async (req, res) => {
-  const { client, total, products } = req.body;
-  console.log(req.body.products);
-  console.log(req.body);
   try {
-    const newOrder = new Order({
-      products: products,
-      client: { ...client },
-      total: total,
-    });
+    const { client, total, products } = req.body;
+    if (validateInputs(client)) {
+      const newOrder = new Order({
+        products: products,
+        client: { ...client },
+        total: total,
+      });
+      console.log(validateInputs(client));
+      await newOrder.save();
+      res.json(newOrder.populate());
+    } else {
+      throw new Error('Wrong input!');
+    }
 
-    await (await newOrder.save());
-    res.json(newOrder.populate());
   } catch (err) {
     res.status(500).json(err);
   }
