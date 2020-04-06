@@ -41,7 +41,6 @@ class Component extends React.Component {
     const { sendOrder } = this.props;
 
     event.preventDefault();
-    console.log(this.isDataCompleted(products, client, total));
     if (this.isDataCompleted(products, client, total)) {
 
       const productsData = products.map(product => (
