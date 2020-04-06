@@ -15,10 +15,6 @@ import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 
-// const countProductsInCart = productsList => {
-//   return productsList.reduce((total, product) => product.amount + total, 0);
-// };
-
 const Component = ({ className, cart, total }) => {
 
   const [expanded, setExpanded] = useState(false);
@@ -64,7 +60,7 @@ const Component = ({ className, cart, total }) => {
             <span>{total} zł</span>
           </div>
           <NavLink className={styles.link} exact to="/order">
-            zamawiam
+            Podsumowanie
           </NavLink>
         </CardContent>
       </Collapse>
