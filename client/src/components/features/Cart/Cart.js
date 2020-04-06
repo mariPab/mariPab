@@ -14,6 +14,7 @@ import { NavLink } from 'react-router-dom';
 import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
+import Button from '@material-ui/core/Button';
 
 const Component = ({ className, cart, total }) => {
 
@@ -59,9 +60,11 @@ const Component = ({ className, cart, total }) => {
             <span>Wartość zamówienia: </span>
             <span>{total} zł</span>
           </div>
-          <NavLink className={styles.link} exact to="/order">
-            Podsumowanie
-          </NavLink>
+          <Button disabled={cart.products.length ? false : true}>
+            <NavLink className={styles.link} exact to="/order">
+              Kontynuuj zamówienie
+            </NavLink>
+          </Button>
         </CardContent>
       </Collapse>
     </Card>
