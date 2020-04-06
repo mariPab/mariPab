@@ -8,38 +8,46 @@ import styles from './OrderSummary.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 import { OrderForm } from '../../features/OrderForm/OrderForm';
 
-const Component = ({ cart, total }) => (
-  <div className={styles.wrapper}>
-    <h2>Podsumowanie zamówienia</h2>
-    {cart.products.length ? (cart.products.map(product => (
-      <CartItem id={product._id} key={product._id} />
-    ))) :
-      (
-        <small className={styles.noProducts}>
-          <i>Brak produktów w koszyku</i>
-        </small>
-      )}
-    <p>Podsumowanie zamówienia</p>
-    <div className={styles.summary}>
-      <span>ilość produktów: </span>
-      <span>{countProductsInCart(cart.products)}</span>
+const Component = ({ cart, total, history }) => (
+  cart.products.length ? (
+    <div className={styles.wrapper}>
+      <h2>Podsumowanie zamówienia</h2>
+      {cart.products.length ? (cart.products.map(product => (
+        <CartItem id={product._id} key={product._id} />
+      ))) :
+        (
+          <small className={styles.noProducts}>
+            <i>Brak produktów w koszyku</i>
+          </small>
+        )}
+      <p>Podsumowanie zamówienia</p>
+      <div className={styles.summary}>
+        <span>ilość produktów: </span>
+        <span>{countProductsInCart(cart.products)}</span>
+      </div>
+      <div className={styles.summary}>
+        <span>Wartość zamówienia: </span>
+        <span>{total} zł</span>
+      </div>
+      <OrderForm />
+      <NavLink className={styles.link} exact to="/">
+        Powrót do strony głównej
+      </NavLink>
+      <div className={styles.actions}>
+      </div>
     </div>
-    <div className={styles.summary}>
-      <span>Wartość zamówienia: </span>
-      <span>{total} zł</span>
+  ) : (
+    <div>
+      {history.push('/')}
+      {window.alert('Najpierw dodaj produkty do koszyka')}
     </div>
-    <OrderForm />
-    <NavLink className={styles.link} exact to="/">
-      Powrót do strony głównej
-    </NavLink>
-    <div className={styles.actions}>
-    </div>
-  </div>
+  )
 );
 
 Component.propTypes = {
   cart: PropTypes.object,
   total: PropTypes.number,
+  history: PropTypes.object,
 };
 
 const mapStateToProps = state => ({
