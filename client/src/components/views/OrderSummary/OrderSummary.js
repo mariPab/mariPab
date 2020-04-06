@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CartItem } from '../../features/CartItem/CartItem';
-import clsx from 'clsx';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
 import styles from './OrderSummary.module.scss';
-import Button from '@material-ui/core/Button';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
+import { OrderForm } from '../../features/OrderForm/OrderForm';
 
-const Component = ({ className, cart, total }) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>OrderSummary</h2>
+const Component = ({ cart, total }) => (
+  <div className={styles.wrapper}>
+    <h2>Podsumowanie zamówienia</h2>
     {cart.products.length ? (cart.products.map(product => (
       <CartItem id={product._id} key={product._id} />
     ))) :
@@ -29,18 +28,16 @@ const Component = ({ className, cart, total }) => (
       <span>Wartość zamówienia: </span>
       <span>{total} zł</span>
     </div>
+    <OrderForm />
+    <NavLink className={styles.link} exact to="/">
+      Powrót do strony głównej
+    </NavLink>
     <div className={styles.actions}>
-      <NavLink className={styles.link} exact to="/">
-        Powrót do strony głównej
-      </NavLink>
-      <Button variant="outlined">Kontynuuj zamówienie</Button>
     </div>
   </div>
 );
 
 Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
   cart: PropTypes.object,
   total: PropTypes.number,
 };
