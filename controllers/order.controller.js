@@ -4,15 +4,14 @@ const validateInputs = require('../utils/validateInputs.js');
 exports.sendOrder = async (req, res) => {
   try {
     const { client, total, products } = req.body;
-    if (validateInputs(client)) {
+    if (validateInputs(client) && products.length && total) {
       const newOrder = new Order({
         products: products,
         client: { ...client },
         total: total,
       });
-      console.log(validateInputs(client));
       await newOrder.save();
-      res.json(newOrder.populate());
+      res.json(newOrder);
     } else {
       throw new Error('Wrong input!');
     }

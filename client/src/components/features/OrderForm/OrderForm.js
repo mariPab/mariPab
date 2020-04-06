@@ -26,25 +26,36 @@ class Component extends React.Component {
     sendOrder: PropTypes.func,
   }
 
+  isDataCompleted = (products, client, total) => {
+
+    let isFormValid = true;
+    if (!client.firstName && !client.lastName && !client.email && !client.address && !client.place && !client.postCode) isFormValid = false;
+    else if (!products.length) isFormValid = false;
+    else if (!total) isFormValid = false;
+
+    return isFormValid;
+  }
+
   submitOrder = async (event, products, total) => {
     const { client } = this.state;
     const { sendOrder } = this.props;
 
     event.preventDefault();
-    const productsData = products.map(product => (
-      {
-        id: product._id,
-        amount: product.amount,
-      }
-    ));
+    console.log(this.isDataCompleted(products, client, total));
+    if (this.isDataCompleted(products, client, total)) {
 
-    const payload = {
-      products: productsData,
-      client: client,
-      total: total,
-    };
+      const productsData = products.map(product => (
+        {
+          _id: product._id,
+          amount: product.amount,
+        }
+      ));
 
-    if (client.firstName && client.lastName && client.email && client.address && client.place && client.postCode) {
+      const payload = {
+        products: productsData,
+        client: client,
+        total: total,
+      };
       this.setState({
         client: {
           firstName: '',
