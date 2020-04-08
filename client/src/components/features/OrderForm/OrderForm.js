@@ -47,6 +47,7 @@ class Component extends React.Component {
         {
           _id: product._id,
           amount: product.amount,
+          notes: product.notes,
         }
       ));
 

@@ -4,6 +4,7 @@ const orderSchema = new mongoose.Schema({
   products: [{
     _id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Product' },
     amount: { type: Number, required: true },
+    notes: { type: String },
   }],
   client: {
     firstName: { type: String, required: true },
