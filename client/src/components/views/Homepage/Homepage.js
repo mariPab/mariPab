@@ -12,7 +12,7 @@ class Component extends React.Component {
     loadProducts: PropTypes.func,
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.loadProducts();
   }
 
