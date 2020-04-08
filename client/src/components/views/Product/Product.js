@@ -8,7 +8,8 @@ import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
 import { connect } from 'react-redux';
 import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
 import { addProductToCart } from '../../../redux/cartRedux.js';
-
+import { NavLink } from 'react-router-dom';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './Product.module.scss';
 
 class Component extends React.Component {
@@ -33,10 +34,7 @@ class Component extends React.Component {
     this.props.loadProduct(this.props.match.params.id);
   }
   updateTextField = ({ target }) => {
-    // const { amount } = this.state;
-    const { value } = target;
-
-    this.setState({ amount: parseInt(value) });
+    this.setState({ amount: parseInt(target.value) });
   }
 
   render() {
@@ -58,7 +56,6 @@ class Component extends React.Component {
             <span>{product.price} zł</span>
             <div>
               <input
-                // defaultValue="1"
                 type="number"
                 min="1"
                 max="10"
@@ -71,6 +68,9 @@ class Component extends React.Component {
               </Fab>
             </div>
             <p>{product.description}</p>
+            <NavLink exact to='/'>
+              <ArrowBackIcon /> Powrót do strony głównej
+            </NavLink>
           </div>
         </div>
       ) :
