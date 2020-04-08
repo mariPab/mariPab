@@ -13,6 +13,10 @@ import styles from './Product.module.scss';
 
 class Component extends React.Component {
 
+  state = {
+    amount: 1,
+  }
+
   static propTypes = {
     className: PropTypes.string,
     product: PropTypes.array,
@@ -28,9 +32,16 @@ class Component extends React.Component {
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.id);
   }
+  updateTextField = ({ target }) => {
+    // const { amount } = this.state;
+    const { value } = target;
+
+    this.setState({ amount: parseInt(value) });
+  }
 
   render() {
     const { product, addToCart } = this.props;
+    const { amount } = this.state;
     return (
       product && product._id ? (
         <div className={styles.wrapper}>
@@ -45,9 +56,20 @@ class Component extends React.Component {
               &nbsp;{product.name}
             </h3>
             <span>{product.price} zł</span>
-            <Fab onClick={() => addToCart(product)}>
-              <ShoppingCartIcon />
-            </Fab>
+            <div>
+              <input
+                // defaultValue="1"
+                type="number"
+                min="1"
+                max="10"
+                value={amount}
+                name="firstName"
+                onChange={this.updateTextField}
+              />
+              <Fab onClick={() => addToCart(product, amount)}>
+                <ShoppingCartIcon />
+              </Fab>
+            </div>
             <p>{product.description}</p>
           </div>
         </div>
@@ -65,7 +87,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadProduct: id => dispatch(loadProductByIdRequest(id)),
-  addToCart: data => dispatch(addProductToCart(data)),
+  addToCart: (product, amount) => dispatch(addProductToCart({ product, amount })),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

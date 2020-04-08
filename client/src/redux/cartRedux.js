@@ -89,13 +89,13 @@ export const reducer = (statePart = [], action = {}) => {
         }
         return {
           ...statePart,
-          products: isProductInCart ? [...products] : [...products, { ...action.payload, amount: 1 }],
+          products: isProductInCart ? [...products] : [...products, { ...action.payload.product, amount: action.payload.amount }],
           total: isProductInCart ? total : total + action.payload.price,
         };
       } else {
         return {
           ...statePart,
-          products: [{ ...action.payload, amount: 1 }],
+          products: [{ ...action.payload.product, amount: action.payload.amount }],
           total: total + action.payload.price,
         };
       }
@@ -104,7 +104,7 @@ export const reducer = (statePart = [], action = {}) => {
       return {
         ...statePart,
         products: statePart.products.map(product => {
-          if (product._id === action.payload.id) return { ...product, amount: parseInt(action.payload.amount) };
+          if (product._id === action.payload.id) return { ...product, amount: action.payload.amount };
           else return product;
         }),
         total: statePart.total,

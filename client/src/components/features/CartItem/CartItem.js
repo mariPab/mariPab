@@ -23,11 +23,11 @@ const Component = ({ product, changeAmount, removeProduct }) => {
       </div>
       <div className={styles.manageItems}>
         <input
-          defaultValue="1"
+          value={product.amount}
           type="number"
           min="1"
           max="10"
-          onChange={e => changeAmount({ id: product._id, amount: e.target.value })}
+          onChange={e => changeAmount({ id: product._id, amount: parseInt(e.target.value) })}
         />
         <IconButton onClick={() => removeProduct(product)} size="small" aria-label="delete">
           <DeleteIcon />
