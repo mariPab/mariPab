@@ -16,6 +16,7 @@ const FETCH_SUCCESS = createActionName('FETCH_SUCCESS');
 const FETCH_ERROR = createActionName('FETCH_ERROR');
 const ADD_TO_CART = createActionName('ADD_TO_CART');
 const CHANGE_AMOUNT = createActionName('CHANGE_AMOUNT');
+const ADD_NOTES = createActionName('ADD_NOTES');
 const REMOVE_FROM_CART = createActionName('REMOVE_FROM_CART');
 const SEND_ORDER = createActionName('SEND_ORDER');
 
@@ -25,6 +26,7 @@ export const fetchSuccess = payload => ({ payload, type: FETCH_SUCCESS });
 export const fetchError = payload => ({ payload, type: FETCH_ERROR });
 export const addProductToCart = payload => ({ payload, type: ADD_TO_CART });
 export const changeProductAmount = payload => ({ payload, type: CHANGE_AMOUNT });
+export const addOrderNotes = payload => ({ payload, type: ADD_NOTES });
 export const removeFromCart = payload => ({ payload, type: REMOVE_FROM_CART });
 export const sendOrder = payload => ({ payload, type: SEND_ORDER });
 
@@ -81,11 +83,12 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
+      console.log(action.payload.product);
       const { products, total } = statePart;
       if (products.length) {
         let isProductInCart = false;
         for (let item of products) {
-          if (item._id === action.payload._id) isProductInCart = true;
+          if (item._id === action.payload.product._id) isProductInCart = true;
         }
         return {
           ...statePart,
@@ -105,6 +108,16 @@ export const reducer = (statePart = [], action = {}) => {
         ...statePart,
         products: statePart.products.map(product => {
           if (product._id === action.payload.id) return { ...product, amount: action.payload.amount };
+          else return product;
+        }),
+        total: statePart.total,
+      };
+    }
+    case ADD_NOTES: {
+      return {
+        ...statePart,
+        products: statePart.products.map(product => {
+          if (product._id === action.payload.id) return { ...product, notes: action.payload.notes };
           else return product;
         }),
         total: statePart.total,
