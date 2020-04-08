@@ -10,3 +10,12 @@ $color-supplemental: #fafafa;
 $color-text: #212121;
 
 $base-size: 10px;
+
+@keyframes viewsFromRight {
+  0% {
+    margin-left: 150px;
+  }
+  100% {
+    margin-left: 0;
+  }
+}

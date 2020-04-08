@@ -1,0 +1,12 @@
+@import "./styles/settings.scss";
+
+.switchWrapper {
+  position: relative;
+
+  > :first-child ~ * {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    animation: viewsFromRight 0.5 ease;
+  }
+}
