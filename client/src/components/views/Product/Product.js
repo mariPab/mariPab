@@ -19,7 +19,7 @@ class Component extends React.Component {
 
   static propTypes = {
     className: PropTypes.string,
-    product: PropTypes.array,
+    product: PropTypes.object,
     loadProduct: PropTypes.func,
     match: PropTypes.shape({
       params: PropTypes.shape({
