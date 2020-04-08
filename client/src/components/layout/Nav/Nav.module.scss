@@ -1,0 +1,40 @@
+@import "../../../styles/settings.scss";
+
+.root {
+  position: fixed;
+  background: transparentize($color: $color-light, $amount: 0.5);
+  height: 60px;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navLinkList {
+  display: flex;
+  cursor: pointer;
+  text-transform: uppercase;
+  list-style: none;
+}
+
+.navlink {
+  padding: 0 30px;
+  text-decoration: none;
+  font-weight: 100;
+  color: $color-text;
+  letter-spacing: 0.4rem;
+
+  &:hover {
+    color: $color-decorator;
+  }
+}
+
+.cartlink {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  span {
+    color: lighten($color: $color-text, $amount: 90%);
+    font-weight: 100;
+  }
+}
