@@ -18,7 +18,7 @@ import styles from './App.module.scss';
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: '#fff' },
+    primary: { main: '#212121' },
     secondary: { main: '#a72456' },
   },
 });
