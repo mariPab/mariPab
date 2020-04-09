@@ -1,35 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
 import { getTotalPrice } from '../../../redux/cartRedux.js';
 import { connect } from 'react-redux';
+import { Cart } from '../../features/Cart/Cart';
+import Button from '@material-ui/core/Button';
 
-const Component = ({ total }) => (
-  <nav className={styles.root}>
-    <div className={styles.navLinkList}>
-      <NavLink className={styles.navlink} exact to='/'>
-        Strona główna
-      </NavLink>
-      <NavLink className={styles.navlink} exact to='/'>
-        Wyprzedaż
-      </NavLink>
-      <NavLink className={styles.navlink} exact to='/'>
-        O nas
-      </NavLink>
-    </div>
-    <div className={styles.cartlink}>
-      <span>
-        {total} zł
-      </span>
-      <NavLink className={styles.navlink} exact to='/cart'>
-        <LocalMallIcon />
-      </NavLink>
-    </div>
-  </nav >
-);
+const Component = ({ total }) => {
+  const [expanded, setExpanded] = useState(false);
 
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
+
+  return (
+    <nav className={styles.root}>
+      <div className={styles.navLinkList}>
+        <NavLink className={styles.navlink} exact to='/'>
+          Strona główna
+        </NavLink>
+        <NavLink className={styles.navlink} exact to='/'>
+          Wyprzedaż
+        </NavLink>
+        <NavLink className={styles.navlink} exact to='/'>
+          O nas
+        </NavLink>
+      </div>
+      <div className={styles.cartlink}>
+        <span>
+          {total} zł
+        </span>
+        <Button
+          onClick={handleExpandClick}
+          className={styles.navlink}>
+          <LocalMallIcon />
+        </Button>
+        <Cart expanded={expanded} />
+      </div>
+    </nav >
+  );
+};
 Component.propTypes = {
   total: PropTypes.number,
 };

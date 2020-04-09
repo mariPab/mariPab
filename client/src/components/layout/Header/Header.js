@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Cart } from '../../features/Cart/Cart';
+import { Nav } from '../Nav/Nav';
 import clsx from 'clsx';
 
 // import { connect } from 'react-redux';
@@ -10,8 +10,8 @@ import styles from './Header.module.scss';
 
 const Component = ({ className, children }) => (
   <div className={clsx(className, styles.root)}>
+    <Nav />
     <h1>Natural Beauty Shop</h1>
-    <Cart />
     {children}
   </div>
 );

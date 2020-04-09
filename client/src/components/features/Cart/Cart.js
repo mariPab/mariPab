@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -6,7 +6,6 @@ import CardActions from '@material-ui/core/CardActions';
 import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import clsx from 'clsx';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
@@ -16,22 +15,15 @@ import styles from './Cart.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 import Button from '@material-ui/core/Button';
 
-const Component = ({ className, cart, total }) => {
-
-  const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
+const Component = ({ expanded, cart, total }) => {
 
   return (
-    <Card className={clsx(className, styles.root)}>
+    <Card className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
       <CardActions className={styles.head} disableSpacing>
         <ShoppingCartIcon color="secondary" />
         <span>{total} zł</span>
         <IconButton
           className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
-          onClick={handleExpandClick}
           aria-expanded={expanded}
           aria-label="show more"
         >
@@ -76,6 +68,7 @@ Component.propTypes = {
   className: PropTypes.string,
   cart: PropTypes.object,
   total: PropTypes.number,
+  expanded: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
