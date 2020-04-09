@@ -32,7 +32,7 @@ const Component = ({ expanded, cart, total }) => {
             <span>ilość produktów:</span>
             <span>{countProductsInCart(cart.products)}</span>
           </div>
-          <div className={styles.summary}>
+          <div>
             <span>Wartość zamówienia: </span>
             <span>{total} zł</span>
           </div>

@@ -34,20 +34,24 @@
   overflow: auto;
 }
 
-p {
-  color: $color-decorator;
-  font-size: 0.8rem;
-  font-weight: 700;
-}
-
 .summary {
+  margin-bottom: 20px;
+  p {
+    color: $color-text;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    border-bottom: 1px solid $color-text;
+  }
+
   & > div {
     display: flex;
     justify-content: space-between;
     span {
       padding: 3px 0;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       color: $color-text;
+      letter-spacing: 0.1rem;
     }
   }
 }
