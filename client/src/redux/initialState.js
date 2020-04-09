@@ -10,4 +10,5 @@ export const initialState = {
     products: [],
     total: 0,
   },
+  mobile: false,
 };
