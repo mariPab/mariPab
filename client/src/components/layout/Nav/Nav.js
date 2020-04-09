@@ -6,7 +6,7 @@ import styles from './Nav.module.scss';
 import { getTotalPrice } from '../../../redux/cartRedux.js';
 import { connect } from 'react-redux';
 import { Cart } from '../../features/Cart/Cart';
-import Button from '@material-ui/core/Button';
+import { Button } from '../../common/Button/Button';
 
 const Component = ({ total }) => {
   const [expanded, setExpanded] = useState(false);
@@ -33,9 +33,10 @@ const Component = ({ total }) => {
           {total} zł
         </span>
         <Button
+          variant="fab"
           onClick={handleExpandClick}
-          className={styles.navlink}>
-          <LocalMallIcon />
+        >
+          <LocalMallIcon color="primary" />
         </Button>
         <Cart expanded={expanded} />
       </div>

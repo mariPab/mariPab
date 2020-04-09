@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
-import Button from '@material-ui/core/Button';
+import { Button } from '../../common/Button/Button';
 
 const Component = ({ expanded, cart, total }) => {
 
