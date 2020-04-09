@@ -1,12 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import IconButton from '@material-ui/core/IconButton';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
@@ -18,20 +11,9 @@ import Button from '@material-ui/core/Button';
 const Component = ({ expanded, cart, total }) => {
 
   return (
-    <Card className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
-      <CardActions className={styles.head} disableSpacing>
-        <ShoppingCartIcon color="secondary" />
-        <span>{total} zł</span>
-        <IconButton
-          className={`${styles.expand} ${expanded ? styles.expandOpen : ''}`}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent className={styles.items}>
+    <div className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
+      <div className={`${styles.cart}`}>
+        <div className={styles.items}>
           {cart.products.length ? (cart.products.map(product => (
             <CartItem id={product._id} key={product._id} />
           ))) :
@@ -41,10 +23,12 @@ const Component = ({ expanded, cart, total }) => {
               </small>
             )
           }
+        </div>
+        <div className={styles.summary}>
           <p>
             Podsumowanie zamówienia
           </p>
-          <div className={styles.summary}>
+          <div>
             <span>ilość produktów:</span>
             <span>{countProductsInCart(cart.products)}</span>
           </div>
@@ -57,9 +41,11 @@ const Component = ({ expanded, cart, total }) => {
               Kontynuuj zamówienie
             </NavLink>
           </Button>
-        </CardContent>
-      </Collapse>
-    </Card>
+        </div>
+      </div>
+    </div>
+
+
   );
 };
 

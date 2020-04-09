@@ -1,29 +1,36 @@
 @import "../../../styles/settings.scss";
 
 .root {
-  width: 450px;
-  height: calc(100vh - 60px);
+  background-color: hsla(0, 0%, 13%, 0.4);
+  width: 100vw;
   position: fixed;
-  right: 0;
+  height: calc(100vh - 60px);
   top: 60px;
+  left: 0;
+  display: none;
+  margin-right: 150px;
+}
+
+.expanded {
+  transition: $transition-all;
+  margin-right: 0;
+  display: block;
+}
+
+.cart {
+  position: absolute;
+  height: 100%;
+  width: 450px;
+  right: 0;
   border-bottom: 1px solid $color-decorator;
+  transition: $transition-transform;
+  background-color: $color-background;
+  padding: 40px 20px;
 }
 
-.head {
-  height: 40px;
-  & > span {
-    font-weight: 700;
-    margin-left: 15px;
-  }
-}
-.expand {
-  transform: rotate(0deg);
-  margin-left: auto;
-  transition: $transition-rotate;
-}
-
-.expandOpen {
-  transform: rotate(180deg);
+.items {
+  height: 60vh;
+  overflow: scroll;
 }
 
 p {
@@ -33,11 +40,14 @@ p {
 }
 
 .summary {
-  display: flex;
-  justify-content: space-between;
-  span {
-    padding: 3px 0;
-    font-size: 0.8rem;
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    span {
+      padding: 3px 0;
+      font-size: 0.8rem;
+      color: $color-text;
+    }
   }
 }
 
@@ -54,5 +64,11 @@ p {
   float: right;
   &:hover {
     background-color: lighten($color-decorator, 5%);
+  }
+}
+
+@media (max-width: 576px) {
+  .cart {
+    width: 100vw;
   }
 }
