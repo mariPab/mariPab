@@ -16,7 +16,7 @@ const Component = ({ total }) => {
   };
 
   return (
-    <nav className={styles.root}>
+    <nav className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
       <div className={styles.navLinkList}>
         <NavLink className={styles.navlink} exact to='/'>
           Strona główna

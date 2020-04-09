@@ -2,7 +2,7 @@
 
 .root {
   position: fixed;
-  background: transparentize($color: $color-light, $amount: 0.5);
+  background-color: rgba(255, 255, 255, 0);
   height: 60px;
   width: 100vw;
   display: flex;
@@ -11,6 +11,9 @@
   z-index: 2;
 }
 
+.expanded {
+  background-color: rgba(255, 255, 255, 0.849);
+}
 .navLinkList {
   display: flex;
   cursor: pointer;
@@ -21,7 +24,7 @@
 .navlink {
   padding: 0 30px;
   text-decoration: none;
-  font-weight: 100;
+  font-weight: 200;
   color: $color-text;
   letter-spacing: 0.4rem;
 
