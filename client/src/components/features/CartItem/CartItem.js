@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { IMAGES_URL } from '../../../config';
-import IconButton from '@material-ui/core/IconButton';
+import { Button } from '../../common/Button/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './CartItem.module.scss';
 import { connect } from 'react-redux';
@@ -26,27 +26,34 @@ const Component = ({ product, changeAmount, removeProduct, addNotes }) => {
           />
         </div>
         <div className={styles.productData}>
-          <span>{product.name}</span>
-          <small>{product.price} zł</small>
-        </div>
-        <div className={styles.manageItems}>
-          <input
-            value={product.amount}
-            type="number"
-            min="1"
-            max="10"
-            onChange={e => changeAmount({ id: product._id, amount: parseInt(e.target.value) })}
-          />
-          <IconButton onClick={() => removeProduct(product)} size="small" aria-label="delete">
-            <DeleteIcon />
-          </IconButton>
-          <IconButton
-            onClick={handleExpandClick}
-            size="small"
-            aria-label="add-notes"
-          >
-            <EditIcon />
-          </IconButton>
+          <div className={styles.productInfo}>
+            <span>{product.name}</span>
+            <small>{product.price} zł</small>
+          </div>
+          <div>
+            <input
+              value={product.amount}
+              type="number"
+              min="1"
+              max="10"
+              onChange={e => changeAmount({ id: product._id, amount: parseInt(e.target.value) })}
+            />
+
+            <Button
+              onClick={handleExpandClick}
+              variant="fab"
+              aria-label="add-notes"
+            >
+              <EditIcon color="primary" />
+            </Button>
+            <Button
+              onClick={() => removeProduct(product)}
+              variant="fab"
+              aria-label="delete"
+            >
+              <DeleteIcon color="primary" />
+            </Button>
+          </div>
         </div>
       </div>
       <div className={`${styles.notes} ${expanded ? styles.expanded : ''}`}>
