@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { IMAGES_URL } from '../../../config';
 import { Button } from '../../common/Button/Button';
+import { NumberInput } from '../../common/NumberInput/NumberInput';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './CartItem.module.scss';
 import { connect } from 'react-redux';
@@ -31,14 +32,11 @@ const Component = ({ product, changeAmount, removeProduct, addNotes }) => {
             <small>{product.price} zł</small>
           </div>
           <div>
-            <input
+            Ilość:&nbsp;
+            <NumberInput
               value={product.amount}
-              type="number"
-              min="1"
-              max="10"
               onChange={e => changeAmount({ id: product._id, amount: parseInt(e.target.value) })}
             />
-
             <Button
               onClick={handleExpandClick}
               variant="fab"
@@ -84,7 +82,6 @@ const mapDispatchToProps = dispatch => ({
   changeAmount: (id, amount) => dispatch(changeProductAmount(id, amount)),
   removeProduct: data => dispatch(removeFromCart(data)),
   addNotes: (id, notes) => dispatch(addOrderNotes(id, notes)),
-
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

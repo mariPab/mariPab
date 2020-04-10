@@ -11,6 +11,7 @@ import { addProductToCart } from '../../../redux/cartRedux.js';
 import { NavLink } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './Product.module.scss';
+import { NumberInput } from '../../common/NumberInput/NumberInput';
 
 class Component extends React.Component {
 
@@ -55,12 +56,8 @@ class Component extends React.Component {
             </h3>
             <span>{product.price} zł</span>
             <div>
-              <input
-                type="number"
-                min="1"
-                max="10"
+              <NumberInput
                 value={amount}
-                name="firstName"
                 onChange={this.updateTextField}
               />
               <Fab onClick={() => addToCart(product, amount)}>

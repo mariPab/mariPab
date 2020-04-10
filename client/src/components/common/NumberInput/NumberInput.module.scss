@@ -1,0 +1,35 @@
+@import "../../../styles/settings.scss";
+
+.component {
+  background: $color-supplemental;
+  border: 2px solid $color-text;
+  color: $color-text;
+  // text-align: center;
+  line-height: 1.3;
+  padding: 0.4rem;
+  width: 50px;
+  // margin-lef;
+  cursor: pointer;
+  font-weight: 900;
+  transition: $transition-all;
+  outline: none;
+
+  // a {
+  //   text-decoration: none;
+  //   letter-spacing: 0.3rem;
+  // }
+
+  // &:hover {
+  //   background: $color-text;
+  //   color: $color-supplemental;
+  // }
+
+  // &.fab {
+  //   background: none;
+  //   border-radius: 50%;
+  //   background: none;
+  //   border: 0;
+  //   padding: 0.5rem;
+  //   display: inline-block;
+  // }
+}
