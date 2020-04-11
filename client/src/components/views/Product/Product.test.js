@@ -5,7 +5,6 @@ import { ProductComponent } from './Product';
 const mockProps = {
   _id: '46346346',
   name: 'Lorem ipsum',
-  manufacturer: 'Lorem ipsum',
   description: 'Lorem ipsum dolor sit amet',
   images: ['abc.jpg', 'bdc.jpg'],
   price: 27,

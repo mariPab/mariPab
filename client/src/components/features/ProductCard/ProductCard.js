@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import styles from './ProductCard.module.scss';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-const Component = ({ className, _id, name, images, manufacturer, price }) => (
+const Component = ({ className, _id, name, images, price }) => (
   <Grid item xs={10} sm={5} lg={3} className={clsx(className, styles.root)}>
     <NavLink exact to={`/product/${_id}`}>
       <Card>
@@ -21,9 +21,6 @@ const Component = ({ className, _id, name, images, manufacturer, price }) => (
           title={name}
         />
         <CardContent>
-          <span>
-            {manufacturer}
-          </span>
           <h3>
             {name}
           </h3>
@@ -42,7 +39,6 @@ const Component = ({ className, _id, name, images, manufacturer, price }) => (
 Component.propTypes = {
   _id: PropTypes.string,
   name: PropTypes.string,
-  manufacturer: PropTypes.string,
   images: PropTypes.array,
   price: PropTypes.number,
   className: PropTypes.string,

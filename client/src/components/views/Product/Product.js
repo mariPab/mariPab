@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Fab from '@material-ui/core/Fab';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { IMAGES_URL } from '../../../config';
 import { NotFound } from '../../views/NotFound/NotFound';
 import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
@@ -12,6 +10,7 @@ import { NavLink } from 'react-router-dom';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './Product.module.scss';
 import { NumberInput } from '../../common/NumberInput/NumberInput';
+import { Button } from '../../common/Button/Button';
 
 class Component extends React.Component {
 
@@ -44,6 +43,9 @@ class Component extends React.Component {
     return (
       product && product._id ? (
         <div className={styles.wrapper}>
+          <NavLink exact to='/'>
+            <ArrowBackIcon /> Powrót do strony głównej
+          </NavLink>
           <div className={styles.gallery}>
             {product.images.map(image => (
               <GalleryPic key={image} alt={product.name} src={`${IMAGES_URL}/${image}`} />
@@ -51,24 +53,22 @@ class Component extends React.Component {
           </div>
           <div className={styles.content}>
             <h3>
-              <small>{product.manufacturer}</small>
-              &nbsp;{product.name}
+              {product.name}
             </h3>
-            <span>{product.price} zł</span>
+            <p>{product.description}</p>
             <div>
+              <span>{product.price} zł</span>
               <NumberInput
                 value={amount}
                 onChange={this.updateTextField}
               />
-              <Fab onClick={() => addToCart(product, amount)}>
-                <ShoppingCartIcon />
-              </Fab>
             </div>
-            <p>{product.description}</p>
-            <NavLink exact to='/'>
-              <ArrowBackIcon /> Powrót do strony głównej
-            </NavLink>
+            <Button onClick={() => addToCart(product, amount)}>
+              Dodaj do koszyka
+            </Button>
           </div>
+
+
         </div>
       ) :
         (

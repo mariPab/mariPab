@@ -7,7 +7,6 @@ const mockProps = {
     products: [{
       name: 'cosmetic name',
       images: ['anc.jpeg'],
-      manufacturer: 'manuf',
       price: 40,
     }],
     total: 40,

@@ -7,7 +7,6 @@ const mockProps = {
   product: {
     name: 'cosmetic name',
     images: ['anc.jpeg'],
-    manufacturer: 'manuf',
     price: 40,
   },
   changeAmount: jest.fn(),

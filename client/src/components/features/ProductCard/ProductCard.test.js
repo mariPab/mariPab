@@ -6,7 +6,6 @@ const mockProps = {
   _id: '463b36',
   name: 'cosmetic name',
   images: ['anc.jpeg'],
-  manufacturer: 'manuf',
   price: 40,
 };
 describe('Component ProductCard', () => {
