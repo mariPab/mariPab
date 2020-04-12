@@ -43,9 +43,6 @@ class Component extends React.Component {
     return (
       product && product._id ? (
         <div className={styles.wrapper}>
-          <NavLink exact to='/'>
-            <ArrowBackIcon /> Powrót do strony głównej
-          </NavLink>
           <div className={styles.gallery}>
             {product.images.map(image => (
               <GalleryPic key={image} alt={product.name} src={`${IMAGES_URL}/${image}`} />
@@ -58,10 +55,12 @@ class Component extends React.Component {
             <p>{product.description}</p>
             <div>
               <span>{product.price} zł</span>
-              <NumberInput
-                value={amount}
-                onChange={this.updateTextField}
-              />
+              <span>Ilość:&nbsp;
+                <NumberInput
+                  value={amount}
+                  onChange={this.updateTextField}
+                />
+              </span>
             </div>
             <Button onClick={() => addToCart(product, amount)}>
               Dodaj do koszyka

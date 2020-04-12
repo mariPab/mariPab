@@ -2,7 +2,7 @@
 
 .wrapper {
   padding: 20px 40px;
-  max-width: 650px;
+  max-width: 750px;
   display: flex;
   margin: 0 auto;
 }
@@ -15,8 +15,19 @@
 
 .content {
   padding: 0 20px;
+  h3 {
+    font-family: $font-supplemental;
+    letter-spacing: 0.1rem;
+  }
+
   p {
     text-align: justify;
+    font-family: $font-text;
+  }
+
+  & > div {
+    display: flex;
+    justify-content: space-between;
   }
 }
 @media (max-width: 576px) {
