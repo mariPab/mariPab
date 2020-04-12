@@ -32,7 +32,7 @@ const Component = ({ product, changeAmount, removeProduct, addNotes }) => {
             <small>{product.price} zł</small>
           </div>
           <div>
-            Ilość:&nbsp;
+            <small>Ilość:&nbsp;</small>
             <NumberInput
               value={product.amount}
               onChange={e => changeAmount({ id: product._id, amount: parseInt(e.target.value) })}

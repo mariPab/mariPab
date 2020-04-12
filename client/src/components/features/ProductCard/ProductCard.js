@@ -27,9 +27,6 @@ const Component = ({ className, _id, name, images, price }) => (
           <small>
             {price} zł
           </small>
-          <Fab color="secondary" size="small">
-            <ShoppingCartIcon />
-          </Fab>
         </CardContent>
       </Card>
     </NavLink>
