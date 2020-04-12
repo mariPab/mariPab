@@ -1,35 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import Fab from '@material-ui/core/Fab';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { IMAGES_URL } from '../../../config';
 import Grid from '@material-ui/core/Grid';
 import styles from './ProductCard.module.scss';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Button } from '../../common/Button/Button';
 
 const Component = ({ className, _id, name, images, price }) => (
   <Grid item xs={10} sm={5} lg={3} className={clsx(className, styles.root)}>
-    <NavLink exact to={`/product/${_id}`}>
-      <Card>
-        <CardMedia
-          component="img"
-          image={`${IMAGES_URL}/${images[0]}`}
-          title={name}
-        />
-        <CardContent>
-          <h3>
-            {name}
-          </h3>
-          <small>
-            {price} zł
-          </small>
-        </CardContent>
-      </Card>
-    </NavLink>
+    <div className={styles.root}>
+      <img src={`${IMAGES_URL}/${images[0]}`} alt={name} />
+      <div className={styles.productDetails}>
+        <h3>
+          {name}
+        </h3>
+        <Button>
+          <NavLink exact to={`/product/${_id}`}>
+            Pokaż opis
+          </NavLink>
+        </Button>
+      </div>
+    </div>
   </Grid>
 );
 
