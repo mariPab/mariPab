@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { FormControl, InputLabel, Input } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice, newOrderRequest } from '../../../redux/cartRedux.js';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import { Button } from '../../common/Button/Button';
+
 import './OrderForm.scss';
 
 class Component extends React.Component {
@@ -154,7 +156,7 @@ class Component extends React.Component {
             id="postCode"
           />
         </FormControl>
-        <Button type="submit" variant="outlined">Zamawiam</Button>
+        <Button type="submit">Zamawiam</Button>
       </form>
     );
   }
