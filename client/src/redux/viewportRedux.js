@@ -1,6 +1,6 @@
 
 /* selectors */
-export const getViewportMode = ({ viewportMode }) => viewportMode;
+export const getViewportMode = ({ mobile }) => mobile;
 
 /* action name creator */
 const reducerName = 'viewport';

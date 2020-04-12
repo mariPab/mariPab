@@ -14,11 +14,32 @@
 .expanded {
   background-color: rgba(255, 255, 255, 0.849);
 }
+
 .navLinkList {
   display: flex;
   cursor: pointer;
   text-transform: uppercase;
   list-style: none;
+}
+
+.mobileOnly {
+  flex-direction: column;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.849);
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  transition: $transition-all;
+  display: none;
+
+  .navlink {
+    padding: 10px 15px;
+  }
+}
+
+.expandMenu {
+  display: flex;
+  top: 60px;
 }
 
 .navlink {
@@ -32,7 +53,6 @@
     color: $color-decorator;
   }
 }
-
 .cartlink {
   display: flex;
   align-items: center;

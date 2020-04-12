@@ -4,20 +4,30 @@ import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
 import { getTotalPrice } from '../../../redux/cartRedux.js';
+import { getViewportMode } from '../../../redux/viewportRedux.js';
 import { connect } from 'react-redux';
 import { Cart } from '../../features/Cart/Cart';
 import { Button } from '../../common/Button/Button';
+import MenuIcon from '@material-ui/icons/Menu';
 
-const Component = ({ total }) => {
-  const [expanded, setExpanded] = useState(false);
+const Component = ({ total, mobile }) => {
+  const [expanded, setExpanded] = useState({ expandMenu: false, expandCart: false });
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleExpandClick = name => {
+    setExpanded({ ...expanded, [name]: !expanded[name] });
   };
 
   return (
-    <nav className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
-      <div className={styles.navLinkList}>
+    <nav className={`${styles.root} ${expanded.expandCart || expanded.expandMenu ? styles.expanded : ''}`} >
+      {mobile ?
+        <Button
+          variant="fab"
+          className={`${styles.navlink} ${mobile ? styles.openMenu : ''}`}
+          onClick={() => handleExpandClick('expandMenu')}
+        >
+          <MenuIcon />
+        </Button> : ''}
+      <div className={`${styles.navLinkList} ${mobile ? styles.mobileOnly : ''} ${expanded.expandMenu ? styles.expandMenu : ''}`}>
         <NavLink className={styles.navlink} exact to='/'>
           Strona główna
         </NavLink>
@@ -34,21 +44,23 @@ const Component = ({ total }) => {
         </span>
         <Button
           variant="fab"
-          onClick={handleExpandClick}
+          onClick={() => handleExpandClick('expandCart')}
         >
           <LocalMallIcon color="primary" />
         </Button>
-        <Cart expanded={expanded} />
+        <Cart expanded={expanded.expandCart} />
       </div>
     </nav >
   );
 };
 Component.propTypes = {
   total: PropTypes.number,
+  mobile: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   total: getTotalPrice(state),
+  mobile: getViewportMode(state),
 });
 
 // const mapDispatchToProps = dispatch => ({
