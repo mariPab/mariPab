@@ -1,4 +1,40 @@
-@import '../../../styles/settings.scss';
+@import "../../../styles/settings.scss";
 
-// .root {
-// }
+.wrapper {
+  margin: 20px 120px;
+  a {
+    color: $color-text;
+    opacity: 0.6;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    margin: 30px 0;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+.mobileWrapper {
+  margin: 10px 15px;
+}
+
+h2 {
+  margin-top: 20px;
+  font-family: $font-supplemental;
+  letter-spacing: 0.1rem;
+  text-decoration: underline;
+}
+.items {
+  margin: 30px 0;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    font-size: 0.9rem;
+    letter-spacing: 0.1rem;
+  }
+}
