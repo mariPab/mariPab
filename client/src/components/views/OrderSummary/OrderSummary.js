@@ -40,10 +40,8 @@ const Component = ({ cart, total, history, mobile }) => {
           <span>Wartość zamówienia: </span>
           <span>{total} zł</span>
         </div>
+        <h2>Dane kontaktowe</h2>
         <OrderForm />
-
-        <div className={styles.actions}>
-        </div>
       </div>
     ) : (
       <DelayedPopup
