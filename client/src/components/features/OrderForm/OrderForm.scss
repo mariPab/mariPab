@@ -1,5 +1,45 @@
-.order-ticket-form input,
-.order-ticket-form select,
-.order-ticket-form small {
-  max-width: 25rem;
+@import "../../../styles/settings.scss";
+
+.MuiGrid-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  input {
+    width: 50%;
+    border: 2px solid $color-text;
+    background-color: $color-supplemental;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+    outline: none;
+    font-size: 0.6rem;
+
+    &::placeholder {
+      text-transform: uppercase;
+      opacity: 0.2;
+      font-weight: 600;
+    }
+
+    &:active,
+    &:focus {
+      border-color: $color-neutral;
+    }
+  }
+
+  label {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 576px) {
+  .MuiGrid-item {
+    flex-direction: column;
+    justify-content: flex-start;
+    input {
+      width: 70%;
+      margin-top: 10px;
+    }
+  }
 }
