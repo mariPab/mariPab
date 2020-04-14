@@ -2,7 +2,9 @@
 
 .root {
   position: fixed;
-  background-color: rgba(255, 255, 255, 0);
+  // background-color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 255, 255, 0.849);
+
   height: 60px;
   width: 100vw;
   display: flex;
@@ -58,7 +60,7 @@
   align-items: center;
   font-size: 1.1rem;
   span {
-    color: lighten($color: $color-text, $amount: 90%);
+    color: lighten($color: $color-text, $amount: 30%);
     font-weight: 100;
   }
 }
