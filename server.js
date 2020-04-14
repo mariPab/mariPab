@@ -8,7 +8,9 @@ const MongoStore = require('connect-mongo')(session);
 const app = express();
 
 /* MIDDLEWARE */
-app.use(cors());
+app.use(cors({
+  credentials: true,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -20,7 +22,10 @@ const db = mongoose.connection;
 
 app.use(session({
   secret: 'sessionKey7h%wvyjg*wr7',
-  store: new MongoStore({ mongooseConnection: db })
+  store: new MongoStore({ mongooseConnection: db }),
+  saveUninitialized: false,
+  resave: true,
+  cookie: { path: '/', httpOnly: false, secure: false, maxAge: 24 * 60 * 60 * 1000 },
 }));
 
 db.once('open', () => {

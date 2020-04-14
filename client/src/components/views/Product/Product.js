@@ -5,9 +5,7 @@ import { NotFound } from '../../views/NotFound/NotFound';
 import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
 import { connect } from 'react-redux';
 import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
-import { addProductToCart } from '../../../redux/cartRedux.js';
-import { NavLink } from 'react-router-dom';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { addProductToCart, saveCartRequest } from '../../../redux/cartRedux.js';
 import styles from './Product.module.scss';
 import { NumberInput } from '../../common/NumberInput/NumberInput';
 import { Button } from '../../common/Button/Button';
@@ -36,6 +34,11 @@ class Component extends React.Component {
   updateTextField = ({ target }) => {
     this.setState({ amount: parseInt(target.value) });
   }
+
+  // addProductToCard() {
+  //   this.props.addToCart(this.props.product, this.state.amount)
+  //   this.props.saveCart();
+  // }
 
   render() {
     const { product, addToCart } = this.props;
@@ -79,11 +82,13 @@ class Component extends React.Component {
 
 const mapStateToProps = state => ({
   product: getProductById(state),
+  loadCart: PropTypes.func,
 });
 
 const mapDispatchToProps = dispatch => ({
   loadProduct: id => dispatch(loadProductByIdRequest(id)),
   addToCart: (product, amount) => dispatch(addProductToCart({ product, amount })),
+  saveCart: data => dispatch(saveCartRequest(data)),
 });
 
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);

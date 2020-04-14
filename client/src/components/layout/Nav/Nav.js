@@ -16,7 +16,8 @@ const Component = ({ total, mobile }) => {
   const handleExpandClick = name => {
     setExpanded({ ...expanded, [name]: !expanded[name] });
   };
-
+  console.log(expanded.expandCart);
+  console.log(expanded.expandMenu);
   return (
     <nav className={`${styles.root} ${expanded.expandCart || expanded.expandMenu ? styles.expanded : ''}`} >
       {mobile ?

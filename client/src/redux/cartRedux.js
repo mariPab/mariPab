@@ -51,6 +51,43 @@ export const newOrderRequest = data => {
   };
 };
 
+/* thunk creators */
+export const saveCartRequest = data => {
+  return async dispatch => {
+    dispatch(fetchStarted());
+    try {
+      let res = await axios.post(
+        `${API_URL}/cart`,
+        data,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      dispatch(fetchSuccess(res.data));
+    } catch (e) {
+      dispatch(fetchError(e.message));
+    }
+  };
+};
+
+export const loadCartRequest = () => {
+  return async dispatch => {
+    dispatch(fetchStarted());
+    try {
+      let res = await axios.get(`${API_URL}/cart`, {
+        headers: {
+          withCredentials: true,
+        },
+      });
+      dispatch(fetchSuccess(res.data));
+    } catch (e) {
+      dispatch(fetchError(e.message || true));
+    }
+  };
+};
+
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
@@ -64,13 +101,14 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case FETCH_SUCCESS: {
+      console.log(action.payload);
       return {
         ...statePart,
+        products: /* action.payload ?  */action.payload/*  : [] */,
         loading: {
           active: false,
           error: false,
         },
-        data: action.payload,
       };
     }
     case FETCH_ERROR: {
@@ -83,7 +121,6 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
-      console.log(action.payload.product);
       const { products, total } = statePart;
       if (products.length) {
         let isProductInCart = false;

@@ -10,6 +10,7 @@ const mockProps = {
       price: 40,
     }],
     total: 40,
+    expanded: true,
   },
 };
 describe('Component Cart', () => {
