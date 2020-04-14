@@ -28,13 +28,13 @@ const Component = ({ total, mobile }) => {
           <MenuIcon />
         </Button> : ''}
       <div className={`${styles.navLinkList} ${mobile ? styles.mobileOnly : ''} ${expanded.expandMenu ? styles.expandMenu : ''}`}>
-        <NavLink className={styles.navlink} exact to='/'>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
           Strona główna
         </NavLink>
-        <NavLink className={styles.navlink} exact to='/'>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
           Wyprzedaż
         </NavLink>
-        <NavLink className={styles.navlink} exact to='/'>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
           O nas
         </NavLink>
       </div>
@@ -48,7 +48,7 @@ const Component = ({ total, mobile }) => {
         >
           <LocalMallIcon color="primary" />
         </Button>
-        <Cart expanded={expanded.expandCart} />
+        {expanded.expandCart ? <Cart expanded={expanded.expandCart} /> : null}
       </div>
     </nav >
   );
