@@ -18,8 +18,13 @@ app.use(express.static(path.join(__dirname, './public')));
 mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
+
+process.env.NODE_ENV === "production" ?
+  mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.APP_PASSWORD}@cluster0-314sb.mongodb.net/natural-beauty?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
+  mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
+
 app.use(session({
-  secret: 'sessionKey7h%wvyjg*wr7',
+  secret: process.env.SESSION_KEY,
   store: new MongoStore({ mongooseConnection: db })
 }));
 
