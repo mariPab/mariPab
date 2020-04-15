@@ -20,14 +20,15 @@ const db = mongoose.connection;
 
 
 process.env.NODE_ENV === "production" ?
-  mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.APP_PASSWORD}@cluster0-314sb.mongodb.net/natural-beauty?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
+  mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/natural-beauty?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
   mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(session({
-  secret: process.env.SESSION_KEY,
+  secret: 'sessionKey7h%wvyjg*wr7',
   store: new MongoStore({ mongooseConnection: db })
 }));
 
+console.log(process.env.NODE_ENV);
 db.once('open', () => {
   console.log('Successfully connected to the database');
 });
