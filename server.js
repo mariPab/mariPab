@@ -28,7 +28,6 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: db })
 }));
 
-console.log(process.env.NODE_ENV);
 db.once('open', () => {
   console.log('Successfully connected to the database');
 });
@@ -48,7 +47,7 @@ app.use('/api', (req, res) => {
 /* REACT WEBSITE */
 app.use(express.static(path.join(__dirname, './client/build')));
 app.use('*', (req, res) => {
-  res.sendFile(path.join(__dirname, './client/build/index.html'));
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
 /* START SERVER */
