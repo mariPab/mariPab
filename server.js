@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + '/client/build')));
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
@@ -36,12 +36,12 @@ process.env.NODE_ENV === "production" ?
   mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/NaturalBeauty?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
   mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
-app.use(session({
-  secret: 'sessionKey7h%wvyjg*wr7',
-  store: new MongoStore({ mongooseConnection: db })
-}));
+// app.use(session({
+//   secret: 'sessionKey7h%wvyjg*wr7',
+//   store: new MongoStore({ mongooseConnection: db })
+// }));
 
 db.once('open', () => {
   console.log('Successfully connected to the database');
