@@ -15,13 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './public')));
 
 /* MONGOOSE */
-mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-
-
 process.env.NODE_ENV === "production" ?
   mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/NaturalBeauty?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
   mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const db = mongoose.connection;
 
 app.use(session({
   secret: 'sessionKey7h%wvyjg*wr7',
