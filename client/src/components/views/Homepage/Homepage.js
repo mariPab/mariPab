@@ -29,7 +29,7 @@ class Component extends React.Component {
             Składniki dobrane z najwyższą starannością dbają nie tylko o Twoją skórę, ale również o nasze otoczenie.
           </p>
         </section>
-        <Grid container>
+        <Grid classes={{ container: styles.container }} container >
           {products.map(product => (
             <ProductCard key={product._id} {...product} />
           ))}
