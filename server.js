@@ -13,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, './client/build')));
 
 /* MONGOOSE */
 process.env.NODE_ENV === "production" ?
@@ -31,24 +32,28 @@ db.once('open', () => {
 });
 db.on('error', err => console.log('Error: ' + err));
 
-
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
 app.use('/api', require('./routes/order.routes'));
 app.use('/api', require('./routes/cart.routes'));
 
-/* API ERROR PAGES */
-app.use('/api', (req, res) => {
-  res.status(404).send({ data: 'Not found...' });
-});
-
 /* REACT WEBSITE */
-app.use(express.static(path.join(__dirname, './client/build')));
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'), err => {
     if (err) res.status(500).send(err);
   });
 });
+
+/* API ERROR PAGES */
+// app.use('/api', (req, res) => {
+//   res.status(404).send({ data: 'Not found...' });
+// });
+
+app.use((req, res) => {
+  res.status(404).send({ message: 'not found...' });
+});
+
+
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
