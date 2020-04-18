@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice, newOrderRequest } from '../../../redux/cartRedux.js';
 import { Button } from '../../common/Button/Button';
-import { getViewportMode } from '../../../redux/viewportRedux.js';
 
 import './OrderForm.scss';
 
@@ -70,6 +69,7 @@ class Component extends React.Component {
         isError: false,
       });
       await sendOrder(payload);
+      // history.push('/')
     } else {
       this.setState({ isError: true });
     }
@@ -158,7 +158,6 @@ class Component extends React.Component {
             />
           </Grid>
         </Grid>
-
         <Button type="submit">Zamawiam</Button>
       </form>
     );
