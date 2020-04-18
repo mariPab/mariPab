@@ -12,8 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(express.static(path.join(__dirname, '/public')));
-app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname + '/public')));
+app.use(express.static(path.join(__dirname + '/client/build')));
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
@@ -38,10 +38,10 @@ process.env.NODE_ENV === "production" ?
 
 const db = mongoose.connection;
 
-app.use(session({
-  secret: 'sessionKey7h%wvyjg*wr7',
-  store: new MongoStore({ mongooseConnection: db })
-}));
+// app.use(session({
+//   secret: 'sessionKey7h%wvyjg*wr7',
+//   store: new MongoStore({ mongooseConnection: db })
+// }));
 
 db.once('open', () => {
   console.log('Successfully connected to the database');
