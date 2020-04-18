@@ -1,7 +1,7 @@
 @import "../../../styles/settings.scss";
 
 .root {
-  background-color: rgba(75, 75, 75, 0.76);
+  background-color: transparentize($color: $color-text, $amount: 0.3);
   width: 100vw;
   position: fixed;
   height: calc(100vh - 60px);
@@ -51,14 +51,6 @@
       color: $color-text;
       letter-spacing: 0.1rem;
     }
-  }
-}
-
-.link {
-  color: $color-text;
-
-  &:hover {
-    color: $color-light;
   }
 }
 

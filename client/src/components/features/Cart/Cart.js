@@ -37,7 +37,7 @@ const Component = ({ expanded, cart, total }) => {
             <span>{total} zł</span>
           </div>
           <Button disabled={cart.products.length ? false : true}>
-            <NavLink className={styles.link} exact to="/order">
+            <NavLink exact to="/order">
               Kontynuuj zamówienie
             </NavLink>
           </Button>
