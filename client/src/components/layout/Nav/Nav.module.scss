@@ -2,9 +2,8 @@
 
 .root {
   position: fixed;
-  // background-color: rgba(255, 255, 255, 0);
-  background-color: rgba(255, 255, 255, 0.849);
-
+  // background-color: rgba(255, 255, 255, 0.849);
+  background-color: $color-supplemental;
   height: 60px;
   width: 100vw;
   display: flex;
@@ -14,7 +13,8 @@
 }
 
 .expanded {
-  background-color: rgba(255, 255, 255, 0.849);
+  // background-color: rgba(255, 255, 255, 0.849);
+  background-color: $color-supplemental;
 }
 
 .navLinkList {
@@ -27,7 +27,9 @@
 .mobileOnly {
   flex-direction: column;
   left: 0;
-  background-color: rgba(255, 255, 255, 0.849);
+  // background-color: rgba(255, 255, 255, 0.849);
+  background-color: $color-supplemental;
+
   position: fixed;
   width: 100vw;
   top: 0;
@@ -35,13 +37,14 @@
   display: none;
 
   .navlink {
-    padding: 10px 15px;
+    padding: 10px 20px;
   }
 }
 
 .expandMenu {
   display: flex;
   top: 60px;
+  padding: 20px 0;
 }
 
 .navlink {
@@ -52,7 +55,7 @@
   letter-spacing: 0.4rem;
 
   &:hover {
-    color: $color-neutral;
+    color: $color-danger;
   }
 }
 .cartlink {
