@@ -53,7 +53,6 @@
   font-weight: 200;
   color: $color-text;
   letter-spacing: 0.4rem;
-
   &:hover {
     color: $color-danger;
   }
@@ -65,5 +64,11 @@
   span {
     color: lighten($color: $color-text, $amount: 30%);
     font-weight: 100;
+  }
+}
+
+@media (max-width: 768px) {
+  .navlink {
+    padding: 0 20px;
   }
 }

@@ -35,12 +35,12 @@ const Component = ({ total, mobile }) => {
           Wyprzedaż
         </NavLink>
         <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
-          O nas
+          O&nbsp;nas
         </NavLink>
       </div>
       <div className={styles.cartlink}>
         <span>
-          {total} zł
+          {total}&nbsp;zł
         </span>
         <Button
           variant="fab"

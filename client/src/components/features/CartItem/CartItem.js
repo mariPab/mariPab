@@ -29,7 +29,7 @@ const Component = ({ product, changeAmount, removeProduct, addNotes }) => {
         <div className={styles.productData}>
           <div className={styles.productInfo}>
             <span>{product.name}</span>
-            <small>{product.price} zł</small>
+            <small>{product.price}&nbsp;zł</small>
           </div>
           <div>
             <small>Ilość:&nbsp;</small>
