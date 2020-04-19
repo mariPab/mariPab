@@ -38,10 +38,10 @@ process.env.NODE_ENV === "production" ?
 
 const db = mongoose.connection;
 
-// app.use(session({
-//   secret: 'sessionKey7h%wvyjg*wr7',
-//   store: new MongoStore({ mongooseConnection: db })
-// }));
+app.use(session({
+  secret: 'sessionKey7h%wvyjg*wr7',
+  store: new MongoStore({ mongooseConnection: db })
+}));
 
 db.once('open', () => {
   console.log('Successfully connected to the database');
