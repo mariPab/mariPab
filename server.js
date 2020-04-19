@@ -10,10 +10,18 @@ const app = express();
 /* MIDDLEWARE */
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/public')));
-app.use(express.static(path.join(__dirname + '/client/build')));
+app.use(express.static(path.join(__dirname + '/client')));
+
+if (process.env.NODE_ENV === 'production') app.use(express.static('client/build'));
+
+/* START SERVER */
+const port = process.env.PORT || 8000;
+const server = app.listen(port, () => {
+  console.log('Server is running on port: ' + port);
+});
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
@@ -28,7 +36,6 @@ app.get('*', (req, res) => {
 });
 
 app.use((req, res) => {
-  console.log(res);
   res.status(404).send({ message: 'not found...' });
 });
 
@@ -49,8 +56,4 @@ db.once('open', () => {
 });
 db.on('error', err => console.log('Error: ' + err));
 
-/* START SERVER */
-const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log('Server is running on port: ' + port);
-});
+module.exports = server;
