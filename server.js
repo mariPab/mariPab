@@ -15,12 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/public')));
 app.use(express.static(path.join(__dirname + '/client/build')));
 
-/* START SERVER */
-const port = process.env.PORT || 8000;
-const server = app.listen(port, () => {
-  console.log('Server is running on port: ' + port);
-});
-
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
 app.use('/api', require('./routes/order.routes'));
@@ -53,5 +47,11 @@ db.once('open', () => {
   console.log('Successfully connected to the database');
 });
 db.on('error', err => console.log('Error: ' + err));
+
+/* START SERVER */
+const port = process.env.PORT || 8000;
+const server = app.listen(port, () => {
+  console.log('Server is running on port: ' + port);
+});
 
 module.exports = server;
