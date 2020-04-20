@@ -13,13 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/client/build')));
-app.use(express.static(path.join(__dirname + '/public')));
 
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
 app.use('/api', require('./routes/order.routes'));
 app.use('/api', require('./routes/cart.routes'));
+
+app.use(express.static(path.join(__dirname + '/public')));
 
 /* REACT WEBSITE */
 app.get('*', (req, res) => {
