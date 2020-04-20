@@ -13,7 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/public')));
-app.use(express.static(path.join(__dirname + '/client/build')));
+app.use(express.static(path.join(__dirname + '/client')));
+
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/products.routes'));
