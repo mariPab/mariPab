@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "set NODE_ENV='production' && pm2 start server.js",
+    "start": "set NODE_ENV='production' && node server.js",
     "start-dev": "npm-run-all -l -p start:*",
     "start:server": "set NODE_ENV='dev' && ./node_modules/.bin/nodemon server.js",
     "start:client": "cd client && yarn start",
