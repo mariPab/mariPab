@@ -4,7 +4,6 @@ const path = require('path');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const functions = require('firebase-functions');
 
 const app = express();
 
@@ -55,5 +54,3 @@ const port = process.env.PORT || 8000;
 const server = app.listen(port, () => {
   console.log('Server is running on port: ' + port);
 });
-
-exports.app = functions.https.onRequest(app);

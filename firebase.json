@@ -8,10 +8,6 @@
     ],
     "rewrites": [
       {
-        "source": "/api/**",
-        "function": "app"
-      },
-      {
         "source": "*",
         "destination": "client/build/index.html"
       }
