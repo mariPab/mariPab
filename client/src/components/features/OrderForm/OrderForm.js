@@ -30,14 +30,21 @@ class Component extends React.Component {
   }
 
   submitOrder = async (event, products, total) => {
-    const { client } = this.state;
+    const { firstName, lastName, email, address, place, postCode } = this.state.client;
     const { sendOrder } = this.props;
     event.preventDefault();
 
+    const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    const validAddress = /^([^\\u0000-\u007F]|\w)+,?\s\d+[A-z]?(\/\d+[A-z]?)?$/;
+    const validPostCode = /[0-9]{2}-[0-9]{3}/;
+
     let error = null;
-    if (!client.firstName && !client.lastName && !client.email && !client.address && !client.place && !client.postCode) error = 'Brakuje wymaganych danych';
+    if (!firstName && !lastName && !email && !address && !place && !postCode) error = 'Brakuje wymaganych danych';
     else if (!products.length) error = 'Twój koszyk jest pusty';
     else if (!total) error = 'Twój koszyk jest pusty';
+    else if (!validEmail.test(email)) error = 'Adres e-mail jest nieprawidłowy';
+    else if (!validAddress.test(address)) error = 'Adres wysyłki jest nieprawidłowy';
+    else if (!validPostCode.test(postCode)) error = 'Kod pocztowy jest nieprawidłowy';
 
     if (!error) {
 
@@ -51,7 +58,7 @@ class Component extends React.Component {
 
       const payload = {
         products: productsData,
-        client: client,
+        client: this.state.client,
         total: total,
       };
       await sendOrder(payload);
@@ -75,7 +82,7 @@ class Component extends React.Component {
     const { client } = this.state;
     const { value, name } = target;
 
-    this.setState({ client: { ...client, [name]: value } });
+    this.setState({ client: { ...client, [name]: value }, error: null });
   }
 
   render() {
