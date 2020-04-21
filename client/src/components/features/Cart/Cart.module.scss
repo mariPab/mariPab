@@ -17,6 +17,17 @@
   }
 }
 
+.linkContinue {
+  float: right;
+  button {
+    letter-spacing: 0.1rem;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
+    }
+  }
+}
+
 .root {
   position: fixed;
   height: calc(100vh - 60px);

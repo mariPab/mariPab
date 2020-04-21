@@ -13,8 +13,6 @@ const Component = ({ cart, total }) => {
   const [opened, setOpened] = useState(false);
 
   const handleClick = e => {
-    e.preventDefault();
-    e.stopPropagation();
     setOpened(!opened);
   };
 
@@ -58,11 +56,11 @@ const Component = ({ cart, total }) => {
                 <span>Wartość zamówienia: </span>
                 <span>{total} zł</span>
               </div>
-              <Button onClick={(e) => handleClick(e)} disabled={cart.products.length ? false : true}>
-                <NavLink exact to="/order">
+              <NavLink className={styles.linkContinue} exact to="/order">
+                <Button disabled={cart.products.length ? false : true} onClick={(e) => handleClick(e)}>
                   Kontynuuj zamówienie
-                </NavLink>
-              </Button>
+                </Button>
+              </NavLink>
             </div>
           </div>
         </div>
