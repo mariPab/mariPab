@@ -2,27 +2,22 @@
 
 .MuiGrid-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  margin: 15px auto;
+
   input {
-    width: 50%;
-    border: 2px solid $color-text;
+    border: 1px solid $color-border;
     background-color: $color-supplemental;
     padding: 10px;
-    margin: 20px;
+    margin: 10px;
     border-radius: 5px;
     outline: none;
-    font-size: 0.6rem;
-
-    &::placeholder {
-      text-transform: uppercase;
-      opacity: 0.2;
-      font-weight: 600;
-    }
+    font-size: 1rem;
 
     &:active,
     &:focus {
       border-color: $color-neutral;
+      background-color: lighten($color-neutral, 65%);
     }
   }
 
@@ -30,16 +25,5 @@
     text-transform: uppercase;
     letter-spacing: 0.1rem;
     opacity: 0.5;
-  }
-}
-
-@media (max-width: 576px) {
-  .MuiGrid-item {
-    flex-direction: column;
-    justify-content: flex-start;
-    input {
-      width: 70%;
-      margin-top: 10px;
-    }
   }
 }

@@ -99,7 +99,7 @@ class Component extends React.Component {
               name="firstName"
               onChange={updateTextField}
               id="firstName"
-              placeholder="Imię"
+            // placeholder="Imię"
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -109,7 +109,7 @@ class Component extends React.Component {
               value={client.lastName}
               name="lastName"
               onChange={updateTextField}
-              placeholder="Nazwisko"
+              // placeholder="Nazwisko"
               id="lastName"
             />
           </Grid>
@@ -120,7 +120,7 @@ class Component extends React.Component {
               value={client.email}
               name="email"
               onChange={updateTextField}
-              placeholder="Email"
+              // placeholder="Email"
               id="email"
             />
           </Grid>
@@ -131,7 +131,7 @@ class Component extends React.Component {
               value={client.address}
               name="address"
               onChange={updateTextField}
-              placeholder="Adres do wysyłki"
+              // placeholder="Adres do wysyłki"
               id="address"
             />
           </Grid>
@@ -142,7 +142,7 @@ class Component extends React.Component {
               value={client.place}
               name="place"
               onChange={updateTextField}
-              placeholder="Miejscowość"
+              // placeholder="Miejscowość"
               id="place"
             />
           </Grid>
@@ -153,7 +153,7 @@ class Component extends React.Component {
               value={client.postCode}
               name="postCode"
               onChange={updateTextField}
-              placeholder="Kod pocztowy"
+              // placeholder="Kod pocztowy"
               id="postCode"
             />
           </Grid>
