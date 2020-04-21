@@ -4,8 +4,10 @@ import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice, newOrderRequest } from '../../../redux/cartRedux.js';
 import { Button } from '../../common/Button/Button';
+import { unmountAfterDelay } from '../../../HOC/unmountAfterDelay/unmountAfterDelay';
 
 import './OrderForm.scss';
+import { Popup } from '../../common/Popup/Popup.js';
 
 class Component extends React.Component {
 
@@ -18,7 +20,7 @@ class Component extends React.Component {
       place: '',
       postCode: '',
     },
-    isError: false,
+    error: null,
   }
 
   static propTypes = {
@@ -27,22 +29,17 @@ class Component extends React.Component {
     sendOrder: PropTypes.func,
   }
 
-  isDataCompleted = (products, client, total) => {
-
-    let isFormValid = true;
-    if (!client.firstName && !client.lastName && !client.email && !client.address && !client.place && !client.postCode) isFormValid = false;
-    else if (!products.length) isFormValid = false;
-    else if (!total) isFormValid = false;
-
-    return isFormValid;
-  }
-
   submitOrder = async (event, products, total) => {
     const { client } = this.state;
     const { sendOrder } = this.props;
-
     event.preventDefault();
-    if (this.isDataCompleted(products, client, total)) {
+
+    let error = null;
+    if (!client.firstName && !client.lastName && !client.email && !client.address && !client.place && !client.postCode) error = 'Brakuje wymaganych danych';
+    else if (!products.length) error = 'Twój koszyk jest pusty';
+    else if (!total) error = 'Twój koszyk jest pusty';
+
+    if (!error) {
 
       const productsData = products.map(product => (
         {
@@ -57,6 +54,7 @@ class Component extends React.Component {
         client: client,
         total: total,
       };
+      await sendOrder(payload);
       this.setState({
         client: {
           firstName: '',
@@ -66,12 +64,10 @@ class Component extends React.Component {
           place: '',
           postCode: '',
         },
-        isError: false,
+        error: null,
       });
-      await sendOrder(payload);
-      // history.push('/')
     } else {
-      this.setState({ isError: true });
+      this.setState({ error });
     }
   };
 
@@ -83,13 +79,14 @@ class Component extends React.Component {
   }
 
   render() {
-
+    const DelayedPopup = unmountAfterDelay(Popup);
     const { updateTextField, submitOrder } = this;
-    const { client } = this.state;
+    const { client, error } = this.state;
     const { cart, total } = this.props;
-
     return (
       <form noValidate onSubmit={e => submitOrder(e, cart.products, total)}>
+        {error ? <DelayedPopup variant='danger'>{error}</DelayedPopup> : null}
+
         <Grid container>
           <Grid item xs={12} md={6}>
             <label htmlFor="firstName">Imię</label>
@@ -99,7 +96,6 @@ class Component extends React.Component {
               name="firstName"
               onChange={updateTextField}
               id="firstName"
-            // placeholder="Imię"
             />
           </Grid>
           <Grid item xs={12} md={6}>
@@ -109,7 +105,6 @@ class Component extends React.Component {
               value={client.lastName}
               name="lastName"
               onChange={updateTextField}
-              // placeholder="Nazwisko"
               id="lastName"
             />
           </Grid>
@@ -120,7 +115,6 @@ class Component extends React.Component {
               value={client.email}
               name="email"
               onChange={updateTextField}
-              // placeholder="Email"
               id="email"
             />
           </Grid>
@@ -131,7 +125,6 @@ class Component extends React.Component {
               value={client.address}
               name="address"
               onChange={updateTextField}
-              // placeholder="Adres do wysyłki"
               id="address"
             />
           </Grid>
@@ -142,7 +135,6 @@ class Component extends React.Component {
               value={client.place}
               name="place"
               onChange={updateTextField}
-              // placeholder="Miejscowość"
               id="place"
             />
           </Grid>
@@ -153,7 +145,6 @@ class Component extends React.Component {
               value={client.postCode}
               name="postCode"
               onChange={updateTextField}
-              // placeholder="Kod pocztowy"
               id="postCode"
             />
           </Grid>

@@ -12,43 +12,41 @@ import { unmountAfterDelay } from '../../../HOC/unmountAfterDelay/unmountAfterDe
 import { getViewportMode } from '../../../redux/viewportRedux.js';
 
 
-const Component = ({ cart, total, history, mobile }) => {
+const Component = ({ cart, total, mobile }) => {
   const DelayedPopup = unmountAfterDelay(Popup);
   return (
-    cart.products.length ? (
-      <div className={`${mobile ? styles.mobileWrapper : styles.wrapper}`}>
-        <h2>Moje produkty</h2>
-        <div className={styles.items}>
-          {cart.products.length ? (cart.products.map(product => (
-            <CartItem id={product._id} key={product._id} />
-          ))) :
-            (
-              <small className={styles.noProducts}>
-                <i>Brak produktów w koszyku</i>
-              </small>
-            )}
-        </div>
-        <NavLink className={styles.link} exact to="/">
-          Dodaj kolejne produkty
-        </NavLink>
-        <h2>Podsumowanie zamówienia</h2>
-        <div className={styles.summary}>
-          <span>Ilość produktów: </span>
-          <span>{countProductsInCart(cart.products)}</span>
-        </div>
-        <div className={styles.summary}>
-          <span>Wartość zamówienia: </span>
-          <span>{total} zł</span>
-        </div>
-        <h2>Dane kontaktowe</h2>
-        <OrderForm />
+    <div className={`${mobile ? styles.mobileWrapper : styles.wrapper}`}>
+      {!cart.products.length ?
+        <DelayedPopup variant="danger">
+          Najpierw dodaj produkty do koszyka
+        </DelayedPopup> : null}
+      <h2>Moje produkty</h2>
+      <div className={styles.items}>
+        {cart.products.length ? (cart.products.map(product => (
+          <CartItem id={product._id} key={product._id} />
+        ))) :
+          (
+            <small className={styles.noProducts}>
+              <i>Brak produktów w koszyku</i>
+            </small>
+          )}
       </div>
-    ) : (
-      <DelayedPopup
-        text="Najpierw dodaj produkty do koszyka"
-        variant="danger"
-      />
-    )
+      <NavLink className={styles.link} exact to="/">
+        Dodaj kolejne produkty
+      </NavLink>
+      <h2>Podsumowanie zamówienia</h2>
+      <div className={styles.summary}>
+        <span>Ilość produktów: </span>
+        <span>{countProductsInCart(cart.products)}</span>
+      </div>
+      <div className={styles.summary}>
+        <span>Wartość zamówienia: </span>
+        <span>{total} zł</span>
+      </div>
+      <h2>Dane kontaktowe</h2>
+      <OrderForm />
+    </div>
+
   );
 };
 Component.propTypes = {
