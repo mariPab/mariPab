@@ -12,4 +12,8 @@
   font-weight: 900;
   transition: $transition-all;
   outline: none;
+
+  &::-webkit-inner-spin-button {
+    opacity: 1;
+  }
 }
