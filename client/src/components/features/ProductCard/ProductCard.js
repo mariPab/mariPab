@@ -7,7 +7,7 @@ import styles from './ProductCard.module.scss';
 import { Button } from '../../common/Button/Button';
 
 const Component = ({ _id, name, images }) => (
-  <Grid item xs={10} sm={5} lg={3} className={styles.root}>
+  <Grid item xs={10} sm={5} lg={4} className={styles.root}>
     <div className={styles.root}>
       <img src={`${IMAGES_URL}/${images[0]}`} alt={name} />
       <div className={styles.productDetails}>

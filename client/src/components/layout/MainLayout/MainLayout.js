@@ -20,7 +20,9 @@ const Component = ({ children, changeViewportMode }) => {
   return (
     <div className={styles.root}>
       <Header />
-      {children}
+      <div className={styles.container}>
+        {children}
+      </div>
     </div>
   );
 };
@@ -31,11 +33,6 @@ Component.propTypes = {
   changeViewportMode: PropTypes.func,
 };
 
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-
 const mapDispatchToProps = dispatch => ({
   changeViewportMode: newMode => dispatch(changeViewport(newMode)),
 });
@@ -43,7 +40,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(null, mapDispatchToProps)(Component);
 
 export {
-  // Component as MainLayout,
   Container as MainLayout,
   Component as MainLayoutComponent,
 };
