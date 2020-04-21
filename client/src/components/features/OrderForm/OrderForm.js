@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getCart, getTotalPrice, newOrderRequest } from '../../../redux/cartRedux.js';
 import { Button } from '../../common/Button/Button';
 import { unmountAfterDelay } from '../../../HOC/unmountAfterDelay/unmountAfterDelay';
+import { withRouter } from 'react-router-dom';
 
 import './OrderForm.scss';
 import { Popup } from '../../common/Popup/Popup.js';
@@ -27,9 +28,10 @@ class Component extends React.Component {
     cart: PropTypes.object,
     total: PropTypes.number,
     sendOrder: PropTypes.func,
+    history: PropTypes.object,
   }
 
-  submitOrder = async (event, products, total) => {
+  submitOrder = (event, products, total) => {
     const { firstName, lastName, email, address, place, postCode } = this.state.client;
     const { sendOrder } = this.props;
     event.preventDefault();
@@ -61,7 +63,7 @@ class Component extends React.Component {
         client: this.state.client,
         total: total,
       };
-      await sendOrder(payload);
+      sendOrder(payload);
       this.setState({
         client: {
           firstName: '',
@@ -73,6 +75,8 @@ class Component extends React.Component {
         },
         error: null,
       });
+      this.props.history.push('/');
+
     } else {
       this.setState({ error });
     }
@@ -171,7 +175,7 @@ const mapDispatchToProps = dispatch => ({
   sendOrder: data => dispatch(newOrderRequest(data)),
 });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
+const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
 
 export {
   Container as OrderForm,
