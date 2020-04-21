@@ -1,5 +1,22 @@
 @import "../../../styles/settings.scss";
 
+.cartlink {
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+  span {
+    color: lighten($color: $color-text, $amount: 30%);
+    font-weight: 100;
+    padding-right: 15px;
+  }
+  button {
+    margin: 0;
+  }
+}
+
 .root {
   background-color: transparentize($color: $color-text, $amount: 0.3);
   width: 100vw;
@@ -50,6 +67,14 @@
       font-size: 0.9rem;
       color: $color-text;
       letter-spacing: 0.1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .cartlink {
+    span {
+      padding-right: 15px;
     }
   }
 }

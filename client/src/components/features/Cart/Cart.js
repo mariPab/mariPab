@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getCart, getTotalPrice } from '../../../redux/cartRedux.js';
@@ -7,45 +7,64 @@ import { CartItem } from '../CartItem/CartItem';
 import styles from './Cart.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 import { Button } from '../../common/Button/Button';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 
-const Component = ({ expanded, cart, total }) => {
+const Component = ({ cart, total }) => {
+  const [opened, setOpened] = useState(false);
+
+  const handleClick = () => {
+    setOpened(!opened);
+  };
 
   return (
-    <div className={`${styles.root} ${expanded ? styles.expanded : ''}`}>
-      <div className={`${styles.cart}`}>
-        <div className={styles.items}>
-          {cart.products.length ? (cart.products.map(product => (
-            <CartItem id={product._id} key={product._id} />
-          ))) :
-            (
-              <small className={styles.noProducts}>
-                <i>Brak produktów w koszyku</i>
-              </small>
-            )
-          }
-        </div>
-        <div className={styles.summary}>
-          <p>
-            Podsumowanie zamówienia
-          </p>
-          <div>
-            <span>ilość produktów:</span>
-            <span>{countProductsInCart(cart.products)}</span>
-          </div>
-          <div>
-            <span>Wartość zamówienia: </span>
-            <span>{total} zł</span>
-          </div>
-          <Button disabled={cart.products.length ? false : true}>
-            <NavLink exact to="/order">
-              Kontynuuj zamówienie
-            </NavLink>
-          </Button>
-        </div>
+    <div>
+      <div className={styles.cartlink}>
+        <span>
+          {total}&nbsp;zł
+        </span>
+        <Button
+          variant="fab"
+          onClick={handleClick}
+        >
+          <LocalMallIcon color="primary" />
+        </Button>
       </div>
+      {opened ? (
+        <div onClick={handleClick} className={`${styles.root} ${opened ? styles.expanded : ''}`}>
+          <div className={`${styles.cart}`}>
+            <div className={styles.items}>
+              {cart.products.length ? (cart.products.map(product => (
+                <CartItem id={product._id} key={product._id} />
+              ))) :
+                (
+                  <small className={styles.noProducts}>
+                    <i>Brak produktów w koszyku</i>
+                  </small>
+                )
+              }
+            </div>
+            <div className={styles.summary}>
+              <p>
+                Podsumowanie zamówienia
+              </p>
+              <div>
+                <span>ilość produktów:</span>
+                <span>{countProductsInCart(cart.products)}</span>
+              </div>
+              <div>
+                <span>Wartość zamówienia: </span>
+                <span>{total} zł</span>
+              </div>
+              <Button onClick={handleClick} disabled={cart.products.length ? false : true}>
+                <NavLink exact to="/order">
+                  Kontynuuj zamówienie
+                </NavLink>
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </div>
-
-
   );
 };
 
@@ -62,14 +81,9 @@ const mapStateToProps = state => ({
   total: getTotalPrice(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
 const Container = connect(mapStateToProps, null)(Component);
 
 export {
-  // Component as Cart,
   Container as Cart,
   Component as CartComponent,
 };

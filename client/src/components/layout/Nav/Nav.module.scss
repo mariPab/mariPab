@@ -22,6 +22,7 @@
   cursor: pointer;
   text-transform: uppercase;
   list-style: none;
+  width: calc(100% - 140px);
 }
 
 .mobileOnly {
@@ -57,18 +58,9 @@
     color: $color-danger;
   }
 }
-.cartlink {
-  display: flex;
-  align-items: center;
-  font-size: 1.1rem;
-  span {
-    color: lighten($color: $color-text, $amount: 30%);
-    font-weight: 100;
-  }
-}
 
 @media (max-width: 768px) {
   .navlink {
-    padding: 0 20px;
+    padding: 0 15px;
   }
 }
