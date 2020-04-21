@@ -10,7 +10,7 @@ import { Button } from '../../common/Button/Button';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 const Component = ({ cart, total }) => {
-  const [opened, setOpened] = useState(true);
+  const [opened, setOpened] = useState(false);
 
   const handleClick = e => {
     e.preventDefault();
