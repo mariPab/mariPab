@@ -7,7 +7,7 @@ module.exports = validateInputs = client => {
 
   /* Form Validation */
   let isValid = true;
-  if (!firstName && !lastName && !email && !address && !place && !postCode) isValid = false;
+  if (!firstName || !lastName || !email || !address || !place || !postCode) isValid = false;
   else if (firstName.length <= 2 || lastName.length <= 2 || place.length <= 2) isValid = false;
   // else if (!invalidSigns.test(firstName)
   //   ||

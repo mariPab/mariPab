@@ -41,7 +41,7 @@ class Component extends React.Component {
     const validPostCode = /[0-9]{2}-[0-9]{3}/;
 
     let error = null;
-    if (!firstName && !lastName && !email && !address && !place && !postCode) error = 'Brakuje wymaganych danych';
+    if (!firstName || !lastName || !email || !address || !place || !postCode) error = 'Brakuje wymaganych danych';
     else if (!products.length) error = 'Twój koszyk jest pusty';
     else if (!total) error = 'Twój koszyk jest pusty';
     else if (!validEmail.test(email)) error = 'Adres e-mail jest nieprawidłowy';
