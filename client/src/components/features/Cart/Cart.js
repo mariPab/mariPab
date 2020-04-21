@@ -10,9 +10,12 @@ import { Button } from '../../common/Button/Button';
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 const Component = ({ cart, total }) => {
-  const [opened, setOpened] = useState(false);
+  const [opened, setOpened] = useState(true);
 
-  const handleClick = () => {
+  const handleClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log(e.target);
     setOpened(!opened);
   };
 
@@ -24,13 +27,14 @@ const Component = ({ cart, total }) => {
         </span>
         <Button
           variant="fab"
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
         >
           <LocalMallIcon color="primary" />
         </Button>
       </div>
       {opened ? (
-        <div onClick={handleClick} className={`${styles.root} ${opened ? styles.expanded : ''}`}>
+        <div className={`${styles.root} ${opened ? styles.expanded : ''}`}>
+          <div onClick={(e) => handleClick(e)} className={`${styles.background}`}></div>
           <div className={`${styles.cart}`}>
             <div className={styles.items}>
               {cart.products.length ? (cart.products.map(product => (
@@ -55,7 +59,7 @@ const Component = ({ cart, total }) => {
                 <span>Wartość zamówienia: </span>
                 <span>{total} zł</span>
               </div>
-              <Button onClick={handleClick} disabled={cart.products.length ? false : true}>
+              <Button onClick={(e) => handleClick(e)} disabled={cart.products.length ? false : true}>
                 <NavLink exact to="/order">
                   Kontynuuj zamówienie
                 </NavLink>

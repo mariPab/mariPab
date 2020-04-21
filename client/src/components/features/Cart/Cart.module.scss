@@ -18,27 +18,30 @@
 }
 
 .root {
-  background-color: transparentize($color: $color-text, $amount: 0.3);
-  width: 100vw;
   position: fixed;
   height: calc(100vh - 60px);
   top: 60px;
+  width: 100vw;
   left: 0;
   display: none;
-  margin-right: 150px;
+}
+
+.background {
+  background-color: transparentize($color: $color-text, $amount: 0.3);
+  height: 100%;
+  width: calc(100% - 450px);
 }
 
 .expanded {
   transition: $transition-all;
   margin-right: 0;
-  display: block;
+  display: flex;
+  animation: viewsFromRight 0.5 ease;
 }
 
 .cart {
-  position: absolute;
   height: 100%;
   width: 450px;
-  right: 0;
   transition: $transition-transform;
   background-color: $color-supplemental;
   padding: 40px 20px;
