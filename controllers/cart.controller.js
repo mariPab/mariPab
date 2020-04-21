@@ -1,5 +1,4 @@
 exports.getCart = async (req, res) => {
-  console.log(req.session.cart.products);
   try {
     if (!req.session || !req.session.cart || !req.session.cart.products) res.json([]);
     else if (!req.session.cart.products.length) res.json([]);

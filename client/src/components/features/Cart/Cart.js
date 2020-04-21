@@ -15,7 +15,6 @@ const Component = ({ cart, total }) => {
   const handleClick = e => {
     e.preventDefault();
     e.stopPropagation();
-    console.log(e.target);
     setOpened(!opened);
   };
 

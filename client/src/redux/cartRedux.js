@@ -83,7 +83,6 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
-      console.log(action.payload.product);
       const { products, total } = statePart;
       if (products.length) {
         let isProductInCart = false;
