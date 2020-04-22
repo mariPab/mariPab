@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { Cart } from '../../features/Cart/Cart';
 import { Button } from '../../common/Button/Button';
 import MenuIcon from '@material-ui/icons/Menu';
+import manageCartStorageHOC from '../../../HOC/manageCartStorage/manageCartStorage';
+
+const CartWithStorageMngmt = manageCartStorageHOC(Cart);
 
 const Component = ({ mobile }) => {
   const [expanded, setExpanded] = useState(false);
@@ -36,7 +39,7 @@ const Component = ({ mobile }) => {
           O&nbsp;nas
         </NavLink>
       </div>
-      <Cart />
+      <CartWithStorageMngmt />
     </nav >
   );
 };
