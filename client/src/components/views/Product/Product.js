@@ -6,18 +6,14 @@ import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
 import { connect } from 'react-redux';
 import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
 import { addProductToCart } from '../../../redux/cartRedux.js';
-import { NavLink } from 'react-router-dom';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import styles from './Product.module.scss';
 import { NumberInput } from '../../common/NumberInput/NumberInput';
 import { Button } from '../../common/Button/Button';
 
 class Component extends React.Component {
-
   state = {
     amount: 1,
   }
-
   static propTypes = {
     className: PropTypes.string,
     product: PropTypes.object,
@@ -29,14 +25,12 @@ class Component extends React.Component {
     }),
     addToCart: PropTypes.func,
   }
-
   componentDidMount() {
     this.props.loadProduct(this.props.match.params.id);
   }
   updateTextField = ({ target }) => {
     this.setState({ amount: parseInt(target.value) });
   }
-
   render() {
     const { product, addToCart } = this.props;
     const { amount } = this.state;
@@ -66,8 +60,6 @@ class Component extends React.Component {
               Dodaj do koszyka
             </Button>
           </div>
-
-
         </div>
       ) :
         (
@@ -89,7 +81,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as Product,
   Container as Product,
   Component as ProductComponent,
 };
