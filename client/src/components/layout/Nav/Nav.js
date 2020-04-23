@@ -29,13 +29,13 @@ const Component = ({ mobile }) => {
           <MenuIcon />
         </Button> : ''}
       <div className={`${styles.navLinkList} ${mobile ? styles.mobileOnly : ''} ${expanded ? styles.expandMenu : ''}`}>
-        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick() : null}>
           Strona główna
         </NavLink>
-        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick() : null}>
           Wyprzedaż
         </NavLink>
-        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick('expandMenu') : null}>
+        <NavLink className={styles.navlink} exact to='/' onClick={mobile ? () => handleExpandClick() : null}>
           O&nbsp;nas
         </NavLink>
       </div>
