@@ -2,8 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
-const session = require('express-session');
-const MongoStore = require('connect-mongo')(session);
 
 const app = express();
 
@@ -39,11 +37,6 @@ process.env.NODE_ENV === "production" ?
   mongoose.connect('mongodb://localhost:27017/natural-beauty', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
-
-app.use(session({
-  secret: 'sessionKey7h%wvyjg*wr7',
-  store: new MongoStore({ mongooseConnection: db })
-}));
 
 db.once('open', () => {
   console.log('Successfully connected to the database');
