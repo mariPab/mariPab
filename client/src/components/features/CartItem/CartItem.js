@@ -87,7 +87,6 @@ const mapDispatchToProps = dispatch => ({
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
-  // Component as CartItem,
   Container as CartItem,
   Component as CartItemComponent,
 };
