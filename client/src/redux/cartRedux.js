@@ -51,6 +51,22 @@ export const newOrderRequest = data => {
   };
 };
 
+/* thunk creators */
+export const saveCartRequest = data => {
+  return () => {
+    localStorage.setItem('cart', JSON.stringify(data));
+  };
+};
+
+export const loadCartRequest = () => {
+  return dispatch => {
+    let getSavedCart;
+    localStorage.getItem('cart') ?
+      getSavedCart = JSON.parse(localStorage.getItem('cart')) : getSavedCart = [];
+    dispatch(fetchSuccess(getSavedCart));
+  };
+};
+
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {
   switch (action.type) {
@@ -66,11 +82,7 @@ export const reducer = (statePart = [], action = {}) => {
     case FETCH_SUCCESS: {
       return {
         ...statePart,
-        loading: {
-          active: false,
-          error: false,
-        },
-        data: action.payload,
+        products: action.payload ? action.payload : [],
       };
     }
     case FETCH_ERROR: {
@@ -83,7 +95,7 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case ADD_TO_CART: {
-      const { products, total } = statePart;
+      const { products } = statePart;
       if (products.length) {
         let isProductInCart = false;
         for (let item of products) {
@@ -92,13 +104,11 @@ export const reducer = (statePart = [], action = {}) => {
         return {
           ...statePart,
           products: isProductInCart ? [...products] : [...products, { ...action.payload.product, amount: action.payload.amount }],
-          total: isProductInCart ? total : total + action.payload.price,
         };
       } else {
         return {
           ...statePart,
           products: [{ ...action.payload.product, amount: action.payload.amount }],
-          total: total + action.payload.price,
         };
       }
     }
@@ -109,7 +119,6 @@ export const reducer = (statePart = [], action = {}) => {
           if (product._id === action.payload.id) return { ...product, amount: action.payload.amount };
           else return product;
         }),
-        total: statePart.total,
       };
     }
     case ADD_NOTES: {
@@ -119,21 +128,18 @@ export const reducer = (statePart = [], action = {}) => {
           if (product._id === action.payload.id) return { ...product, notes: action.payload.notes };
           else return product;
         }),
-        total: statePart.total,
       };
     }
     case REMOVE_FROM_CART: {
       return {
         ...statePart,
         products: statePart.products.filter(product => product._id !== action.payload._id),
-        total: statePart.total,
       };
     }
     case SEND_ORDER: {
       return {
         ...statePart,
         products: [],
-        total: 0,
       };
     }
     default:
