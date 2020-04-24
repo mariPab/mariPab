@@ -6,15 +6,12 @@
   background-color: $color-supplemental;
   height: 60px;
   width: 100vw;
+  padding: 0 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   z-index: 2;
-}
-
-.expanded {
-  // background-color: rgba(255, 255, 255, 0.849);
-  background-color: $color-supplemental;
+  box-shadow: 0px 0px 5px 0px $color-border;
 }
 
 .navLinkList {
@@ -28,24 +25,22 @@
 .mobileOnly {
   flex-direction: column;
   left: 0;
-  // background-color: rgba(255, 255, 255, 0.849);
-  background-color: $color-supplemental;
-
+  background-color: transparentize($color: $color-text, $amount: 0.3);
   position: fixed;
   width: 100vw;
+  height: 100vh;
   top: 0;
   transition: $transition-all;
   display: none;
-
   .navlink {
-    padding: 10px 20px;
+    background-color: $color-supplemental;
+    padding: 15px 20px;
   }
 }
 
 .expandMenu {
   display: flex;
   top: 60px;
-  padding: 20px 0;
 }
 
 .navlink {
