@@ -17,17 +17,6 @@
   }
 }
 
-.linkContinue {
-  float: right;
-  button {
-    letter-spacing: 0.1rem;
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.3;
-    }
-  }
-}
-
 .root {
   position: fixed;
   height: calc(100vh - 60px);
@@ -66,7 +55,6 @@
 }
 
 .summary {
-  margin-bottom: 20px;
   p {
     color: $color-text;
     font: 700 1.1rem $font-supplemental;
@@ -77,11 +65,25 @@
   & > div {
     display: flex;
     justify-content: space-between;
+
     span {
       padding: 3px 0;
       font-size: 0.9rem;
       color: $color-text;
       letter-spacing: 0.1rem;
+    }
+  }
+}
+
+.linkContinue {
+  float: right;
+  margin-top: 40px;
+
+  button {
+    letter-spacing: 0.1rem;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.3;
     }
   }
 }

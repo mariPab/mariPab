@@ -63,3 +63,14 @@
 .expanded {
   display: block;
 }
+
+@media (max-width: 576px) {
+  .productInfo {
+    padding: 0 5px;
+
+    span {
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+  }
+}

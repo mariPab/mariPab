@@ -26,6 +26,10 @@
   & > div {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 40px;
+  }
+  button {
+    float: right;
   }
 }
 @media (max-width: 576px) {
