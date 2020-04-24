@@ -9,13 +9,11 @@ import styles from './OrderSummary.module.scss';
 import { countProductsInCart } from '../../../utils/countProductsInCart.js';
 import { OrderForm } from '../../features/OrderForm/OrderForm';
 import { unmountAfterDelay } from '../../../HOC/unmountAfterDelay/unmountAfterDelay';
-import { getViewportMode } from '../../../redux/viewportRedux.js';
 
-
-const Component = ({ cart, total, mobile }) => {
+const Component = ({ cart, total }) => {
   const DelayedPopup = unmountAfterDelay(Popup);
   return (
-    <div className={`${mobile ? styles.mobileWrapper : styles.wrapper}`}>
+    <div className={styles.wrapper}>
       {!cart.products.length ?
         <DelayedPopup variant="danger">
           Najpierw dodaj produkty do koszyka
@@ -46,20 +44,17 @@ const Component = ({ cart, total, mobile }) => {
       <h2>Dane kontaktowe</h2>
       <OrderForm />
     </div>
-
   );
 };
 Component.propTypes = {
   cart: PropTypes.object,
   total: PropTypes.number,
   history: PropTypes.object,
-  mobile: PropTypes.bool,
 };
 
 const mapStateToProps = state => ({
   cart: getCart(state),
   total: getTotalPrice(state),
-  mobile: getViewportMode(state),
 });
 
 // const mapDispatchToProps = dispatch => ({
