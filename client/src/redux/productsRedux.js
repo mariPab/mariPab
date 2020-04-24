@@ -3,7 +3,9 @@ import { API_URL } from '../config';
 
 /* selectors */
 export const getAll = ({ products }) => products.data;
+export const getLoadingState = ({ products }) => products.loading;
 export const getProductById = ({ products }) => products.opened;
+
 
 /* action name creator */
 const reducerName = 'products';

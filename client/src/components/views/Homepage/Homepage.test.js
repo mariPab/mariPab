@@ -9,6 +9,9 @@ const mockProps = {
       name: 'Lorem ipsum',
     },
   ],
+  loading: {
+    active: false,
+  },
   loadProducts: () => { },
 };
 
