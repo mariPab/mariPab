@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
 import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
 import styles from './MainLayout.module.scss';
@@ -23,6 +24,7 @@ const Component = ({ children, changeViewportMode }) => {
       <div className={styles.container}>
         {children}
       </div>
+      <Footer />
     </div>
   );
 };

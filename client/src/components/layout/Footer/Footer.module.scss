@@ -1,0 +1,27 @@
+@import "../../../styles/settings.scss";
+
+.root {
+  background-color: $color-text;
+  display: flex;
+  justify-content: flex-start;
+
+  & > div {
+    padding: 30px;
+  }
+
+  span {
+    font-size: 0.8rem;
+    color: darken($color-supplemental, 30%);
+    letter-spacing: 0.1rem;
+  }
+}
+
+.contact {
+}
+
+h4 {
+  color: $color-supplemental;
+  font-size: 1rem;
+  margin: 10px 0;
+  letter-spacing: 0.1rem;
+}
