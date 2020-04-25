@@ -31,10 +31,10 @@
 
   button {
     background-color: transparent;
-    border-color: $color-light;
+    border-color: $color-supplemental;
     &:hover {
       background-color: transparentize($color: $color-text, $amount: 0.5);
-      border-color: $color-light;
+      border-color: $color-supplemental;
     }
   }
   span {
