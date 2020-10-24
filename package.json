@@ -6,7 +6,7 @@
   "scripts": {
     "start": "set NODE_ENV='production' && node server.js",
     "start-dev": "npm-run-all -l -p start:*",
-    "start:server": "set NODE_ENV='dev' && ./node_modules/.bin/nodemon server.js",
+    "start:server": "set NODE_ENV='dev' && nodemon server.js",
     "start:client": "cd client && yarn start",
     "build": "cd client && yarn install && yarn build"
   },

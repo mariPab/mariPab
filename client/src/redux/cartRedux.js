@@ -3,6 +3,7 @@ import { API_URL } from '../config';
 
 /* selectors */
 export const getCart = ({ cart }) => cart;
+export const getProducts = ({ cart }) => cart.products;
 export const getProductFromCart = ({ cart }, productId) => cart.products.filter(product => product._id === productId)[0];
 export const getTotalPrice = ({ cart }) => cart.products.reduce((total, product) => product.price * product.amount + total, 0);
 
