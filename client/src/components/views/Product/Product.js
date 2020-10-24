@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IMAGES_URL } from '../../../config';
 import { NotFound } from '../../views/NotFound/NotFound';
-import { GalleryPic } from '../../features/GalleryPic/GalleryPic';
+import { GalleryPic } from '../../features/GalleryPic';
 import { connect } from 'react-redux';
 import { getProductById, loadProductByIdRequest } from '../../../redux/productsRedux.js';
 import { addProductToCart } from '../../../redux/cartRedux.js';
