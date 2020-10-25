@@ -9,6 +9,7 @@ import {
   LoadCart,
   CartProduct,
 } from "./types";
+import { ProductBasic } from '../products/types';
 
 /* action name creator */
 const reducerName = "CART";
@@ -39,7 +40,7 @@ export const submitOrderFail = (): SubmitOrderFail => ({
   type: SUBMIT_ORDER_FAIL,
 });
 export const addProductToCart = (
-  product: CartProduct,
+  product: ProductBasic,
   amount: number
 ): AddProductToCart => ({
   payload: { product, amount },

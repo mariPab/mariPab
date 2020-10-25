@@ -17,7 +17,7 @@ import { RootState } from "../store";
 /* selectors */
 export const getAll = ({ products }: RootState) => products.data;
 export const getLoadingState = ({ products }: RootState) => products.loading;
-export const getProductById = ({ products }: RootState) => products.activeProduct;
+export const getActiveProduct = ({ products }: RootState) => products.activeProduct;
 
 const initState: ProductStore = {
   data: [],
@@ -41,6 +41,7 @@ export default function productsReducer(
     }
     case GET_PRODUCTS_LIST_SUCCESS: {
       const { payload } = action as GetProductsListSuccess;
+      console.log(payload);
       return {
         ...statePart,
         loading: false,

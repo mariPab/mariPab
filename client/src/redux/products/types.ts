@@ -17,7 +17,7 @@ export interface ProductBasic {
 }
 
 export interface Product extends ProductBasic {
-  tags: string[];
+  tags?: string[];
 }
 export interface ProductStore {
   data: Product[];

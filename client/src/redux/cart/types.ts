@@ -8,14 +8,14 @@ import {
   SUBMIT_ORDER_FAIL,
   LOAD_CART,
 } from "./actions";
-import { Product } from '../products/types';
+import { Product, ProductBasic } from '../products/types';
 
 export interface CartProduct extends Product {
   amount: number;
   notes: string;
 }
 export interface CartStore {
-  products: Product[];
+  products: CartProduct[];
   orderProcessing: boolean;
 }
 
@@ -36,7 +36,7 @@ export interface SubmitOrderFail {
 export interface AddProductToCart {
   type: typeof ADD_PRODUCT;
   payload: {
-    product: CartProduct;
+    product: ProductBasic;
     amount: number;
   };
 }

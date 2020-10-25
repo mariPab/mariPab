@@ -49,12 +49,12 @@ export default function cartReducer(
           ...statePart,
           products: isProductInCart
             ? [...products]
-            : [...products, { ...payload.product, amount: payload.amount }],
+            : [...products, { ...payload.product, amount: payload.amount, notes: '' }],
         };
       } else {
         return {
           ...statePart,
-          products: [{ ...payload.product, amount: payload.amount }],
+          products: [{ ...payload.product, amount: payload.amount, notes: '', }],
         };
       }
     }

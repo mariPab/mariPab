@@ -5,8 +5,10 @@ import {
   submitOrderStartProcessing,
   submitOrderSuccess,
   loadCart,
+  addProductToCart
 } from "./actions";
 import { OrderPayload, CartProduct } from "./types";
+import { Product, ProductBasic } from "../products/types";
 
 /* thunk creators */
 export const submitOrder = (data: OrderPayload): AppThunk => async (
@@ -39,4 +41,11 @@ export const loadCartRequest = (): AppThunk => {
       ? dispatch(loadCart(JSON.parse(getSavedCart)))
       : dispatch(loadCart([]));
   };
+};
+export const addProductToCard = (product: Product, amount: number): AppThunk => {
+  return async dispatch => {
+    const cartproductData = { ...product };
+    delete cartproductData.tags;
+    dispatch(addProductToCart(cartproductData as ProductBasic, amount));
+  }
 };

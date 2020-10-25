@@ -8,14 +8,18 @@ import {
   getProductsListStart,
   getProductsListSuccess
 } from './actions';
+import { Product } from "./types";
 
 /* thunk creators */
 export const getProductsList = () => {
   return async (dispatch: any) => {
     dispatch(getProductsListStart());
     try {
-      let res = await axios.get(`${API_URL}/products`);
-      dispatch(getProductsListSuccess(res.data));
+      const res = await axios.get(`${API_URL}/products`);
+      const data = res.data.map((item: any) => ({
+        ...item, id: item._id
+      })) as Product[];
+      dispatch(getProductsListSuccess(data));
     } catch (e) {
       console.log(e);
       dispatch(getProductsListFail());
@@ -28,7 +32,9 @@ export const getProductById = (id: string) => {
     dispatch(getProductByIdStart());
     try {
       const res = await axios.get(`${API_URL}/products/${id}`);
-      dispatch(getProductByIdSuccess(res.data));
+      const data = { ...res.data, id: res.data._id };
+      delete data._id;
+      dispatch(getProductByIdSuccess(data));
     } catch (e) {
       dispatch(getProductByIdFail());
     }
