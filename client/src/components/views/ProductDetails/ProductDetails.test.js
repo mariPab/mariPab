@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ProductComponent } from './Product';
+import { ProductComponent } from '.';
 
 const mockProps = {
-  _id: '46346346',
+  id: '46346346',
   name: 'Lorem ipsum',
   description: 'Lorem ipsum dolor sit amet',
   images: ['abc.jpg', 'bdc.jpg'],
