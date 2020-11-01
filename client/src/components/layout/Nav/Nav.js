@@ -4,12 +4,12 @@ import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
 import { getViewportMode } from '../../../redux/viewportRedux.js';
 import { connect } from 'react-redux';
-import { Cart } from '../../features/Cart';
+import Cart from '../../features/Cart';
 import { Button } from '../../common/Button/Button';
 import MenuIcon from '@material-ui/icons/Menu';
-import manageCartStorageHOC from '../../../HOC/manageCartStorage/manageCartStorage';
+// import manageCartStorageHOC from '../../../HOC/manageCartStorage';
 
-const CartWithStorageMngmt = manageCartStorageHOC(Cart);
+// const CartWithStorageMngmt = manageCartStorageHOC(Cart);
 
 const Component = ({ mobile }) => {
   const [expanded, setExpanded] = useState(false);
@@ -39,7 +39,7 @@ const Component = ({ mobile }) => {
           O&nbsp;nas
         </NavLink>
       </div>
-      <CartWithStorageMngmt />
+      <Cart />
     </nav >
   );
 };

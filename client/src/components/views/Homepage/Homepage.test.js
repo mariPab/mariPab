@@ -1,12 +1,12 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-import { HomepageComponent } from './Homepage';
+import React from "react";
+import { shallow } from "enzyme";
+import { HomepageComponent } from ".";
 
 const mockProps = {
   products: [
     {
-      _id: 'sg634673eb',
-      name: 'Lorem ipsum',
+      id: "sg634673eb",
+      name: "Lorem ipsum",
     },
   ],
   loading: {
@@ -15,8 +15,8 @@ const mockProps = {
   loadProducts: () => { },
 };
 
-describe('Component Homepage', () => {
-  it('should render without crashing', () => {
+describe("Component Homepage", () => {
+  it("should render without crashing", () => {
     const component = shallow(<HomepageComponent {...mockProps} />);
     expect(component).toBeTruthy();
   });

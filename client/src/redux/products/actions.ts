@@ -16,9 +16,9 @@ export const GET_PRODUCTS_LIST_START = createActionName("GET_PRODUCTS_LIST_START
 export const GET_PRODUCTS_LIST_SUCCESS = createActionName("GET_PRODUCTS_LIST_SUCCESS");
 export const GET_PRODUCTS_LIST_FAIL = createActionName("GET_PRODUCTS_LIST_FAIL");
 
-export const GET_PRODUCT_BY_ID_START = createActionName("GET_PRODUCT_BY_ID");
-export const GET_PRODUCT_BY_ID_SUCCESS = createActionName("GET_PRODUCT_BY_ID");
-export const GET_PRODUCT_BY_ID_FAIL = createActionName("GET_PRODUCT_BY_ID");
+export const GET_PRODUCT_BY_ID_START = createActionName("GET_PRODUCT_BY_ID_START");
+export const GET_PRODUCT_BY_ID_SUCCESS = createActionName("GET_PRODUCT_BY_ID_SUCCESS");
+export const GET_PRODUCT_BY_ID_FAIL = createActionName("GET_PRODUCT_BY_ID_FAIL");
 
 export const RESET_ACTIVE_PRODUCT = createActionName("RESET_ACTIVE_PRODUCT");
 
@@ -37,7 +37,7 @@ export const getProductByIdStart = (): GetProductByIdStart => ({
 });
 export const getProductByIdSuccess = (product: Product): GetProductByIdSuccess => ({
   payload: product,
-  type: GET_PRODUCT_BY_ID_START
+  type: GET_PRODUCT_BY_ID_SUCCESS
 });
 export const getProductByIdFail = (): GetProductByIdFail => ({
   type: GET_PRODUCT_BY_ID_FAIL

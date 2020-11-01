@@ -35,7 +35,6 @@ export const CartItem: React.FunctionComponent<Props> = ({
 }: Props): React.ReactElement => {
   const [expanded, setExpanded] = useState(false);
   const handleExpandClick = () => setExpanded(!expanded);
-
   return (
     <div className={styles.root}>
       <div className={styles.productItem}>
@@ -61,7 +60,7 @@ export const CartItem: React.FunctionComponent<Props> = ({
               <EditIcon color="primary" />
             </Button>
             <Button
-              onClick={removeProduct(product.id)}
+              onClick={removeProduct.bind(null, product.id)}
               variant="fab"
               aria-label="delete"
             >

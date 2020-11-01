@@ -5,6 +5,7 @@ import {
   ChangeProductAmount,
   RemoveFromCart,
   AddComments,
+  LoadCart
 } from "./types";
 import { RootState } from "../store";
 import {
@@ -14,13 +15,14 @@ import {
   CHANGE_PRODUCT_AMOUNT,
   REMOVE_PRODUCT,
   SUBMIT_ORDER_SUCCESS,
+  LOAD_CART,
 } from "./actions";
 
 /* selectors */
 export const getCart = ({ cart }: RootState) => cart;
 export const getProducts = ({ cart }: RootState) => cart.products;
 export const getProductFromCart = ({ cart }: RootState, productId: string) =>
-  cart.products.filter((product) => product.id === productId)[0];
+  cart.products.filter(product => product.id === productId)[0];
 export const getTotalPrice = ({ cart }: RootState) =>
   cart.products.reduce(
     (total, product) => product.price * product.amount + total,
@@ -37,6 +39,12 @@ export default function cartReducer(
   action: CartReducerActionTypes
 ): CartStore {
   switch (action.type) {
+    case LOAD_CART:
+      const { payload } = action as LoadCart;
+      return {
+        ...statePart,
+        products: payload,
+      };
     case ADD_PRODUCT: {
       const { products } = statePart;
       const { payload } = action as AddProductToCart;

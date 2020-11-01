@@ -1,38 +1,48 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import { connect } from 'react-redux';
-import { getCart, getTotalPrice, newOrderRequest } from '../../../redux/cartRedux.js';
-import { Button } from '../../common/Button/Button';
-import { unmountAfterDelay } from '../../../HOC/unmountAfterDelay/unmountAfterDelay';
-import { withRouter } from 'react-router-dom';
+import React from "react";
+import PropTypes from "prop-types";
+import Grid from "@material-ui/core/Grid";
+import { connect } from "react-redux";
+import {
+  getCart,
+  getTotalPrice,
+} from "../../../redux/cart/reducer";
+import { submitOrder } from '../../../redux/cart/thunks';
+import { Button } from "../../common/Button/Button";
+import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay/unmountAfterDelay";
+import { withRouter } from "react-router-dom";
 
-import './OrderForm.scss';
-import { Popup } from '../../common/Popup/Popup.js';
+import "./OrderForm.scss";
+import { Popup } from "../../common/Popup/Popup.js";
 
 class Component extends React.Component {
-
   state = {
     client: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      address: '',
-      place: '',
-      postCode: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      address: "",
+      place: "",
+      postCode: "",
     },
     error: null,
-  }
+  };
 
   static propTypes = {
     cart: PropTypes.object,
     total: PropTypes.number,
     sendOrder: PropTypes.func,
     history: PropTypes.object,
-  }
+  };
 
   submitOrder = (event, products, total) => {
-    const { firstName, lastName, email, address, place, postCode } = this.state.client;
+    const {
+      firstName,
+      lastName,
+      email,
+      address,
+      place,
+      postCode,
+    } = this.state.client;
     const { sendOrder } = this.props;
     event.preventDefault();
 
@@ -41,22 +51,22 @@ class Component extends React.Component {
     const validPostCode = /[0-9]{2}-[0-9]{3}/;
 
     let error = null;
-    if (!firstName || !lastName || !email || !address || !place || !postCode) error = 'Brakuje wymaganych danych';
-    else if (!products.length) error = 'Twój koszyk jest pusty';
-    else if (!total) error = 'Twój koszyk jest pusty';
-    else if (!validEmail.test(email)) error = 'Adres e-mail jest nieprawidłowy';
-    else if (!validAddress.test(address)) error = 'Adres wysyłki jest nieprawidłowy';
-    else if (!validPostCode.test(postCode)) error = 'Kod pocztowy jest nieprawidłowy';
+    if (!firstName || !lastName || !email || !address || !place || !postCode)
+      error = "Brakuje wymaganych danych";
+    else if (!products.length) error = "Twój koszyk jest pusty";
+    else if (!total) error = "Twój koszyk jest pusty";
+    else if (!validEmail.test(email)) error = "Adres e-mail jest nieprawidłowy";
+    else if (!validAddress.test(address))
+      error = "Adres wysyłki jest nieprawidłowy";
+    else if (!validPostCode.test(postCode))
+      error = "Kod pocztowy jest nieprawidłowy";
 
     if (!error) {
-
-      const productsData = products.map(product => (
-        {
-          _id: product._id,
-          amount: product.amount,
-          notes: product.notes,
-        }
-      ));
+      const productsData = products.map((product) => ({
+        _id: product._id,
+        amount: product.amount,
+        notes: product.notes,
+      }));
 
       const payload = {
         products: productsData,
@@ -66,17 +76,16 @@ class Component extends React.Component {
       sendOrder(payload);
       this.setState({
         client: {
-          firstName: '',
-          lastName: '',
-          email: '',
-          address: '',
-          place: '',
-          postCode: '',
+          firstName: "",
+          lastName: "",
+          email: "",
+          address: "",
+          place: "",
+          postCode: "",
         },
         error: null,
       });
-      this.props.history.push('/');
-
+      this.props.history.push("/");
     } else {
       this.setState({ error });
     }
@@ -87,7 +96,7 @@ class Component extends React.Component {
     const { value, name } = target;
 
     this.setState({ client: { ...client, [name]: value }, error: null });
-  }
+  };
 
   render() {
     const DelayedPopup = unmountAfterDelay(Popup);
@@ -95,8 +104,8 @@ class Component extends React.Component {
     const { client, error } = this.state;
     const { cart, total } = this.props;
     return (
-      <form noValidate onSubmit={e => submitOrder(e, cart.products, total)}>
-        {error ? <DelayedPopup variant='danger'>{error}</DelayedPopup> : null}
+      <form noValidate onSubmit={(e) => submitOrder(e, cart.products, total)}>
+        {error ? <DelayedPopup variant="danger">{error}</DelayedPopup> : null}
 
         <Grid container>
           <Grid item xs={12} md={6}>
@@ -166,18 +175,18 @@ class Component extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   cart: getCart(state),
   total: getTotalPrice(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  sendOrder: data => dispatch(newOrderRequest(data)),
+const mapDispatchToProps = (dispatch) => ({
+  sendOrder: (data) => dispatch(submitOrder(data)),
 });
 
-const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
+const Container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(Component));
 
-export {
-  Container as OrderForm,
-  Component as OrderFormComponent,
-};
+export { Container as OrderForm, Component as OrderFormComponent };

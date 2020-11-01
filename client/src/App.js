@@ -9,8 +9,8 @@ import { CssBaseline } from '@material-ui/core';
 import { store } from './redux/store';
 
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
-import { Homepage } from './components/views/Homepage/Homepage';
-import { Product } from './components/views/Product/Product';
+import Homepage from './components/views/Homepage';
+import ProductDetails from './components/views/ProductDetails';
 import { OrderSummary } from './components/views/OrderSummary/OrderSummary';
 import { NotFound } from './components/views/NotFound/NotFound';
 
@@ -37,7 +37,7 @@ const App = () => (
               className={styles.switchWrapper}
             >
               <Route exact path='/' component={Homepage} />
-              <Route exact path='/product/:id' component={Product} />
+              <Route exact path='/product/:id' component={ProductDetails} />
               <Route exact path='/order' component={OrderSummary} />
               <Route path='*' component={NotFound} />
             </AnimatedSwitch>
