@@ -1,18 +1,22 @@
 import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import Header from '../Header';
 import { Footer } from '../Footer/Footer';
 import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
 import styles from './MainLayout.module.scss';
 
-const isMobileViewport = () => {
+interface MapDispatchToProps {
+  changeViewportMode: (newMode: boolean) => void;
+}
+type Props = MapDispatchToProps;
+
+const isMobileViewport = (): boolean => {
   const mobile = '(max-width: 576px)';
   if (window.matchMedia(`${mobile}`).matches) return true;
   else return false;
 };
 
-const Component = ({ children, changeViewportMode }) => {
+const MainLayout: React.FunctionComponent<Props> = ({ children, changeViewportMode }) => {
   useEffect(() => {
     changeViewportMode(isMobileViewport());
     window.addEventListener('resize', () => changeViewportMode(isMobileViewport()));
@@ -29,19 +33,8 @@ const Component = ({ children, changeViewportMode }) => {
   );
 };
 
-Component.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string,
-  changeViewportMode: PropTypes.func,
-};
-
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   changeViewportMode: newMode => dispatch(changeViewport(newMode)),
 });
 
-const Container = connect(null, mapDispatchToProps)(Component);
-
-export {
-  Container as MainLayout,
-  Component as MainLayoutComponent,
-};
+export default connect(null, mapDispatchToProps)(MainLayout);

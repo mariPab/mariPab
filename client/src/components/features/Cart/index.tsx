@@ -5,7 +5,7 @@ import { getProducts, getTotalPrice } from "../../../redux/cart/reducer";
 import { NavLink } from "react-router-dom";
 import CartItem from "../CartItem";
 import styles from "./Cart.module.scss";
-import { countProductsInCart } from "../../../utils/countProductsInCart.js";
+import { countProductsInCart } from "../../../utils/countProductsInCart";
 import { Button } from "../../common/Button/Button";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import { CartProduct } from "../../../redux/cart/types";
