@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NavComponent } from './Nav';
+import { Nav } from '.';
 
 const mockProps = {
   total: 40,
@@ -8,7 +8,7 @@ const mockProps = {
 
 describe('Component Nav', () => {
   it('should render without crashing', () => {
-    const component = shallow(<NavComponent {...mockProps} />);
+    const component = shallow(<Nav {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

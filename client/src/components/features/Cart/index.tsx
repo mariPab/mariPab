@@ -23,7 +23,6 @@ export const Cart: React.FunctionComponent<Props> = ({
 }: Props) => {
   const [opened, setOpened] = useState(false);
   const handleClick = () => setOpened(!opened);
-  console.log(products, total);
   return (
     <div>
       <div className={styles.cartlink}>
@@ -85,4 +84,4 @@ export default compose(
     null
   ),
   manageCartStorage,
-)(Cart);
+)(Cart) as React.ComponentType<any>;

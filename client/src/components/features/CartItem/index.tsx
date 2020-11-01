@@ -13,21 +13,15 @@ import {
 import EditIcon from "@material-ui/icons/Edit";
 import { CartProduct } from "../../../redux/cart/types";
 
-// interface MapStateToProps {
-//   product: CartProduct;
-// }
 interface MapDispatchToProps {
-  changeAmount: (id: string, amount: number) => any;
-  removeProduct: (id: string) => any;
-  addNotes: (id: string, notes: string) => any;
+  changeAmount: (id: string, amount: number) => void;
+  removeProduct: (id: string) => void;
+  addNotes: (id: string, notes: string) => void;
 }
-// type Props = MapStateToProps & MapDispatchToProps;
-interface Props extends /* MapStateToProps, */ MapDispatchToProps {
-  // id: string;
+interface Props extends MapDispatchToProps {
   product: CartProduct;
 }
 export const CartItem: React.FunctionComponent<Props> = ({
-  // id,
   product,
   changeAmount,
   removeProduct,
@@ -80,15 +74,10 @@ export const CartItem: React.FunctionComponent<Props> = ({
   );
 };
 
-// const mapStateToProps = (state: any, props: Props): MapStateToProps => ({
-// product: getProductFromCart(state, props.id),
-// });
-
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   changeAmount: (id, amount) => dispatch(changeProductAmount(id, amount)),
   removeProduct: (id) => dispatch(removeFromCart(id)),
   addNotes: (id, notes) => dispatch(addComments(id, notes)),
 });
 
-// export default connect(mapStateToProps, mapDispatchToProps)(CartItem);
 export default connect(null, mapDispatchToProps)(CartItem);

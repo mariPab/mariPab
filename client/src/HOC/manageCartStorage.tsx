@@ -28,7 +28,7 @@ function manageCartStorage(Cmp: ComponentType<any>): ConnectedComponent<Componen
         this.props.saveCart(this.props.products);
       }
     }
-    render(): React.ReactNode {
+    render(): React.ReactElement {
       return <Cmp {...this.props} />;
     }
   }
