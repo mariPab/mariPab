@@ -11,7 +11,7 @@ import { RootState } from "../../../redux/store";
 
 // const CartWithStorageMngmt = manageCartStorageHOC(Cart);
 
-const Nav = (/* { mobile  }*/) => {
+const Nav: React.FunctionComponent = (/* { mobile  }*/) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {

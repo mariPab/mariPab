@@ -2,18 +2,14 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import { Provider } from 'react-redux';
-
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-
 import { store } from './redux/store';
-
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import Homepage from './components/views/Homepage';
 import ProductDetails from './components/views/ProductDetails';
 import { OrderSummary } from './components/views/OrderSummary/OrderSummary';
 import { NotFound } from './components/views/NotFound/NotFound';
-
 import styles from './App.module.scss';
 
 const theme = createMuiTheme({
@@ -23,7 +19,7 @@ const theme = createMuiTheme({
   },
 });
 
-const App = () => (
+const App: React.FunctionComponent = () => (
   <Provider store={store}>
     <BrowserRouter>
       <StylesProvider injectFirst>
@@ -48,4 +44,4 @@ const App = () => (
   </Provider>
 );
 
-export { App };
+export default App;
