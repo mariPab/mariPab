@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styles from './Footer.module.scss';
 
-const Component = () => (
+const Footer: React.FunctionComponent = () => (
   <div className={styles.root}>
     <div className={styles.contact}>
       <h4>
@@ -18,12 +17,4 @@ const Component = () => (
     </div>
   </div>
 );
-
-Component.propTypes = {
-
-};
-
-export {
-  Component as Footer,
-  Component as FooterComponent,
-};
+export default Footer;

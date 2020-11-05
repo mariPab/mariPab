@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from '../Header';
-import { Footer } from '../Footer/Footer';
+import Footer from '../Footer';
 import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
 import styles from './MainLayout.module.scss';
