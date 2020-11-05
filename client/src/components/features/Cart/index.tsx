@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import CartItem from "../CartItem";
 import styles from "./Cart.module.scss";
 import { countProductsInCart } from "../../../utils/countProductsInCart";
-import { Button } from "../../common/Button/Button";
+import Button from "../../common/Button";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import { CartProduct } from "../../../redux/cart/types";
 import manageCartStorage from "../../../HOC/manageCartStorage";

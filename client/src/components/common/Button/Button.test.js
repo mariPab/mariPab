@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ButtonComponent } from './Button';
+import Button from '.';
 
 describe('Component Button', () => {
   it('should render without crashing', () => {
-    const component = shallow(<ButtonComponent />);
+    const component = shallow(<Button />);
     expect(component).toBeTruthy();
   });
 });

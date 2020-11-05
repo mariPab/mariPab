@@ -13,7 +13,7 @@ import {
 import { addProductToCart } from "../../../redux/cart/actions";
 import styles from "./ProductDetails.module.scss";
 import { NumberInput } from "../../common/NumberInput/NumberInput";
-import { Button } from "../../common/Button/Button";
+import Button from "../../common/Button";
 import { Product } from "../../../redux/products/types";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { RootState } from "../../../redux/store";

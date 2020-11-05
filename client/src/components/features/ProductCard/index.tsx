@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { IMAGES_URL } from '../../../config';
 import Grid from '@material-ui/core/Grid';
 import styles from './ProductCard.module.scss';
-import { Button } from '../../common/Button/Button';
+import Button from '../../common/Button';
 import { Product } from '../../../redux/products/types';
 
 interface Props {

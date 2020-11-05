@@ -4,7 +4,7 @@ import styles from './Nav.module.scss';
 // import { getViewportMode } from '../../../redux/viewportRedux.js';
 import { connect } from 'react-redux';
 import Cart from '../../features/Cart';
-// import { Button } from '../../common/Button/Button';
+// import Button from '../../common/Button/Button';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import manageCartStorageHOC from '../../../HOC/manageCartStorage';
 import { RootState } from "../../../redux/store";

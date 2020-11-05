@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IMAGES_URL } from "../../../config";
-import { Button } from "../../common/Button/Button";
+import Button from "../../common/Button";
 import { NumberInput } from "../../common/NumberInput/NumberInput";
 import DeleteIcon from "@material-ui/icons/Delete";
 import styles from "./CartItem.module.scss";
