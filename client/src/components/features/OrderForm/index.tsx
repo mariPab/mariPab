@@ -1,18 +1,27 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Grid from "@material-ui/core/Grid";
 import { connect } from "react-redux";
 import {
-  getCart,
+  getProducts,
   getTotalPrice,
 } from "../../../redux/cart/reducer";
 import { submitOrder } from '../../../redux/cart/thunks';
 import Button from "../../common/Button";
-import { withRouter } from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
+import { RootState } from "../../../redux/store";
+import { CartProduct } from '../../../redux/cart/types';
 
 import "./OrderForm.scss";
 
-class Component extends React.Component {
+interface MapDispatchToProps {
+  sendOrder: (data: any) => void;
+}
+interface Props extends MapDispatchToProps, RouteComponentProps {
+  products: CartProduct[];
+  total: number;
+}
+
+class OrderForm extends React.Component<Props> {
   state = {
     client: {
       firstName: "",
@@ -25,14 +34,7 @@ class Component extends React.Component {
     error: null,
   };
 
-  static propTypes = {
-    cart: PropTypes.object,
-    total: PropTypes.number,
-    sendOrder: PropTypes.func,
-    history: PropTypes.object,
-  };
-
-  submitOrder = (event, products, total) => {
+  submitOrder = (products: CartProduct[], total: number) => {
     const {
       firstName,
       lastName,
@@ -41,8 +43,6 @@ class Component extends React.Component {
       place,
       postCode,
     } = this.state.client;
-    const { sendOrder } = this.props;
-    event.preventDefault();
 
     const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const validAddress = /^([^\\u0000-\u007F]|\w)+,?\s\d+[A-z]?(\/\d+[A-z]?)?$/;
@@ -61,7 +61,7 @@ class Component extends React.Component {
 
     if (!error) {
       const productsData = products.map((product) => ({
-        _id: product._id,
+        _id: product.id,
         amount: product.amount,
         notes: product.notes,
       }));
@@ -71,7 +71,7 @@ class Component extends React.Component {
         client: this.state.client,
         total: total,
       };
-      sendOrder(payload);
+      this.props.sendOrder(payload);
       this.setState({
         client: {
           firstName: "",
@@ -89,19 +89,16 @@ class Component extends React.Component {
     }
   };
 
-  updateTextField = ({ target }) => {
-    const { client } = this.state;
+  updateTextField = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = target;
-
-    this.setState({ client: { ...client, [name]: value }, error: null });
+    this.setState({ client: { ...this.state.client, [name]: value }, error: null });
   };
 
   render() {
-    const { updateTextField, submitOrder } = this;
-    const { client, error } = this.state;
-    const { cart, total } = this.props;
+    const { updateTextField } = this;
+    const { client } = this.state;
     return (
-      <form noValidate onSubmit={(e) => submitOrder(e, cart.products, total)}>
+      <form noValidate onSubmit={this.submitOrder.bind(null, this.props.products, this.props.total)}>
         <Grid container>
           <Grid item xs={12} md={6}>
             <label htmlFor="firstName">Imię</label>
@@ -170,18 +167,17 @@ class Component extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({
-  cart: getCart(state),
+const mapStateToProps = (state: RootState) => ({
+  products: getProducts(state),
   total: getTotalPrice(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  sendOrder: (data) => dispatch(submitOrder(data)),
+const mapDispatchToProps = (dispatch: any) => ({
+  sendOrder: (data: any) => dispatch(submitOrder(data)),
 });
 
-const Container = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withRouter(Component));
+)(withRouter(OrderForm));
 
-export { Container as OrderForm, Component as OrderFormComponent };

@@ -5,7 +5,7 @@ import { getCart, getTotalPrice } from "../../../redux/cart/reducer";
 import { NavLink } from "react-router-dom";
 import styles from "./OrderSummary.module.scss";
 import { countProductsInCart } from "../../../utils/countProductsInCart";
-import { OrderForm } from "../../features/OrderForm/OrderForm";
+import OrderForm from "../../features/OrderForm";
 import { RootState } from "../../../redux/store";
 import { CartStore } from '../../../redux/cart/types';
 
