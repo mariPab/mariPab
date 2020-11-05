@@ -8,7 +8,7 @@ import { store } from './redux/store';
 import MainLayout from './components/layout/MainLayout';
 import Homepage from './components/views/Homepage';
 import ProductDetails from './components/views/ProductDetails';
-import { OrderSummary } from './components/views/OrderSummary/OrderSummary';
+import OrderSummary from './components/views/OrderSummary';
 import { NotFound } from './components/views/NotFound/NotFound';
 import styles from './App.module.scss';
 

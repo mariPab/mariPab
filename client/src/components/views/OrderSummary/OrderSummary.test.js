@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { OrderSummaryComponent } from "./OrderSummary";
+import { OrderSummaryComponent } from ".";
 
 const mockProps = {
   cart: {

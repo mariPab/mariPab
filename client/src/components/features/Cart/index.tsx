@@ -10,6 +10,7 @@ import Button from "../../common/Button";
 import LocalMallIcon from "@material-ui/icons/LocalMall";
 import { CartProduct } from "../../../redux/cart/types";
 import manageCartStorage from "../../../HOC/manageCartStorage";
+import { RootState } from "../../../redux/store";
 
 interface MapStateToProps {
   products: CartProduct[];
@@ -73,7 +74,7 @@ export const Cart: React.FunctionComponent<Props> = ({
   );
 };
 
-const mapStateToProps = (state: any): MapStateToProps => ({
+const mapStateToProps = (state: RootState): MapStateToProps => ({
   products: getProducts(state),
   total: getTotalPrice(state),
 });

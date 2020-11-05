@@ -1,5 +1,4 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { FunctionComponent } from "react";
 import CartItem from "../../features/CartItem";
 import { connect } from "react-redux";
 import { getCart, getTotalPrice } from "../../../redux/cart/reducer";
@@ -7,21 +6,29 @@ import { NavLink } from "react-router-dom";
 import styles from "./OrderSummary.module.scss";
 import { countProductsInCart } from "../../../utils/countProductsInCart";
 import { OrderForm } from "../../features/OrderForm/OrderForm";
+import { RootState } from "../../../redux/store";
+import { CartStore } from '../../../redux/cart/types';
 
-const Component = ({ cart, total }) => {
+interface MapStateToProps {
+  cart: CartStore;
+  total: number;
+}
+type Props = MapStateToProps;
+
+export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
   return (
     <div className={styles.wrapper}>
       <h2>Moje produkty</h2>
       <div className={styles.items}>
-        {cart.products.length ? (
+        {cart.products.length ?
           cart.products.map((product) => (
-            <CartItem id={product.id} key={product.id} />
+            <CartItem product={product} key={product.id} />
           ))
-        ) : (
-            <small className={styles.noProducts}>
-              <i>Brak produktów w koszyku</i>
-            </small>
-          )}
+          :
+          <small className={styles.noProducts}>
+            <i>Brak produktów w koszyku</i>
+          </small>
+        }
       </div>
       <NavLink className={styles.link} exact to="/">
         Dodaj kolejne produkty
@@ -40,21 +47,10 @@ const Component = ({ cart, total }) => {
     </div>
   );
 };
-Component.propTypes = {
-  cart: PropTypes.object,
-  total: PropTypes.number,
-  history: PropTypes.object,
-};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: RootState) => ({
   cart: getCart(state),
   total: getTotalPrice(state),
 });
 
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-const Container = connect(mapStateToProps, null)(Component);
-
-export { Container as OrderSummary, Component as OrderSummaryComponent };
+export default connect(mapStateToProps, null)(Component);
