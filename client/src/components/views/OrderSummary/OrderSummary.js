@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 import styles from "./OrderSummary.module.scss";
 import { countProductsInCart } from "../../../utils/countProductsInCart";
 import { OrderForm } from "../../features/OrderForm/OrderForm";
-import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay";
 
 const Component = ({ cart, total }) => {
   return (

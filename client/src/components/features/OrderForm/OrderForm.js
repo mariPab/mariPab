@@ -8,7 +8,6 @@ import {
 } from "../../../redux/cart/reducer";
 import { submitOrder } from '../../../redux/cart/thunks';
 import Button from "../../common/Button";
-import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay";
 import { withRouter } from "react-router-dom";
 
 import "./OrderForm.scss";
