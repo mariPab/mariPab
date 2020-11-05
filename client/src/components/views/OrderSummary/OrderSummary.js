@@ -1,24 +1,17 @@
 import React from "react";
 import PropTypes from "prop-types";
 import CartItem from "../../features/CartItem";
-import { Popup } from "../../common/Popup/Popup";
 import { connect } from "react-redux";
 import { getCart, getTotalPrice } from "../../../redux/cart/reducer";
 import { NavLink } from "react-router-dom";
 import styles from "./OrderSummary.module.scss";
 import { countProductsInCart } from "../../../utils/countProductsInCart";
 import { OrderForm } from "../../features/OrderForm/OrderForm";
-import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay/unmountAfterDelay";
+import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay";
 
 const Component = ({ cart, total }) => {
-  const DelayedPopup = unmountAfterDelay(Popup);
   return (
     <div className={styles.wrapper}>
-      {!cart.products.length ? (
-        <DelayedPopup variant="danger">
-          Najpierw dodaj produkty do koszyka
-        </DelayedPopup>
-      ) : null}
       <h2>Moje produkty</h2>
       <div className={styles.items}>
         {cart.products.length ? (

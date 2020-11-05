@@ -7,12 +7,11 @@ import {
   getTotalPrice,
 } from "../../../redux/cart/reducer";
 import { submitOrder } from '../../../redux/cart/thunks';
-import { Button } from "../../common/Button/Button";
-import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay/unmountAfterDelay";
+import Button from "../../common/Button";
+import { unmountAfterDelay } from "../../../HOC/unmountAfterDelay";
 import { withRouter } from "react-router-dom";
 
 import "./OrderForm.scss";
-import { Popup } from "../../common/Popup/Popup.js";
 
 class Component extends React.Component {
   state = {
@@ -99,14 +98,11 @@ class Component extends React.Component {
   };
 
   render() {
-    const DelayedPopup = unmountAfterDelay(Popup);
     const { updateTextField, submitOrder } = this;
     const { client, error } = this.state;
     const { cart, total } = this.props;
     return (
       <form noValidate onSubmit={(e) => submitOrder(e, cart.products, total)}>
-        {error ? <DelayedPopup variant="danger">{error}</DelayedPopup> : null}
-
         <Grid container>
           <Grid item xs={12} md={6}>
             <label htmlFor="firstName">Imię</label>
