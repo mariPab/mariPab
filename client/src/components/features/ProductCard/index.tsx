@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { IMAGES_URL } from '../../../config';
+import { IMAGES_URL } from '../../../settings/config';
 import Grid from '@material-ui/core/Grid';
 import styles from './ProductCard.module.scss';
 import Button from '../../common/Button';

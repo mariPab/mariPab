@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "../../config";
+import { API_URL } from "../../settings/config";
 import { AppThunk } from "../store";
 import {
   submitOrderStartProcessing,

@@ -1,6 +1,6 @@
 import React from "react";
 import { compose } from "redux";
-import { IMAGES_URL } from "../../../config";
+import { IMAGES_URL } from "../../../settings/config";
 import { NotFound } from "../NotFound/NotFound";
 import { GalleryPic } from "../../features/GalleryPic";
 import { connect } from "react-redux";

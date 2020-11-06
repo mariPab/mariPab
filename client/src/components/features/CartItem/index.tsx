@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IMAGES_URL } from "../../../config";
+import { IMAGES_URL } from "../../../settings/config";
 import Button from "../../common/Button";
 import { NumberInput } from "../../common/NumberInput/NumberInput";
 import DeleteIcon from "@material-ui/icons/Delete";
