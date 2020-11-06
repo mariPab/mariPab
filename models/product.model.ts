@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose = require('mongoose');
+import { DBProduct } from '../interfaces';
 
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -10,4 +11,4 @@ const productSchema = new mongoose.Schema({
   { versionKey: false }
 );
 
-module.exports = mongoose.model('Product', productSchema);
+export default mongoose.model<DBProduct>('Product', productSchema);

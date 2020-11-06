@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose = require('mongoose');
+import { DBOrder } from '../interfaces';
 
 const orderSchema = new mongoose.Schema({
   products: [{
@@ -17,5 +18,4 @@ const orderSchema = new mongoose.Schema({
 },
   { versionKey: false }
 );
-
-module.exports = mongoose.model('Order', orderSchema);
+export default mongoose.model<DBOrder>('Order', orderSchema);

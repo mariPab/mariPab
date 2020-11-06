@@ -1,9 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const mongoose = require('mongoose');
+import { Response, Request, Application } from 'express/index';
+import express = require('express');
+import cors = require('cors');
+import path = require('path');
+import mongoose = require('mongoose');
+import OrderRouter from './routes/order.routes';
+import ProductsRouter from './routes/products.routes';
 
-const app = express();
+const app: Application = express();
 
 /* MIDDLEWARE */
 app.use(cors());
@@ -12,16 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/client/build')));
 
-
 /* API ENDPOINTS */
-app.use('/api', require('./routes/products.routes'));
-app.use('/api', require('./routes/order.routes'));
-app.use('/api', require('./routes/cart.routes'));
+app.use('/api', ProductsRouter);
+app.use('/api', OrderRouter);
 
 app.use(express.static(path.join(__dirname + '/public')));
 
 /* REACT WEBSITE */
-app.get('*', (req, res) => {
+app.get('*', (_req, res) => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'), err => {
     if (err) res.status(500).send(err);
   });
