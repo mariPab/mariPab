@@ -16,7 +16,7 @@ export const submitOrder = (data: OrderPayload): AppThunk => async (
 ) => {
   dispatch(submitOrderStartProcessing());
   try {
-    await axios.post(`${API_URL}/order`, data, {
+    await axios.post(`${API_URL}/order/submit`, data, {
       headers: {
         "Content-Type": "application/json",
       },

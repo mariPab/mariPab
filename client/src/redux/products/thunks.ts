@@ -15,7 +15,7 @@ export const getProductsList = () => {
   return async (dispatch: any) => {
     dispatch(getProductsListStart());
     try {
-      const res = await axios.get(`${API_URL}/products`);
+      const res = await axios.get(`${API_URL}/products/all`);
       const data = res.data.map((item: any) => ({
         ...item, id: item._id
       })) as Product[];
@@ -31,7 +31,7 @@ export const getProductById = (id: string) => {
   return async (dispatch: any) => {
     dispatch(getProductByIdStart());
     try {
-      const res = await axios.get(`${API_URL}/products/${id}`);
+      const res = await axios.get(`${API_URL}/products/product/${id}`);
       const data = { ...res.data, id: res.data._id };
       delete data._id;
       dispatch(getProductByIdSuccess(data));
