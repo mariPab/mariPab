@@ -20,30 +20,30 @@ class ValidateData {
     validationCodes.push(this.validatePostCode(data.postCode));
     return validationCodes.filter(code => code !== codes.SUCCESSFUL_VALIDATION);
   }  
-  public validateFirstName: ValidateStrings = firstname => {
-    if (!this.invalidSigns.test(firstname)) return errorCodes.INVALID_CHAR_FIRSTNAME;
+  private validateFirstName: ValidateStrings = firstname => {
+    if (this.invalidSigns.test(firstname)) return errorCodes.INVALID_CHAR_FIRSTNAME;
     else if (!firstname || firstname.length < 3) return errorCodes.INVALID_FIRSTNAME;
     return codes.SUCCESSFUL_VALIDATION;
   }
-  public validateLastName: ValidateStrings = lastname => {
-    if (!this.invalidSigns.test(lastname)) return errorCodes.INVALID_CHAR_LASTNAME;
+  private validateLastName: ValidateStrings = lastname => {
+    if (this.invalidSigns.test(lastname)) return errorCodes.INVALID_CHAR_LASTNAME;
     else if (!lastname || lastname.length < 3) return errorCodes.INVALID_LASTNAME;
     return codes.SUCCESSFUL_VALIDATION;
   }
-  public validatePlace: ValidateStrings = place => {
-    if (!this.invalidSigns.test(place)) return errorCodes.INVALID_CHAR_PLACE;
+  private validatePlace: ValidateStrings = place => {
+    if (this.invalidSigns.test(place)) return errorCodes.INVALID_CHAR_PLACE;
     else if (!place || place.length < 3) return errorCodes.INVALID_PLACE;
     return codes.SUCCESSFUL_VALIDATION;
   }
-  public validateEmail: ValidateStrings = email => {
+  private validateEmail: ValidateStrings = email => {
     if (!this.validEmail.test(email)) return errorCodes.INVALID_EMAIL_ADDRESS;
     return codes.SUCCESSFUL_VALIDATION;
   }
-  public validateAddress: ValidateStrings = address => {
+  private validateAddress: ValidateStrings = address => {
   if (!this.validAddress.test(address)) return errorCodes.INVALID_ADDRESS;
     return codes.SUCCESSFUL_VALIDATION;
   }
-  public validatePostCode: ValidateStrings = postcode => {
+  private validatePostCode: ValidateStrings = postcode => {
     if (!this.validPostCode.test(postcode)) return errorCodes.INVALID_POSTCODE;
     return codes.SUCCESSFUL_VALIDATION;
   }

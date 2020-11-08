@@ -1,7 +1,7 @@
+import Order from '../models/order.model';
 import validateData from '../helpers/validateData';
 import { ServerRequest} from '../interfaces';
 import { errorCodes } from '../client/src/settings/codes';
-const Order = require('../models/order.model');
 
 class OrderController {
   public sendOrder: ServerRequest = async (req, res) => {
@@ -12,8 +12,8 @@ class OrderController {
       if (products.length && total) {
         if (!validationResult.length) {
         const newOrder = new Order({
-          products: products,
-          client: { ...client },
+          products: products.map(product => ({ ...product, _id: product.id })),
+          client: client,
           total: total,
         });
         await newOrder.save();

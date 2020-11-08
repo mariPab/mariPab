@@ -1,5 +1,5 @@
-import mongoose = require('mongoose');
 import { DBOrder } from '../interfaces';
+import mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
   products: [{
