@@ -9,6 +9,7 @@ import {
 } from "./actions";
 import { OrderPayload, CartProduct } from "./types";
 import { Product, ProductBasic } from "../products/types";
+import ErrorHandler from '../../utils/codesHandler';
 
 /* thunk creators */
 export const submitOrder = (data: OrderPayload): AppThunk => async (
@@ -16,12 +17,15 @@ export const submitOrder = (data: OrderPayload): AppThunk => async (
 ) => {
   dispatch(submitOrderStartProcessing());
   try {
-    await axios.post(`${API_URL}/order/submit`, data, {
+    const res = await axios.post(`${API_URL}/order/submit`, data, {
       headers: {
         "Content-Type": "application/json",
       },
     });
     dispatch(submitOrderSuccess());
+    console.log(res.data);
+    ErrorHandler.executeSuccessCode(res.data.code);
+
   } catch (e) {
     console.log(e);
     // dispatch(fetchError(e.message));

@@ -4,6 +4,8 @@ import Footer from '../Footer';
 import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
 import styles from './MainLayout.module.scss';
+import { NotificationContainer } from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 
 interface MapDispatchToProps {
   changeViewportMode: (newMode: boolean) => void;
@@ -25,6 +27,7 @@ const MainLayout: React.FunctionComponent<Props> = ({ children, changeViewportMo
   return (
     <div className={styles.root}>
       <Header />
+      <NotificationContainer />
       <div className={styles.container}>
         {children}
       </div>
