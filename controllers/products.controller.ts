@@ -1,4 +1,4 @@
-const Product = require('../models/product.model');
+import Product from '../models/product.model';
 import { ServerRequest} from '../interfaces';
 
 class ProductsController {

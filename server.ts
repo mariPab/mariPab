@@ -1,10 +1,10 @@
-import { Response, Request, Application } from 'express/index';
 import express = require('express');
 import cors = require('cors');
 import path = require('path');
 import mongoose = require('mongoose');
 import OrderRouter from './routes/order.routes';
 import ProductsRouter from './routes/products.routes';
+import { Response, Request, Application } from 'express/index';
 
 const app: Application = express();
 
@@ -16,8 +16,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/client/build')));
 
 /* API ENDPOINTS */
-app.use('/api', ProductsRouter);
-app.use('/api', OrderRouter);
+app.use('/products', ProductsRouter);
+app.use('/order', OrderRouter);
 
 app.use(express.static(path.join(__dirname + '/public')));
 
