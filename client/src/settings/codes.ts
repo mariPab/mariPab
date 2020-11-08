@@ -17,5 +17,5 @@ export const errorCodes = {
 
 export const codes = {
   SUCCESSFUL_VALIDATION: 2001,
-
+  SUCCESSFUL_ORDER_SUBMISSION: 2002,
 };
