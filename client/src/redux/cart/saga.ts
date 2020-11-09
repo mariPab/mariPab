@@ -11,18 +11,17 @@ import {
   LOAD_CART,
   LOAD_CART_START,
 } from "./actions";
-import { /* OrderPayload, CartProduct,  */CartStore } from "./types";
+import { CartStore } from "./types";
 import { getCart } from "./reducer";
-// import { Product, ProductBasic } from "../products/types";
-// import ErrorHandler from '../../utils/codesHandler';
-import { select, takeEvery, put, all, fork } from "redux-saga/effects";
-import { /* codes, */ errorCodes } from "../../settings/codes";
+import CodesHandler from '../../utils/codesHandler';
+import { select, takeEvery, put, all, fork, delay } from "redux-saga/effects";
+import { errorCodes } from "../../settings/codes";
 
 export function* updateTotalWatcher(): Generator {
-  yield takeEvery([ADD_PRODUCT, REMOVE_PRODUCT], updateTotal);
+  yield takeEvery([ADD_PRODUCT, REMOVE_PRODUCT, LOAD_CART], updateTotal);
 }
 export function* updateTotal() {
-  yield put({ type: UPDATE_TOTAL});
+  yield put({ type: UPDATE_TOTAL });
 }
 
 export function* submitOrderWatcher(): Generator {
@@ -40,22 +39,25 @@ export function* submitOrder() {
         customer,
         total,
     };
-    const res = yield axios.post(`${API_URL}/order/submit`, orderAttributes, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const res = yield axios.post(`${API_URL}/order/submit`, orderAttributes);
     if (res && res.data) {
-      yield put({ type: SUBMIT_ORDER_SUCCESS, payload: res.data });
+      yield CodesHandler.executeSuccessCode(res.data.code);
+      yield delay(3000);
+      yield put({ type: SUBMIT_ORDER_SUCCESS });
+      yield localStorage.removeItem('cart');
     }
   }
   catch (err) {
-    console.log(err.data);
+    const { data } = err.response;
     yield put({
       type: SUBMIT_ORDER_FAIL,
     });
-    if(err.data.errorCode === errorCodes.VALIDATION_FAILED) {
-      // TODO:
+    if(data.errorCode === errorCodes.VALIDATION_FAILED) {
+      for (const code of data.validationErrors) {
+        yield CodesHandler.executeErrorCodes(code);
+      }
+    } else {
+        yield CodesHandler.executeErrorCodes(err.errorCode);
     }
   }
 }
@@ -85,6 +87,5 @@ export default function* rootSaga(): Generator {
     fork(submitOrderWatcher),
     fork(saveCartWatcher),
     fork(loadCartWatcher),
-    fork(submitOrderWatcher),
   ]);
 };

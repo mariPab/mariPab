@@ -33,6 +33,7 @@ export const getTotalPrice = ({ cart }: RootState) =>
     0
   );
 export const getCustomerData = ({ cart }: RootState) => cart.customer;
+export const getProcessingState = ({ cart }: RootState) => cart.orderProcessing;
 
 const initState: CartStore = {
   products: [],
