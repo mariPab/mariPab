@@ -4,7 +4,7 @@ import { AnimatedSwitch } from 'react-router-transition';
 import { Provider } from 'react-redux';
 import { createMuiTheme, StylesProvider, ThemeProvider } from '@material-ui/core/styles';
 import { CssBaseline } from '@material-ui/core';
-import { store } from './redux/store';
+import store from './redux/store';
 import MainLayout from './components/layout/MainLayout';
 import Homepage from './components/views/Homepage';
 import ProductDetails from './components/views/ProductDetails';

@@ -5,18 +5,22 @@ import {
   ChangeProductAmount,
   RemoveFromCart,
   AddComments,
-  LoadCart
-} from "./types";
-import { RootState } from "../store";
+  LoadCart,
+  UpdateOrderData,
+  CartProduct
+} from './types';
+import { RootState } from '../store';
 import {
-  SUBMIT_ORDER_START_PROCESSING,
+  SUBMIT_ORDER_START,
   ADD_COMMENTS,
   ADD_PRODUCT,
   CHANGE_PRODUCT_AMOUNT,
   REMOVE_PRODUCT,
   SUBMIT_ORDER_SUCCESS,
   LOAD_CART,
-} from "./actions";
+  UPDATE_ORDER_DATA,
+  UPDATE_TOTAL,
+} from './actions';
 
 /* selectors */
 export const getCart = ({ cart }: RootState) => cart;
@@ -28,10 +32,20 @@ export const getTotalPrice = ({ cart }: RootState) =>
     (total, product) => product.price * product.amount + total,
     0
   );
+export const getCustomerData = ({ cart }: RootState) => cart.customer;
 
 const initState: CartStore = {
   products: [],
   orderProcessing: false,
+  customer: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: '',
+    place: '',
+    postCode: '',
+  },
+  total: 0,
 };
 
 export default function cartReducer(
@@ -43,7 +57,10 @@ export default function cartReducer(
       const { payload } = action as LoadCart;
       return {
         ...statePart,
-        products: payload,
+        products: payload.length ? payload.map(({ tags, ...rest}) => ({
+          ...rest,
+        } as CartProduct
+      )) : [],
       };
     case ADD_PRODUCT: {
       const { products } = statePart;
@@ -88,6 +105,13 @@ export default function cartReducer(
         }),
       };
     }
+    case UPDATE_ORDER_DATA: {
+      const { payload } = action as UpdateOrderData;
+      return {
+        ...statePart,
+        customer: { ...statePart.customer, [payload.field]: payload.value },
+      };
+    }
     case REMOVE_PRODUCT: {
       const { payload } = action as RemoveFromCart;
       return {
@@ -97,19 +121,22 @@ export default function cartReducer(
         ),
       };
     }
-    case SUBMIT_ORDER_START_PROCESSING: {
+    case UPDATE_TOTAL:
+    return {
+      ...statePart,
+      total: statePart.products.reduce((total, product) =>
+      product.price * product.amount + total,0),
+    }
+    case SUBMIT_ORDER_START: {
       return {
         ...statePart,
         orderProcessing: true,
       };
     }
-    case SUBMIT_ORDER_SUCCESS: {
+    case SUBMIT_ORDER_SUCCESS:
       return {
-        ...statePart,
-        products: [],
-        orderProcessing: false,
+        ...initState,
       };
-    }
     default:
       return statePart;
   }

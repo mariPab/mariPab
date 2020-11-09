@@ -1,12 +1,8 @@
 import {
-  GetProductByIdSuccess,
-  GetProductsListSuccess,
   GetProductByIdStart,
   GetProductsListStart,
-  GetProductByIdFail,
-  GetProductsListFail,
-  Product,
 } from "./types";
+
 /* action name creator */
 const reducerName = "PRODUCT";
 const createActionName = (name: string) => `APP/${reducerName}/${name}`;
@@ -26,21 +22,9 @@ export const RESET_ACTIVE_PRODUCT = createActionName("RESET_ACTIVE_PRODUCT");
 export const getProductsListStart = (): GetProductsListStart => ({
   type: GET_PRODUCTS_LIST_START
 });
-export const getProductsListSuccess = (products: Product[]): GetProductsListSuccess => ({
-  payload: products, type: GET_PRODUCTS_LIST_SUCCESS
-});
-export const getProductsListFail = (): GetProductsListFail => ({
-  type: GET_PRODUCTS_LIST_FAIL
-});
-export const getProductByIdStart = (): GetProductByIdStart => ({
-  type: GET_PRODUCT_BY_ID_START
-});
-export const getProductByIdSuccess = (product: Product): GetProductByIdSuccess => ({
-  payload: product,
-  type: GET_PRODUCT_BY_ID_SUCCESS
-});
-export const getProductByIdFail = (): GetProductByIdFail => ({
-  type: GET_PRODUCT_BY_ID_FAIL
+export const getProductByIdStart = (id: string): GetProductByIdStart => ({
+  type: GET_PRODUCT_BY_ID_START,
+  payload: { id },
 });
 export const resetActiveProduct = () => ({
   type: RESET_ACTIVE_PRODUCT,

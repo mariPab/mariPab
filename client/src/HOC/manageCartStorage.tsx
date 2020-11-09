@@ -1,5 +1,5 @@
 import React, { ComponentType } from "react";
-import { loadCartRequest, saveCart } from "../redux/cart/thunks";
+import { loadCartStart, saveCart } from "../redux/cart/actions";
 import { getProducts, getTotalPrice } from "../redux/cart/reducer";
 import { connect, ConnectedComponent } from "react-redux";
 import { RootState } from "../redux/store";
@@ -10,7 +10,7 @@ interface MapStateToProps {
   total: number;
 }
 interface MapDispatchToProps {
-  saveCart: (data: CartProduct[]) => void;
+  saveCart: () => void;
   loadCart: () => void;
 }
 
@@ -25,7 +25,7 @@ function manageCartStorage(Cmp: ComponentType<any>): ConnectedComponent<Componen
     }
     componentDidUpdate(prev: Props): void {
       if (prev.total !== this.props.total) {
-        this.props.saveCart(this.props.products);
+        this.props.saveCart();
       }
     }
     render(): React.ReactElement {
@@ -44,8 +44,8 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 });
 
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  loadCart: () => dispatch(loadCartRequest()),
-  saveCart: (data: CartProduct[]) => dispatch(saveCart(data)),
+  loadCart: () => dispatch(loadCartStart()),
+  saveCart: () => dispatch(saveCart()),
 });
 
 export default manageCartStorage;

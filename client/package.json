@@ -13,6 +13,9 @@
     "test-related": "react-scripts test --watchAll=false --noStackTrace --findRelatedTests",
     "eject": "react-scripts eject"
   },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -43,6 +46,7 @@
     "react-test-renderer": "^16.12.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.1.3",
     "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
@@ -51,6 +55,7 @@
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.6",
     "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
     "@typescript-eslint/parser": "^4.5.0",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.3",

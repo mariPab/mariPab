@@ -8,8 +8,8 @@ import {
   getActiveProduct,
 } from "../../../redux/products/reducer";
 import {
-  getProductById,
-} from "../../../redux/products/thunks";
+  getProductByIdStart,
+} from "../../../redux/products/actions";
 import { addProductToCart } from "../../../redux/cart/actions";
 import styles from "./ProductDetails.module.scss";
 import { NumberInput } from "../../common/NumberInput/NumberInput";
@@ -26,8 +26,8 @@ interface MapStateToProps {
   product: Product | null;
 }
 interface MapDispatchToProps {
-  loadProduct: (id: string) => any;
-  addToCart: (product: Product, amount: number) => any;
+  loadProduct: (id: string) => void;
+  addToCart: (product: Product, amount: number) => void;
 }
 
 type Props = MapStateToProps &
@@ -82,7 +82,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 });
 
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  loadProduct: (id: string) => dispatch(getProductById(id)),
+  loadProduct: (id: string) => dispatch(getProductByIdStart(id)),
   addToCart: (product: Product, amount: number) =>
     dispatch(addProductToCart(product, amount)),
 });

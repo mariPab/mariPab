@@ -37,6 +37,7 @@ export interface GetProductsListFail {
 }
 export interface GetProductByIdStart {
   type: typeof GET_PRODUCT_BY_ID_START;
+  payload: { id: string; };
 }
 export interface GetProductByIdSuccess {
   type: typeof GET_PRODUCT_BY_ID_SUCCESS;

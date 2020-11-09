@@ -4,107 +4,112 @@ import { connect } from "react-redux";
 import {
   getProducts,
   getTotalPrice,
+  getCustomerData,
 } from "../../../redux/cart/reducer";
-import { submitOrder } from '../../../redux/cart/thunks';
+// import { submitOrder } from '../../../redux/cart/saga';
+import { updateOrderData, submitOrderStart } from '../../../redux/cart/actions';
+import { Customer } from '../../../redux/cart/types';
 import Button from "../../common/Button";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { RootState } from "../../../redux/store";
 import { CartProduct } from '../../../redux/cart/types';
-
 import "./OrderForm.scss";
 
 interface MapDispatchToProps {
-  sendOrder: (data: any) => void;
+  sendOrder: () => void;
+  updateOrderData: (value: string, field: string)  => void;
 }
 interface Props extends MapDispatchToProps, RouteComponentProps {
   products: CartProduct[];
   total: number;
+  customer: Customer;
 }
 
 class OrderForm extends React.Component<Props> {
-  state = {
-    client: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: "",
-      place: "",
-      postCode: "",
-    },
-    error: null,
-  };
+  // state = {
+  //   customer: {
+  //     firstName: "",
+  //     lastName: "",
+  //     email: "",
+  //     address: "",
+  //     place: "",
+  //     postCode: "",
+  //   },
+  //   error: null,
+  // };
 
   submitOrder = (products: CartProduct[], total: number) => {
-    const {
-      firstName,
-      lastName,
-      email,
-      address,
-      place,
-      postCode,
-    } = this.state.client;
+    // const {
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   address,
+    //   place,
+    //   postCode,
+    // } = this.state.customer;
 
-    const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    const validAddress = /^([^\\u0000-\u007F]|\w)+,?\s\d+[A-z]?(\/\d+[A-z]?)?$/;
-    const validPostCode = /[0-9]{2}-[0-9]{3}/;
+    // const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    // const validAddress = /^([^\\u0000-\u007F]|\w)+,?\s\d+[A-z]?(\/\d+[A-z]?)?$/;
+    // const validPostCode = /[0-9]{2}-[0-9]{3}/;
 
-    let error = null;
-    if (!firstName || !lastName || !email || !address || !place || !postCode)
-      error = "Brakuje wymaganych danych";
-    else if (!products.length) error = "Twój koszyk jest pusty";
-    else if (!total) error = "Twój koszyk jest pusty";
-    else if (!validEmail.test(email)) error = "Adres e-mail jest nieprawidłowy";
-    else if (!validAddress.test(address))
-      error = "Adres wysyłki jest nieprawidłowy";
-    else if (!validPostCode.test(postCode))
-      error = "Kod pocztowy jest nieprawidłowy";
+    // let error = null;
+    // if (!firstName || !lastName || !email || !address || !place || !postCode)
+    //   error = "Brakuje wymaganych danych";
+    // else if (!products.length) error = "Twój koszyk jest pusty";
+    // else if (!total) error = "Twój koszyk jest pusty";
+    // else if (!validEmail.test(email)) error = "Adres e-mail jest nieprawidłowy";
+    // else if (!validAddress.test(address))
+    //   error = "Adres wysyłki jest nieprawidłowy";
+    // else if (!validPostCode.test(postCode))
+    //   error = "Kod pocztowy jest nieprawidłowy";
 
-    if (!error) {
-      const productsData = products.map((product) => ({
-        _id: product.id,
-        amount: product.amount,
-        notes: product.notes,
-      }));
+    // if (!error) {
+      // const productsData = products.map((product) => ({
+      //   _id: product.id,
+      //   amount: product.amount,
+      //   notes: product.notes,
+      // }));
 
-      const payload = {
-        products: productsData,
-        client: this.state.client,
-        total: total,
-      };
-      this.props.sendOrder(payload);
-      this.setState({
-        client: {
-          firstName: "",
-          lastName: "",
-          email: "",
-          address: "",
-          place: "",
-          postCode: "",
-        },
-        error: null,
-      });
+      // const payload = {
+      //   products: productsData,
+      //   customer: this.state.customer,
+      //   total: total,
+      // };
+      this.props.sendOrder();
+      // this.setState({
+      //   customer: {
+      //     firstName: "",
+      //     lastName: "",
+      //     email: "",
+      //     address: "",
+      //     place: "",
+      //     postCode: "",
+      //   },
+      //   error: null,
+      // });
       this.props.history.push("/");
-    } else {
-      this.setState({ error });
-    }
+    // } else {
+    //   this.setState({ error });
+    // }
   };
 
   updateTextField = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     const { value, name } = target;
-    this.setState({ client: { ...this.state.client, [name]: value }, error: null });
+    this.props.updateOrderData(value, name);
+    // this.setState({ customer: { ...this.state.customer, [name]: value }, error: null });
   };
 
   render() {
     const { updateTextField } = this;
-    const { client } = this.state;
+    const { customer } = this.props;
     return (
-      <form noValidate onSubmit={this.submitOrder.bind(null, this.props.products, this.props.total)}>
+      <form noValidate onSubmit={this.props.sendOrder}>
         <Grid container>
           <Grid item xs={12} md={6}>
             <label htmlFor="firstName">Imię</label>
             <input
               type="text"
-              value={client.firstName}
+              value={customer.firstName}
               name="firstName"
               onChange={updateTextField}
               id="firstName"
@@ -114,7 +119,7 @@ class OrderForm extends React.Component<Props> {
             <label htmlFor="lastName">Nazwisko</label>
             <input
               type="text"
-              value={client.lastName}
+              value={customer.lastName}
               name="lastName"
               onChange={updateTextField}
               id="lastName"
@@ -124,7 +129,7 @@ class OrderForm extends React.Component<Props> {
             <label htmlFor="email">Adres e-mail</label>
             <input
               type="text"
-              value={client.email}
+              value={customer.email}
               name="email"
               onChange={updateTextField}
               id="email"
@@ -134,7 +139,7 @@ class OrderForm extends React.Component<Props> {
             <label htmlFor="address">Adres do wysyłki</label>
             <input
               type="text"
-              value={client.address}
+              value={customer.address}
               name="address"
               onChange={updateTextField}
               id="address"
@@ -144,7 +149,7 @@ class OrderForm extends React.Component<Props> {
             <label htmlFor="place">Miejscowość</label>
             <input
               type="text"
-              value={client.place}
+              value={customer.place}
               name="place"
               onChange={updateTextField}
               id="place"
@@ -154,7 +159,7 @@ class OrderForm extends React.Component<Props> {
             <label htmlFor="postCode">Kod pocztowy</label>
             <input
               type="text"
-              value={client.postCode}
+              value={customer.postCode}
               name="postCode"
               onChange={updateTextField}
               id="postCode"
@@ -170,10 +175,12 @@ class OrderForm extends React.Component<Props> {
 const mapStateToProps = (state: RootState) => ({
   products: getProducts(state),
   total: getTotalPrice(state),
+  customer: getCustomerData(state),
 });
 
 const mapDispatchToProps = (dispatch: any) => ({
-  sendOrder: (data: any) => dispatch(submitOrder(data)),
+  sendOrder: () => dispatch(submitOrderStart()),
+  updateOrderData: (value: string, field: string) => dispatch(updateOrderData(value, field)),
 });
 
 export default connect(

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProductsList } from '../../../redux/products/thunks';
+import { getProductsListStart } from '../../../redux/products/actions';
 import { getAll, getLoadingState } from '../../../redux/products/reducer';
 import ProductCard from '../../features/ProductCard';
 import Grid from '@material-ui/core/Grid';
@@ -54,7 +54,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
   loading: getLoadingState(state),
 });
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  getProductsList: () => dispatch(getProductsList()),
+  getProductsList: () => dispatch(getProductsListStart()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Homepage);
