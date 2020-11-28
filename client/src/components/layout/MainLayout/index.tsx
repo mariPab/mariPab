@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import Header from '../Header';
 import Footer from '../Footer';
 import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
-import styles from './MainLayout.module.scss';
 import { NotificationContainer } from 'react-notifications';
+import Nav from '../Nav';
+import { PageContainer } from './MainLayout.style';
+
 import 'react-notifications/lib/notifications.css';
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 interface MapDispatchToProps {
   changeViewportMode: (newMode: boolean) => void;
@@ -23,21 +25,17 @@ const MainLayout: React.FunctionComponent<Props> = ({ children, changeViewportMo
     changeViewportMode(isMobileViewport());
     window.addEventListener('resize', () => changeViewportMode(isMobileViewport()));
   });
-
   return (
-    <div className={styles.root}>
-      <Header />
+      <PageContainer>
       <NotificationContainer />
-      <div className={styles.container}>
+      <Nav />
         {children}
-      </div>
       <Footer />
-    </div>
+      </PageContainer>
   );
 };
 
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   changeViewportMode: newMode => dispatch(changeViewport(newMode)),
 });
-
 export default connect(null, mapDispatchToProps)(MainLayout);

@@ -7,7 +7,7 @@ import Cart from '../../features/Cart';
 // import Button from '../../common/Button/Button';
 // import MenuIcon from '@material-ui/icons/Menu';
 // import manageCartStorageHOC from '../../../HOC/manageCartStorage';
-import { RootState } from "../../../redux/store";
+import { RootState } from '../../../redux/store';
 
 // const CartWithStorageMngmt = manageCartStorageHOC(Cart);
 
@@ -41,11 +41,11 @@ const Nav: React.FunctionComponent = (/* { mobile  }*/) => {
           Strona główna
         </NavLink>
         <NavLink
-          className={styles.navlink} exact to='/'
+          className={styles.navlink} exact to='/products'
           // onClick={mobile ? () => handleExpandClick() : null}
           onClick={handleExpandClick}
         >
-          Wyprzedaż
+          Produkty
         </NavLink>
         <NavLink
           className={styles.navlink}

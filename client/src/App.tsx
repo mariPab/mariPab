@@ -7,10 +7,12 @@ import { CssBaseline } from '@material-ui/core';
 import store from './redux/store';
 import MainLayout from './components/layout/MainLayout';
 import Homepage from './components/views/Homepage';
+import Products from './components/views/Products';
 import ProductDetails from './components/views/ProductDetails';
 import OrderSummary from './components/views/OrderSummary';
 import { NotFound } from './components/views/NotFound/NotFound';
 import styles from './App.module.scss';
+import { GlobalStyle } from './styles/global';
 
 const theme = createMuiTheme({
   palette: {
@@ -22,6 +24,7 @@ const theme = createMuiTheme({
 const App: React.FunctionComponent = () => (
   <Provider store={store}>
     <BrowserRouter>
+      <GlobalStyle />
       <StylesProvider injectFirst>
         <ThemeProvider theme={theme}>
           <CssBaseline />
@@ -33,6 +36,7 @@ const App: React.FunctionComponent = () => (
               className={styles.switchWrapper}
             >
               <Route exact path='/' component={Homepage} />
+              <Route exact path='/products' component={Products} />
               <Route exact path='/product/:id' component={ProductDetails} />
               <Route exact path='/order' component={OrderSummary} />
               <Route path='*' component={NotFound} />
