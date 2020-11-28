@@ -1,4 +1,4 @@
-import { ProductStore, ProductReducerActionTypes } from "./types";
+import { ProductStore, ProductReducerActionTypes } from './types';
 import {
   GET_PRODUCTS_LIST_START,
   GET_PRODUCTS_LIST_SUCCESS,
@@ -7,12 +7,12 @@ import {
   GET_PRODUCT_BY_ID_FAIL,
   GET_PRODUCT_BY_ID_START,
   RESET_ACTIVE_PRODUCT,
-} from "./actions";
+} from './actions';
 import {
   GetProductByIdSuccess,
   GetProductsListSuccess,
-} from "./types";
-import { RootState } from "../store";
+} from './types';
+import { RootState } from '../store';
 
 /* selectors */
 export const getAll = ({ products }: RootState) => products.data;

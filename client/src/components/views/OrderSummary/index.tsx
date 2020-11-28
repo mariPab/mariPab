@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from "react";
-import CartItem from "../../features/CartItem";
-import { connect } from "react-redux";
-import { getCart, getTotalPrice } from "../../../redux/cart/reducer";
-import { NavLink } from "react-router-dom";
-import styles from "./OrderSummary.module.scss";
-import { countProductsInCart } from "../../../utils/countProductsInCart";
-import OrderForm from "../../features/OrderForm";
-import { RootState } from "../../../redux/store";
+import React, { FunctionComponent } from 'react';
+import CartItem from '../../features/CartItem';
+import { connect } from 'react-redux';
+import { getCart, getTotalPrice } from '../../../redux/cart/reducer';
+import { NavLink } from 'react-router-dom';
+import styles from './OrderSummary.module.scss';
+import { countProductsInCart } from '../../../utils/countProductsInCart';
+import OrderForm from '../../features/OrderForm';
+import { RootState } from '../../../redux/store';
 import { CartStore } from '../../../redux/cart/types';
 
 interface MapStateToProps {

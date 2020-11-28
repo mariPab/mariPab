@@ -10,7 +10,7 @@ import {
   UPDATE_ORDER_DATA,
   LOAD_CART_START,
   SAVE_CART,
-} from "./actions";
+} from './actions';
 import { Product, ProductBasic } from '../products/types';
 
 export interface CartProduct extends Product {

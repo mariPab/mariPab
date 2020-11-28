@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_URL } from "../../settings/config";
+import axios from 'axios';
+import { API_URL } from '../../settings/config';
 import {
   GET_PRODUCTS_LIST_START,
   GET_PRODUCTS_LIST_FAIL,
@@ -8,8 +8,8 @@ import {
   GET_PRODUCT_BY_ID_START,
   GET_PRODUCT_BY_ID_SUCCESS,
 } from './actions';
-import { Product, GetProductByIdStart } from "./types";
-import { takeEvery, put, all, fork } from "redux-saga/effects";
+import { Product, GetProductByIdStart } from './types';
+import { takeEvery, put, all, fork } from 'redux-saga/effects';
 
 export function* getProductsListWatcher(): Generator {
   yield takeEvery(GET_PRODUCTS_LIST_START, getProductsList);
@@ -18,7 +18,7 @@ export function* getProductsList() {
   try {
     const res = yield axios.get(`${API_URL}/products/all`);
     const data = res.data.map((item: any) => ({
-      ...item, id: item._id
+      ...item, id: item._id,
     })) as Product[];
     yield put({ type: GET_PRODUCTS_LIST_SUCCESS, payload: data });
   } catch (e) {
@@ -46,4 +46,4 @@ export default function* rootSaga(): Generator {
     fork(getProductsListWatcher),
     fork(getProductByIdWatcher),
   ]);
-};
+}

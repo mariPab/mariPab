@@ -1,5 +1,5 @@
-import axios from "axios";
-import { API_URL } from "../../settings/config";
+import axios from 'axios';
+import { API_URL } from '../../settings/config';
 import {
   SUBMIT_ORDER_FAIL,
   SUBMIT_ORDER_START,
@@ -10,12 +10,12 @@ import {
   SAVE_CART,
   LOAD_CART,
   LOAD_CART_START,
-} from "./actions";
-import { CartStore } from "./types";
-import { getCart } from "./reducer";
+} from './actions';
+import { CartStore } from './types';
+import { getCart } from './reducer';
 import CodesHandler from '../../utils/codesHandler';
-import { select, takeEvery, put, all, fork, delay } from "redux-saga/effects";
-import { errorCodes } from "../../settings/codes";
+import { select, takeEvery, put, all, fork, delay } from 'redux-saga/effects';
+import { errorCodes } from '../../settings/codes';
 
 export function* updateTotalWatcher(): Generator {
   yield takeEvery([ADD_PRODUCT, REMOVE_PRODUCT, LOAD_CART], updateTotal);
@@ -32,12 +32,12 @@ export function* submitOrder() {
   try {
     const orderAttributes = {
       products: products.map(product => ({
-          _id: product.id,
-          amount: product.amount,
-          notes: product.notes,
-        })),
-        customer,
-        total,
+        _id: product.id,
+        amount: product.amount,
+        notes: product.notes,
+      })),
+      customer,
+      total,
     };
     const res = yield axios.post(`${API_URL}/order/submit`, orderAttributes);
     if (res && res.data) {
@@ -57,7 +57,7 @@ export function* submitOrder() {
         yield CodesHandler.executeErrorCodes(code);
       }
     } else {
-        yield CodesHandler.executeErrorCodes(err.errorCode);
+      yield CodesHandler.executeErrorCodes(err.errorCode);
     }
   }
 }
@@ -67,14 +67,14 @@ export function* saveCartWatcher(): Generator {
 }
 export function* saveCart() {
   const { products } = (yield select(getCart)) as CartStore;
-  localStorage.setItem("cart", JSON.stringify(products));
+  localStorage.setItem('cart', JSON.stringify(products));
 }
 
 export function* loadCartWatcher(): Generator {
   yield takeEvery(LOAD_CART_START, loadCart);
 }
 export function* loadCart() {
-  const savedCart = localStorage.getItem("cart");
+  const savedCart = localStorage.getItem('cart');
   yield put({
     type: LOAD_CART,
     payload: savedCart ? JSON.parse(savedCart) : [],
@@ -88,4 +88,4 @@ export default function* rootSaga(): Generator {
     fork(saveCartWatcher),
     fork(loadCartWatcher),
   ]);
-};
+}

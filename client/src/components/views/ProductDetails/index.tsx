@@ -1,22 +1,22 @@
-import React from "react";
-import { compose } from "redux";
-import { IMAGES_URL } from "../../../settings/config";
-import { NotFound } from "../NotFound/NotFound";
-import { GalleryPic } from "../../features/GalleryPic";
-import { connect } from "react-redux";
+import React from 'react';
+import { compose } from 'redux';
+import { IMAGES_URL } from '../../../settings/config';
+import { NotFound } from '../NotFound/NotFound';
+import { GalleryPic } from '../../features/GalleryPic';
+import { connect } from 'react-redux';
 import {
   getActiveProduct,
-} from "../../../redux/products/reducer";
+} from '../../../redux/products/reducer';
 import {
   getProductByIdStart,
-} from "../../../redux/products/actions";
-import { addProductToCart } from "../../../redux/cart/actions";
-import styles from "./ProductDetails.module.scss";
-import { NumberInput } from "../../common/NumberInput/NumberInput";
-import Button from "../../common/Button";
-import { Product } from "../../../redux/products/types";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import { RootState } from "../../../redux/store";
+} from '../../../redux/products/actions';
+import { addProductToCart } from '../../../redux/cart/actions';
+import styles from './ProductDetails.module.scss';
+import { NumberInput } from '../../common/NumberInput/NumberInput';
+import Button from '../../common/Button';
+import { Product } from '../../../redux/products/types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RootState } from '../../../redux/store';
 
 interface MatchProps {
   id: string;
@@ -72,8 +72,8 @@ class ProductDetails extends React.Component<Props> {
         </div>
       </div>
     ) : (
-        <NotFound />
-      );
+      <NotFound />
+    );
   }
 }
 

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { getProducts, getTotalPrice } from "../../../redux/cart/reducer";
-import { NavLink } from "react-router-dom";
-import CartItem from "../CartItem";
-import styles from "./Cart.module.scss";
-import { countProductsInCart } from "../../../utils/countProductsInCart";
-import Button from "../../common/Button";
-import LocalMallIcon from "@material-ui/icons/LocalMall";
-import { CartProduct } from "../../../redux/cart/types";
-import manageCartStorage from "../../../HOC/manageCartStorage";
-import { RootState } from "../../../redux/store";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { getProducts, getTotalPrice } from '../../../redux/cart/reducer';
+import { NavLink } from 'react-router-dom';
+import CartItem from '../CartItem';
+import styles from './Cart.module.scss';
+import { countProductsInCart } from '../../../utils/countProductsInCart';
+import Button from '../../common/Button';
+import LocalMallIcon from '@material-ui/icons/LocalMall';
+import { CartProduct } from '../../../redux/cart/types';
+import manageCartStorage from '../../../HOC/manageCartStorage';
+import { RootState } from '../../../redux/store';
 
 interface MapStateToProps {
   products: CartProduct[];
@@ -33,9 +33,9 @@ export const Cart: React.FunctionComponent<Props> = ({
         </Button>
       </div>
       {opened ? (
-        <div className={`${styles.root} ${opened ? styles.expanded : ""}`}>
+        <div className={`${styles.root} ${opened ? styles.expanded : ''}`}>
           <div onClick={handleClick} className={`${styles.background}`}>
-            {" "}
+            {' '}
           </div>
           <div className={`${styles.cart}`}>
             <div className={styles.items}>

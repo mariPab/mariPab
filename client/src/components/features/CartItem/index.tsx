@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { IMAGES_URL } from "../../../settings/config";
-import Button from "../../common/Button";
-import { NumberInput } from "../../common/NumberInput/NumberInput";
-import DeleteIcon from "@material-ui/icons/Delete";
-import styles from "./CartItem.module.scss";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { IMAGES_URL } from '../../../settings/config';
+import Button from '../../common/Button';
+import { NumberInput } from '../../common/NumberInput/NumberInput';
+import DeleteIcon from '@material-ui/icons/Delete';
+import styles from './CartItem.module.scss';
+import { connect } from 'react-redux';
 import {
   changeProductAmount,
   removeFromCart,
   addComments,
-} from "../../../redux/cart/actions";
-import EditIcon from "@material-ui/icons/Edit";
-import { CartProduct } from "../../../redux/cart/types";
+} from '../../../redux/cart/actions';
+import EditIcon from '@material-ui/icons/Edit';
+import { CartProduct } from '../../../redux/cart/types';
 
 interface MapDispatchToProps {
   changeAmount: (id: string, amount: number) => void;
@@ -63,7 +63,7 @@ export const CartItem: React.FunctionComponent<Props> = ({
           </div>
         </div>
       </div>
-      <div className={`${styles.notes} ${expanded ? styles.expanded : ""}`}>
+      <div className={`${styles.notes} ${expanded ? styles.expanded : ''}`}>
         <textarea
           value={product.notes}
           onChange={(e) => addNotes(product.id, e.target.value)}

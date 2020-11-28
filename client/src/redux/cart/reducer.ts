@@ -7,7 +7,7 @@ import {
   AddComments,
   LoadCart,
   UpdateOrderData,
-  CartProduct
+  CartProduct,
 } from './types';
 import { RootState } from '../store';
 import {
@@ -61,14 +61,14 @@ export default function cartReducer(
         products: payload.length ? payload.map(({ tags, ...rest}) => ({
           ...rest,
         } as CartProduct
-      )) : [],
+        )) : [],
       };
     case ADD_PRODUCT: {
       const { products } = statePart;
       const { payload } = action as AddProductToCart;
       if (products.length) {
         let isProductInCart = false;
-        for (let item of products) {
+        for (const item of products) {
           if (item.id === payload.product.id) isProductInCart = true;
         }
         return {
@@ -80,7 +80,7 @@ export default function cartReducer(
       } else {
         return {
           ...statePart,
-          products: [{ ...payload.product, amount: payload.amount, notes: '', }],
+          products: [{ ...payload.product, amount: payload.amount, notes: '' }],
         };
       }
     }
@@ -123,11 +123,11 @@ export default function cartReducer(
       };
     }
     case UPDATE_TOTAL:
-    return {
-      ...statePart,
-      total: statePart.products.reduce((total, product) =>
-      product.price * product.amount + total,0),
-    }
+      return {
+        ...statePart,
+        total: statePart.products.reduce((total, product) =>
+          product.price * product.amount + total,0),
+      };
     case SUBMIT_ORDER_START: {
       return {
         ...statePart,

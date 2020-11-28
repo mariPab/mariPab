@@ -1,9 +1,9 @@
-import React, { ComponentType } from "react";
-import { loadCartStart, saveCart } from "../redux/cart/actions";
-import { getProducts, getTotalPrice } from "../redux/cart/reducer";
-import { connect, ConnectedComponent } from "react-redux";
-import { RootState } from "../redux/store";
-import { CartProduct } from "../redux/cart/types";
+import React, { ComponentType } from 'react';
+import { loadCartStart, saveCart } from '../redux/cart/actions';
+import { getProducts, getTotalPrice } from '../redux/cart/reducer';
+import { connect, ConnectedComponent } from 'react-redux';
+import { RootState } from '../redux/store';
+import { CartProduct } from '../redux/cart/types';
 
 interface MapStateToProps {
   products: CartProduct[];

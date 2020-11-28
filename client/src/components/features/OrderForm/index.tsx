@@ -1,18 +1,18 @@
-import React from "react";
-import Grid from "@material-ui/core/Grid";
-import { connect } from "react-redux";
+import React from 'react';
+import Grid from '@material-ui/core/Grid';
+import { connect } from 'react-redux';
 import {
   getProducts,
   getTotalPrice,
   getCustomerData,
-} from "../../../redux/cart/reducer";
+} from '../../../redux/cart/reducer';
 import { updateOrderData, submitOrderStart } from '../../../redux/cart/actions';
 import { Customer } from '../../../redux/cart/types';
-import Button from "../../common/Button";
-import { withRouter, RouteComponentProps } from "react-router-dom";
-import { RootState } from "../../../redux/store";
+import Button from '../../common/Button';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { RootState } from '../../../redux/store';
 import { CartProduct } from '../../../redux/cart/types';
-import "./OrderForm.scss";
+import './OrderForm.scss';
 
 interface MapDispatchToProps {
   sendOrder: () => void;

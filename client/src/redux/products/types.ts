@@ -6,7 +6,7 @@ import {
   GET_PRODUCTS_LIST_FAIL,
   GET_PRODUCT_BY_ID_FAIL,
   RESET_ACTIVE_PRODUCT,
-} from "./actions";
+} from './actions';
 
 export interface ProductBasic {
   id: string;
