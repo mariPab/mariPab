@@ -3,11 +3,10 @@ import { connect } from 'react-redux';
 import { getProductsListStart } from '../../../redux/products/actions';
 import { getAll, getLoadingState } from '../../../redux/products/reducer';
 import ProductCard from '../../features/ProductCard';
-import styles from './Products.module.scss';
 import { RootState } from '../../../redux/store';
 import { Product } from '../../../redux/products/types';
 import Loader from 'react-loader-spinner';
-
+import { ProductsContainer } from './Products.style';
 interface MapStateToProps {
   products: Product[];
   loading: boolean;
@@ -25,7 +24,7 @@ export class Products extends React.Component<Props> {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <ProductsContainer>
         {this.props.loading ?
           <Loader
             type="ThreeDots"
@@ -35,7 +34,7 @@ export class Products extends React.Component<Props> {
           /> : this.props.products.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
-      </div>
+      </ProductsContainer>
     );
   }
 }

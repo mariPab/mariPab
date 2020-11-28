@@ -4,7 +4,7 @@ import { changeViewport } from '../../../redux/viewportRedux';
 import { connect } from 'react-redux';
 import { NotificationContainer } from 'react-notifications';
 import Nav from '../Nav';
-import { PageContainer } from './MainLayout.style';
+import { PageContainer, ContentContainer } from './MainLayout.style';
 
 import 'react-notifications/lib/notifications.css';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
@@ -29,7 +29,9 @@ const MainLayout: React.FunctionComponent<Props> = ({ children, changeViewportMo
       <PageContainer>
       <NotificationContainer />
       <Nav />
+      <ContentContainer>
         {children}
+      </ContentContainer>
       <Footer />
       </PageContainer>
   );
