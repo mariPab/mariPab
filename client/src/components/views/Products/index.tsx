@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { getProductsListStart, setSearchValue } from '../../../redux/products/actions';
 import { getAll, getLoadingState } from '../../../redux/products/reducer';
 import ProductCard from '../../features/ProductCard';
+import Loader from '../../common/Loader/Loader.style';
 import { RootState } from '../../../redux/store';
 import { Product } from '../../../redux/products/types';
-import Loader from 'react-loader-spinner';
 import { ProductsContainer, SearchContainer, SearchField } from './Products.style';
-import { InputAdornment} from '@material-ui/core';
+import { InputAdornment } from '@material-ui/core';
 import { Search } from '@material-ui/icons';
 import debounce from 'debounce';
 
@@ -45,16 +45,11 @@ export class Products extends React.Component<Props> {
             }}
           />
         </SearchContainer>
-        <ProductsContainer>
-          {this.props.loading ?
-            <Loader
-              type="ThreeDots"
-              color="#00BFFF"
-              height={100}
-              width={100}
-            /> : this.props.products.map(product => (
+        {this.props.loading ? <Loader position='center' height={80} width={100} /> : null}
+        <ProductsContainer loading={this.props.loading}>
+            {this.props.products.length ? this.props.products.map(product =>
               <ProductCard key={product.id} product={product} />
-            ))}
+            ) : <p>Przykro nam! :( Nie znaleźliśmy produktów spełniających Twoje kryteria.</p>}
         </ProductsContainer>
       </>
     );

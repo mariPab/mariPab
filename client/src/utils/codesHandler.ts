@@ -42,6 +42,8 @@ class CodesHandler {
         case (errorCodes.INVALID_CHAR_PLACE):
           NotificationManager.error('Pole "Miejscowość" zawiera niepoprawne znaki');
           break;
+        default:
+          return;
       }
     }
 }

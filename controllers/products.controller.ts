@@ -1,17 +1,14 @@
 import Product from '../models/product.model';
 import { ServerRequest, DBProduct } from '../interfaces';
-import { errorCodes } from '../client/src/settings/codes';
 
 class ProductsController {
   public loadAll: ServerRequest = async (req, res) => {
     try {
       if (req.query.search) {
-        const filtered: DBProduct[] = await Product.find({
+        const products: DBProduct[] = await Product.find({
           name: { $regex: req.query.search as string, $options: 'i' }
         });
-        filtered.length ? res.json(filtered) : res.status(404).json({
-          error: true, errorCode: errorCodes.NO_RECORD
-        });
+        res.json(products);
       } else { 
         const products = await Product.find();
         if (!products) res.status(404).json({ product: 'Not Found' });
