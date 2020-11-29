@@ -26,14 +26,14 @@ const MainLayout: React.FunctionComponent<Props> = ({ children, changeViewportMo
     window.addEventListener('resize', () => changeViewportMode(isMobileViewport()));
   });
   return (
-      <PageContainer>
+    <PageContainer>
       <NotificationContainer />
       <Nav />
       <ContentContainer>
         {children}
       </ContentContainer>
       <Footer />
-      </PageContainer>
+    </PageContainer>
   );
 };
 
