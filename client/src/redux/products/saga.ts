@@ -7,15 +7,24 @@ import {
   GET_PRODUCT_BY_ID_FAIL,
   GET_PRODUCT_BY_ID_START,
   GET_PRODUCT_BY_ID_SUCCESS,
+  SET_SEARCH_VALUE,
 } from './actions';
-import { Product, GetProductByIdStart } from './types';
-import { takeEvery, put, all, fork } from 'redux-saga/effects';
+import { Product, GetProductByIdStart, ProductStore } from './types';
+import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
+import UrlBuilder from '../../utils/urlBuilder';
+import { getProductsState } from './reducer';
+
+const { build } = UrlBuilder;
 
 export function* getProductsListWatcher(): Generator {
   yield takeEvery(GET_PRODUCTS_LIST_START, getProductsList);
 }
 export function* getProductsList() {
   try {
+    const { search } = (yield select(getProductsState)) as ProductStore;
+    const requestParams = { search };
+    const address = build(`${API_URL}/products/all`, requestParams);
+    console.log(search, address);
     const res = yield axios.get(`${API_URL}/products/all`);
     const data = res.data.map((item: any) => ({
       ...item, id: item._id,
@@ -41,9 +50,19 @@ export function* getProductById({ payload }: GetProductByIdStart) {
   }
 }
 
+export function* refreshProductsListWatcher(): Generator {
+  yield takeEvery([SET_SEARCH_VALUE], refreshProductsList);
+}
+export function* refreshProductsList() {
+  yield put({
+    type: GET_PRODUCTS_LIST_START,
+  })
+}
+
 export default function* rootSaga(): Generator {
   yield all([
     fork(getProductsListWatcher),
     fork(getProductByIdWatcher),
+    fork(refreshProductsListWatcher),
   ]);
 }
