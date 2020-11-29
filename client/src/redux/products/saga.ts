@@ -8,6 +8,8 @@ import {
   GET_PRODUCT_BY_ID_START,
   GET_PRODUCT_BY_ID_SUCCESS,
   SET_SEARCH_VALUE,
+  SET_AVAILABLE_TAGS,
+  INIT_PRODUCTS_FINISH,
 } from './actions';
 import { Product, GetProductByIdStart, ProductStore } from './types';
 import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
@@ -22,7 +24,7 @@ export function* getProductsListWatcher(): Generator {
 }
 export function* getProductsList() {
   try {
-    const { search } = (yield select(getProductsState)) as ProductStore;
+    const { search, init } = (yield select(getProductsState)) as ProductStore;
     const requestParams = { search };
     const address = build(`${API_URL}/products/all`, requestParams);
     const res = yield axios.get(address);
@@ -30,6 +32,17 @@ export function* getProductsList() {
       ...item, id: item._id,
     })) as Product[];
     yield put({ type: GET_PRODUCTS_LIST_SUCCESS, payload: data });
+    if (init) {
+      const tags: string[] = [];
+      data.forEach(item => {
+        if (item.tags) {
+          item.tags.forEach(tag => tags.push(tag));
+        }
+      });
+      yield put({ type: SET_AVAILABLE_TAGS, payload: tags.filter((item, idx) => tags.indexOf(item) == idx) });
+      yield put({ type: INIT_PRODUCTS_FINISH });
+
+    }
   } catch (err) {
     console.log(err);
     yield put({ type: GET_PRODUCTS_LIST_FAIL });
@@ -57,7 +70,7 @@ export function* refreshProductsListWatcher(): Generator {
 export function* refreshProductsList() {
   yield put({
     type: GET_PRODUCTS_LIST_START,
-  })
+  });
 }
 
 export default function* rootSaga(): Generator {

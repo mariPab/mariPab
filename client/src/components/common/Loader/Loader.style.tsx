@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React from 'react';
 import styled, { css, FlattenSimpleInterpolation } from 'styled-components';
 import Loader from 'react-loader-spinner';
 import { variables } from '../../../styles/settings';
@@ -20,7 +20,7 @@ const positionLoader = (position: string): FlattenSimpleInterpolation => {
     default:
       return css``;
   }
-}
+};
 const CustomLoader = styled(({ position = 'inline', ...props }: LoaderProps) =>
   <Loader
     {...props}
