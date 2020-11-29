@@ -13,6 +13,7 @@ import { Product, GetProductByIdStart, ProductStore } from './types';
 import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
 import UrlBuilder from '../../utils/urlBuilder';
 import { getProductsState } from './reducer';
+import CodesHandler from '../../utils/codesHandler';
 
 const { build } = UrlBuilder;
 
@@ -24,15 +25,15 @@ export function* getProductsList() {
     const { search } = (yield select(getProductsState)) as ProductStore;
     const requestParams = { search };
     const address = build(`${API_URL}/products/all`, requestParams);
-    console.log(search, address);
-    const res = yield axios.get(`${API_URL}/products/all`);
+    const res = yield axios.get(address);
     const data = res.data.map((item: any) => ({
       ...item, id: item._id,
     })) as Product[];
     yield put({ type: GET_PRODUCTS_LIST_SUCCESS, payload: data });
-  } catch (e) {
-    console.log(e);
-    yield put({ type: GET_PRODUCTS_LIST_FAIL});
+  } catch (err) {
+    console.log(err);
+    yield put({ type: GET_PRODUCTS_LIST_FAIL });
+    yield CodesHandler.executeErrorCodes(err.response.data.errorCode);
   }
 }
 
