@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS_LIST_FAIL,
   GET_PRODUCT_BY_ID_FAIL,
   RESET_ACTIVE_PRODUCT,
+  SET_SEARCH_VALUE,
 } from './actions';
 
 export interface ProductBasic {
@@ -22,6 +23,7 @@ export interface Product extends ProductBasic {
 export interface ProductStore {
   data: Product[];
   loading: boolean;
+  search: string;
   error: boolean;
   activeProduct: Product | null;
 }
@@ -46,6 +48,10 @@ export interface GetProductByIdSuccess {
 export interface GetProductByIdFail {
   type: typeof GET_PRODUCT_BY_ID_FAIL;
 }
+export interface SetSearchValue {
+  type: typeof SET_SEARCH_VALUE;
+  payload: { value: string; };
+}
 export interface ResetActiveProduct {
   type: typeof RESET_ACTIVE_PRODUCT;
 }
@@ -55,4 +61,5 @@ export type ProductReducerActionTypes =
   | GetProductsListFail
   | GetProductByIdStart
   | GetProductByIdSuccess
-  | GetProductByIdFail;
+  | GetProductByIdFail
+  |SetSearchValue;

@@ -7,10 +7,12 @@ import {
   GET_PRODUCT_BY_ID_FAIL,
   GET_PRODUCT_BY_ID_START,
   RESET_ACTIVE_PRODUCT,
+  SET_SEARCH_VALUE,
 } from './actions';
 import {
   GetProductByIdSuccess,
   GetProductsListSuccess,
+  SetSearchValue,
 } from './types';
 import { RootState } from '../store';
 
@@ -22,6 +24,7 @@ export const getActiveProduct = ({ products }: RootState) => products.activeProd
 const initState: ProductStore = {
   data: [],
   loading: false,
+  search: '',
   error: false,
   activeProduct: null,
 };
@@ -41,7 +44,6 @@ export default function productsReducer(
     }
     case GET_PRODUCTS_LIST_SUCCESS: {
       const { payload } = action as GetProductsListSuccess;
-      console.log(payload);
       return {
         ...statePart,
         loading: false,
@@ -56,6 +58,13 @@ export default function productsReducer(
         loading: false,
         error: false,
         activeProduct: payload,
+      };
+    }
+          case SET_SEARCH_VALUE: {
+      const { payload } = action as SetSearchValue;
+      return {
+        ...statePart,
+        search: payload.value,
       };
     }
     case GET_PRODUCT_BY_ID_FAIL:
