@@ -10,12 +10,14 @@ import {
   SET_SEARCH_VALUE,
   SET_AVAILABLE_TAGS,
   INIT_PRODUCTS_FINISH,
+  SET_ACTIVE_TAGS,
 } from './actions';
 import {
   GetProductByIdSuccess,
   GetProductsListSuccess,
   SetSearchValue,
   SetAvailableTags,
+  SetActiveTags,
 } from './types';
 import { RootState } from '../store';
 
@@ -83,6 +85,13 @@ export default function productsReducer(
       return {
         ...statePart,
         search: payload.value,
+      };
+    }
+    case SET_ACTIVE_TAGS: {
+      const { payload } = action as SetActiveTags;
+      return {
+        ...statePart,
+        activeTags: payload.tags,
       };
     }
     case GET_PRODUCT_BY_ID_FAIL:

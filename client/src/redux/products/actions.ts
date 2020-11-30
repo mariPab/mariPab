@@ -1,7 +1,9 @@
 import {
   GetProductByIdStart,
   GetProductsListStart,
+  SetActiveTags,
   SetSearchValue,
+  ResetActiveProduct,
 } from './types';
 
 /* action name creator */
@@ -38,7 +40,11 @@ export const setSearchValue = (value: string): SetSearchValue  => ({
   type: SET_SEARCH_VALUE,
   payload: { value },
 });
-export const resetActiveProduct = () => ({
+export const setActiveTags = (tags: string[]): SetActiveTags  => ({
+  type: SET_ACTIVE_TAGS,
+  payload: { tags },
+});
+export const resetActiveProduct = (): ResetActiveProduct => ({
   type: RESET_ACTIVE_PRODUCT,
 });
 

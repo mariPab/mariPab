@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TextField } from '@material-ui/core';
+import {
+  // Select,
+  Chip,
+  // MenuItem,
+  // Input,
+  // InputLabel
+} from '@material-ui/core';
+import { variables } from '../../../styles/settings';
 
 interface ProductsContainerProps {
   loading: boolean;
@@ -17,7 +25,11 @@ export const ProductsContainer = styled(({ loading, ...props }: ProductsContaine
 `;
 
 export const SearchContainer = styled.div`
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  & > div {
+    flex: 0 0 30%;
+  }
 `;
 
 export const SearchField = styled(TextField)`
@@ -27,3 +39,11 @@ export const SearchField = styled(TextField)`
     font-size: 2rem;
   }
 `;
+
+const CustomChip = styled(Chip)`
+  border: 1px solid ${variables.colorDanger};
+`;
+
+export {
+  CustomChip as Chip,
+};

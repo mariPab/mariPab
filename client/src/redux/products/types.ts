@@ -8,6 +8,7 @@ import {
   RESET_ACTIVE_PRODUCT,
   SET_SEARCH_VALUE,
   SET_AVAILABLE_TAGS,
+  SET_ACTIVE_TAGS,
 } from './actions';
 
 export interface ProductBasic {
@@ -60,6 +61,10 @@ export interface SetSearchValue {
   type: typeof SET_SEARCH_VALUE;
   payload: { value: string; };
 }
+export interface SetActiveTags {
+  type: typeof SET_ACTIVE_TAGS;
+  payload: { tags: string[]; };
+}
 export interface ResetActiveProduct {
   type: typeof RESET_ACTIVE_PRODUCT;
 }
@@ -71,4 +76,5 @@ export type ProductReducerActionTypes =
   | GetProductByIdSuccess
   | GetProductByIdFail
   | SetSearchValue
-  | SetAvailableTags;
+  | SetAvailableTags
+  | SetActiveTags;
