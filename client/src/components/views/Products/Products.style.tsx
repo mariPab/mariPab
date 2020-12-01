@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextField } from '@material-ui/core';
+import { TextField, Chip } from '@material-ui/core';
 import {
-  // Select,
-  Chip,
-  // MenuItem,
-  // Input,
-  // InputLabel
+// Select,
+// MenuItem,
+// Input,
+// InputLabel
 } from '@material-ui/core';
 import { variables } from '../../../styles/settings';
 

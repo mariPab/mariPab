@@ -15,7 +15,6 @@ import {
 import {
   InputAdornment,
   Select,
-  // Chip,
   Input,
   InputLabel,
   MenuItem,
@@ -85,7 +84,6 @@ export class Products extends React.Component<Props> {
                 ))}
               </div>
             )}
-          // MenuProps={MenuProps}
           >
             {this.props.tags.map(tag =>
               <MenuItem key={tag} value={tag}>
