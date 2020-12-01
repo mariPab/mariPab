@@ -17,6 +17,9 @@ import Button from '../../common/Button';
 import { Product } from '../../../redux/products/types';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../redux/store';
+import { Chip } from '@material-ui/core';
+import { NavLink } from 'react-router-dom';
+import { setActiveTags } from '../../../redux/products/actions';
 
 interface MatchProps {
   id: string;
@@ -28,6 +31,7 @@ interface MapStateToProps {
 interface MapDispatchToProps {
   loadProduct: (id: string) => void;
   addToCart: (product: Product, amount: number) => void;
+  filterByTags: (tags: string[]) => void;
 }
 
 type Props = MapStateToProps &
@@ -68,6 +72,13 @@ class ProductDetails extends React.Component<Props> {
               <NumberInput value={amount} onChange={this.updateTextField} />
             </span>
           </div>
+          {product.tags ? product.tags?.map(tag =>
+            <NavLink exact to='/products'>
+              <Button onClick={this.props.filterByTags.bind(null, [tag])}>
+              <Chip key={tag} label={tag} />
+              </Button>
+            </NavLink>
+          ) : null}
           <Button onClick={() => addToCart(product, amount)}>Dodaj do koszyka</Button>
         </div>
       </div>
@@ -85,6 +96,8 @@ const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   loadProduct: (id: string) => dispatch(getProductByIdStart(id)),
   addToCart: (product: Product, amount: number) =>
     dispatch(addProductToCart(product, amount)),
+  filterByTags: (tags: string[]) => dispatch(setActiveTags(tags)),
+
 });
 
 export default compose(
