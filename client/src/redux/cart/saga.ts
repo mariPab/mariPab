@@ -15,13 +15,19 @@ import { CartStore } from './types';
 import { getCart } from './reducer';
 import CodesHandler from '../../utils/codesHandler';
 import { select, takeEvery, put, all, fork, delay } from 'redux-saga/effects';
-import { errorCodes } from '../../settings/codes';
+import { errorCodes, codes } from '../../settings/codes';
+import { AnyAction } from 'redux';
 
 export function* updateTotalWatcher(): Generator {
   yield takeEvery([ADD_PRODUCT, REMOVE_PRODUCT, LOAD_CART], updateTotal);
 }
-export function* updateTotal() {
+export function* updateTotal({ type }: AnyAction) {
   yield put({ type: UPDATE_TOTAL });
+  if (type === ADD_PRODUCT) {
+    yield CodesHandler.executeSuccessCode(codes.SUCCESSFULLY_ADDED_TO_CART);
+  } else if (type === REMOVE_PRODUCT) {
+    yield CodesHandler.executeSuccessCode(codes.SUCCESSFULLY_REMOVED_FROM_CART);
+  }
 }
 
 export function* submitOrderWatcher(): Generator {

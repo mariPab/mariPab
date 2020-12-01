@@ -8,6 +8,13 @@ class CodesHandler {
     switch(code) {
       case (codes.SUCCESSFUL_ORDER_SUBMISSION):
         NotificationManager.success('Dziękujemy! Zamówienie zostało złożone');
+        break;
+      case (codes.SUCCESSFULLY_ADDED_TO_CART):
+        NotificationManager.success('Produkt został dodany do koszyka');
+        break;
+      case (codes.SUCCESSFULLY_REMOVED_FROM_CART):
+        NotificationManager.success('Produkt został usunięty z koszyka');
+        break;
     }
   }
     public executeErrorCodes: ExecuteCode = code => {
