@@ -13,6 +13,7 @@ export const errorCodes = {
   VALIDATION_FAILED: 1411,
   NO_PRODUCTS_IN_CART: 1412,
   INVALID_TOTAL: 1413,
+  UNKNOWN_ERROR: 1499,
 };
 
 export const codes = {

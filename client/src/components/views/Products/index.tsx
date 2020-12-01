@@ -113,6 +113,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   getProductsList: () => dispatch(getProductsListStart()),
   setSearchValue: (value: string) => dispatch(setSearchValue(value)),
-  filterByTags:(tags: string[]) => dispatch(setActiveTags(tags)),
+  filterByTags: (tags: string[]) => dispatch(setActiveTags(tags)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

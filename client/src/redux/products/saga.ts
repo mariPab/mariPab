@@ -10,6 +10,7 @@ import {
   SET_SEARCH_VALUE,
   SET_AVAILABLE_TAGS,
   INIT_PRODUCTS_FINISH,
+  SET_ACTIVE_TAGS,
 } from './actions';
 import { Product, GetProductByIdStart, ProductStore } from './types';
 import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
@@ -24,9 +25,10 @@ export function* getProductsListWatcher(): Generator {
 }
 export function* getProductsList() {
   try {
-    const { search, init } = (yield select(getProductsState)) as ProductStore;
-    const requestParams = { search };
+    const { search, init, activeTags } = (yield select(getProductsState)) as ProductStore;
+    const requestParams = { search, activeTags };
     const address = build(`${API_URL}/products/all`, requestParams);
+    console.log(address);
     const res = yield axios.get(address);
     const data = res.data.map((item: any) => ({
       ...item, id: item._id,
@@ -65,7 +67,7 @@ export function* getProductById({ payload }: GetProductByIdStart) {
 }
 
 export function* refreshProductsListWatcher(): Generator {
-  yield takeEvery([SET_SEARCH_VALUE], refreshProductsList);
+  yield takeEvery([SET_SEARCH_VALUE, SET_ACTIVE_TAGS], refreshProductsList);
 }
 export function* refreshProductsList() {
   yield put({
