@@ -11,16 +11,14 @@ import {
   getProductByIdStart,
 } from '../../../redux/products/actions';
 import { addProductToCart } from '../../../redux/cart/actions';
-import styles from './ProductDetails.module.scss';
 import { NumberInput } from '../../common/NumberInput/NumberInput';
-import Button from '../../common/Button';
+import {Btn, IconBtn, Tag } from '../../common/UIElems.style';
 import { Product } from '../../../redux/products/types';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../redux/store';
-import { Chip } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 import { setActiveTags } from '../../../redux/products/actions';
-
+import { TagsContainer, ProductsPageContainer, Gallery, DetailsContent } from './ProductDetails.style';
 interface MatchProps {
   id: string;
 }
@@ -52,8 +50,8 @@ class ProductDetails extends React.Component<Props> {
     const { product, addToCart } = this.props;
     const { amount } = this.state;
     return product && product.id ? (
-      <div className={styles.wrapper}>
-        <div className={styles.gallery}>
+      <ProductsPageContainer>
+        <Gallery>
           {product.images.map((image) => (
             <GalleryPic
               key={image}
@@ -61,8 +59,8 @@ class ProductDetails extends React.Component<Props> {
               src={`${IMAGES_URL}/${image}`}
             />
           ))}
-        </div>
-        <div className={styles.content}>
+        </Gallery>
+        <DetailsContent>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <div>
@@ -72,16 +70,19 @@ class ProductDetails extends React.Component<Props> {
               <NumberInput value={amount} onChange={this.updateTextField} />
             </span>
           </div>
+          <TagsContainer>
+
           {product.tags ? product.tags?.map(tag =>
             <NavLink exact to='/products'>
-              <Button onClick={this.props.filterByTags.bind(null, [tag])}>
-              <Chip key={tag} label={tag} />
-              </Button>
+              <IconBtn onClick={this.props.filterByTags.bind(null, [tag])}>
+              <Tag key={tag} label={tag} />
+              </IconBtn>
             </NavLink>
           ) : null}
-          <Button onClick={() => addToCart(product, amount)}>Dodaj do koszyka</Button>
-        </div>
-      </div>
+          </TagsContainer>
+          <Btn onClick={() => addToCart(product, amount)}>Dodaj do koszyka</Btn>
+        </DetailsContent>
+      </ProductsPageContainer>
     ) : (
       <NotFound />
     );
