@@ -1,12 +1,9 @@
 import styled from 'styled-components';
 import { variables } from '../../../styles/settings';
+import shared from '../../../styles/shared.style';
 
-export const TagsContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-`;
-
-export const ProductsPageContainer = styled.div`
+export default {
+  Container: styled.div`
   padding: 30px 40px;
   display: flex;
   @media (max-width: 576px) {
@@ -15,19 +12,18 @@ export const ProductsPageContainer = styled.div`
       padding: 30px 0;
     }
   }
-`;
+`,
 
-export const Gallery = styled.div`
-  display: flex;
-  justify-content: center;
+  Gallery: styled.div`
+  ${shared.flexCenter};
   flex-direction: column;
   @media (max-width: 576px) {
     width: 100%;
     align-items: center;
   }
-`;
+`,
 
-export const DetailsContent = styled.div`
+  DetailsContent: styled.div`
     padding: 0 20px;
   h3 {
     font-family: ${variables.fontSupplemental};
@@ -47,4 +43,10 @@ export const DetailsContent = styled.div`
   button {
     float: right;
   }
-`;
+`,
+
+  TagsContainer: styled.div`
+  display: flex;
+  justify-content: flex-start;
+`,
+};

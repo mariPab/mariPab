@@ -18,7 +18,7 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../redux/store';
 import { NavLink } from 'react-router-dom';
 import { setActiveTags } from '../../../redux/products/actions';
-import { TagsContainer, ProductsPageContainer, Gallery, DetailsContent } from './ProductDetails.style';
+import ProdDetails from './ProductDetails.style';
 interface MatchProps {
   id: string;
 }
@@ -50,8 +50,8 @@ class ProductDetails extends React.Component<Props> {
     const { product, addToCart } = this.props;
     const { amount } = this.state;
     return product && product.id ? (
-      <ProductsPageContainer>
-        <Gallery>
+      <ProdDetails.Container>
+        <ProdDetails.Gallery>
           {product.images.map((image) => (
             <GalleryPic
               key={image}
@@ -59,8 +59,8 @@ class ProductDetails extends React.Component<Props> {
               src={`${IMAGES_URL}/${image}`}
             />
           ))}
-        </Gallery>
-        <DetailsContent>
+        </ProdDetails.Gallery>
+        <ProdDetails.DetailsContent>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <div>
@@ -70,7 +70,7 @@ class ProductDetails extends React.Component<Props> {
               <NumberInput value={amount} onChange={this.updateTextField} />
             </span>
           </div>
-          <TagsContainer>
+          <ProdDetails.TagsContainer>
 
           {product.tags ? product.tags?.map(tag =>
             <NavLink exact to='/products'>
@@ -79,10 +79,10 @@ class ProductDetails extends React.Component<Props> {
               </IconBtn>
             </NavLink>
           ) : null}
-          </TagsContainer>
+          </ProdDetails.TagsContainer>
           <Btn onClick={() => addToCart(product, amount)}>Dodaj do koszyka</Btn>
-        </DetailsContent>
-      </ProductsPageContainer>
+        </ProdDetails.DetailsContent>
+      </ProdDetails.Container>
     ) : (
       <NotFound />
     );
