@@ -25,6 +25,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "react-app",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
