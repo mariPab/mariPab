@@ -26,3 +26,4 @@ yarn.lock
 
 nodemon.json
 package-lock.json
+debug.log
