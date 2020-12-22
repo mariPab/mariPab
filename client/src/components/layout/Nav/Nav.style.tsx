@@ -1,10 +1,11 @@
+import React from 'react';
 import styled from 'styled-components';
 import { variables } from '../../../styles/settings';
 import shared from '../../../styles/shared.style';
 import { NavLink } from 'react-router-dom';
 
 export default {
-  Root: styled.nav<{expanded: boolean; }>`
+  Root: styled(({  expanded, ...rest }) => <nav {...rest} />)`
     position: fixed;
     background-color: ${variables.colorSupplemental};
     height: 60px;
@@ -16,7 +17,7 @@ export default {
     z-index: 2;
     box-shadow: 0px 0px 5px 0px ${variables.colorBorder};
   `,
-  LinkList: styled.ul<{ mobile: boolean; expanded: boolean; }>`
+  LinkList: styled(({ mobile, expanded, ...rest }) => <ul {...rest} />)`
     ${shared.flexCenter};
     justify-content: flex-start;
     cursor: pointer;
@@ -41,7 +42,7 @@ export default {
       top: 60px;
     `}
   `,
-  Link: styled(NavLink)<{ mobile: boolean; }>`
+  Link: styled(({ mobile, ...rest }) => <NavLink {...rest} />)`
     padding: calc((60px - 1.4rem) / 2) 30px;
     text-decoration: none;
     font-weight: 200;
