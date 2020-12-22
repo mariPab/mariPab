@@ -8,6 +8,7 @@ import { countProductsInCart } from '../../../utils/countProductsInCart';
 import OrderForm from '../../features/OrderForm';
 import { RootState } from '../../../redux/store';
 import { CartStore } from '../../../redux/cart/types';
+import { useHistory } from "react-router-dom";
 
 interface MapStateToProps {
   cart: CartStore;
@@ -16,8 +17,20 @@ interface MapStateToProps {
 type Props = MapStateToProps;
 
 export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
+  let history = useHistory();
+  React.useEffect(() => {
+    if (total === 0 || !cart.products.length) {
+      if (history.length > 1) {
+        history.goBack()
+      } else {
+        history.replace('/')
+      }
+    }
+  }, [])
   return (
     <div className={styles.wrapper}>
+      {total !== 0 || cart.products.length ?
+        <>
       <h2>Moje produkty</h2>
       <div className={styles.items}>
         {cart.products.length ?
@@ -31,7 +44,7 @@ export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
         }
       </div>
       <NavLink className={styles.link} exact to="/">
-        Dodaj kolejne produkty
+          Dodaj kolejne produkty
       </NavLink>
       <h2>Podsumowanie zamówienia</h2>
       <div className={styles.summary}>
@@ -43,7 +56,9 @@ export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
         <span>{total} zł</span>
       </div>
       <h2>Dane kontaktowe</h2>
-      <OrderForm />
+          <OrderForm />
+          </>
+        : null}
     </div>
   );
 };
