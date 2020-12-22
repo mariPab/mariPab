@@ -1,69 +1,50 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './Nav.module.scss';
-// import { getViewportMode } from '../../../redux/viewportRedux.js';
-import { connect } from 'react-redux';
 import Cart from '../../features/Cart';
-// import Button from '../../common/Button/Button';
-// import MenuIcon from '@material-ui/icons/Menu';
-// import manageCartStorageHOC from '../../../HOC/manageCartStorage';
-import { RootState } from '../../../redux/store';
+import Button from '../../common/Button';
+import MenuIcon from '@material-ui/icons/Menu';
+import { useViewport } from "../../../context/viewport";
+import Navi from './Nav.style';
 
-// const CartWithStorageMngmt = manageCartStorageHOC(Cart);
+const links = [
+  { title: 'Strona główna', path: '/'},
+  { title: 'Produkty', path: '/products'},
+  { title: `O nas`, path: '/'},
+];
 
-const Nav: React.FunctionComponent = (/* { mobile  }*/) => {
+const Nav: React.FunctionComponent = () => {
   const [expanded, setExpanded] = useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
+  const { viewport } = useViewport();
   return (
-    <nav className={`${styles.root} ${expanded ? styles.expanded : ''}`} >
-      {/* {mobile ?
+    <Navi.Root expanded={expanded}>
+      {viewport === 'mobile' ?
         <Button
           variant="fab"
-          className={`${styles.navlink} ${mobile ? styles.openMenu : ''}`}
-          onClick={() => handleExpandClick()}
+          // className={`${styles.navlink} ${viewport === 'mobile' ? styles.openMenu : ''}`}
+          onClick={setExpanded.bind(null, !expanded)}
         >
-          <MenuIcon />
-        </Button> : ''} */}
-      <div
-        className={`${styles.navLinkList} ${/* mobile ? styles.mobileOnly : '' */''} ${expanded ? styles.expandMenu : ''}`}
+          <MenuIcon fontSize="large" />
+        </Button> : ''}
+      <Navi.LinkList
+        mobile={viewport === 'mobile'}
+        expanded={expanded}
       >
-        <NavLink
-          className={styles.navlink}
-          exact to='/'
-          // onClick={mobile ? () => handleExpandClick() : null}
-          onClick={handleExpandClick}
-
-        >
-          Strona główna
-        </NavLink>
-        <NavLink
-          className={styles.navlink} exact to='/products'
-          // onClick={mobile ? () => handleExpandClick() : null}
-          onClick={handleExpandClick}
-        >
-          Produkty
-        </NavLink>
-        <NavLink
-          className={styles.navlink}
-          exact to='/'
-          //  onClick={mobile ? () => handleExpandClick() : null}
-          onClick={handleExpandClick}
-
-        >
-          O&nbsp;nas
-        </NavLink>
-      </div>
+        {links.map((link, idx) =>
+          <li key={idx}>
+            <Navi.Link
+              exact
+              to={link.path}
+              mobile={viewport === 'mobile'}
+              onClick={setExpanded.bind(null, !expanded)}
+              activeClassName='active'
+            >
+              {link.title}
+            </Navi.Link>
+            </li>
+            )}
+      </Navi.LinkList>
       <Cart />
-    </nav >
+  </Navi.Root>
   );
 };
 
-const mapStateToProps = (state: RootState) => ({
-  // mobile: getViewportMode(state),
-});
-
-export default connect(mapStateToProps, null)(Nav);
+export default Nav;
