@@ -13,7 +13,7 @@ import {
 } from './actions';
 import { CartStore } from './types';
 import { getCart } from './reducer';
-import CodesHandler from '../../utils/codesHandler';
+import CodesHandler from '../../helpers/codesHandler';
 import { select, takeEvery, put, all, fork, delay } from 'redux-saga/effects';
 import { errorCodes, codes } from '../../settings/codes';
 import { AnyAction } from 'redux';

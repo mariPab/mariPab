@@ -14,9 +14,9 @@ import {
 } from './actions';
 import { Product, GetProductByIdStart, ProductStore } from './types';
 import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
-import UrlBuilder from '../../utils/urlBuilder';
+import UrlBuilder from '../../helpers/urlBuilder';
 import { getProductsState } from './reducer';
-import CodesHandler from '../../utils/codesHandler';
+import CodesHandler from '../../helpers/codesHandler';
 
 const { build } = UrlBuilder;
 
