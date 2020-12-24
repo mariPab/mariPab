@@ -7,7 +7,7 @@ import styles from './Homepage.module.scss';
 // import { Splash } from '../Splash/Splash';
 import { RootState } from '../../../redux/store';
 import { Product } from '../../../redux/products/types';
-import Header from '../../layout/Header';
+// import Header from '../../layout/Header';
 
 interface MapStateToProps {
   products: Product[];
@@ -27,7 +27,7 @@ export class Homepage extends React.Component<Props> {
   render() {
     return (
       <>
-        <Header />
+        {/* <Header /> */}
         {
           <div className={styles.root}>
             <section className={`${styles.motto} ${ /* mobile ? styles.mobileOnly : */ ''}`}>

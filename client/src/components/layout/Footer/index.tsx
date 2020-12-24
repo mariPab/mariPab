@@ -1,20 +1,20 @@
 import React from 'react';
-import styles from './Footer.module.scss';
+import FooterSheet from './Footer.style';
 
 const Footer: React.FunctionComponent = () => (
-  <div className={styles.root}>
-    <div className={styles.contact}>
-      <h4>
+  <FooterSheet.Root>
+    <div>
+      <h5>
         Zamówienia indywidualne
-      </h4>
+      </h5>
       <span>amanda.nowak@natural.pl</span>
     </div>
-    <div className={styles.contact}>
-      <h4>
+    <div>
+      <h5>
         Wysyłki
-      </h4>
+      </h5>
       <span>pn. - pt. 8:00 - 16:00</span>
     </div>
-  </div>
+  </FooterSheet.Root>
 );
 export default Footer;

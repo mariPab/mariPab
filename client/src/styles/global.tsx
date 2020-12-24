@@ -44,6 +44,12 @@ export const GlobalStyle = createGlobalStyle`
     border-bottom: 1px solid ${variables.colorText};
     padding-bottom: 10px;
   }
+  h5 {
+    color: ${variables.colorSupplemental};
+    font-size: 1.2rem;
+    margin: 10px 0;
+    letter-spacing: 0.1rem;
+  }
   span {
     font-size: 1.2rem;
   }
