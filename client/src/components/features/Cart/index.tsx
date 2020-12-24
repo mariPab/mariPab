@@ -1,82 +1,77 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getProducts, getTotalPrice } from '../../../redux/cart/reducer';
+import { getProducts } from '../../../redux/cart/reducer';
 import { NavLink } from 'react-router-dom';
 import CartItem from '../CartItem';
-import styles from './Cart.module.scss';
-import { countProductsInCart } from '../../../utils/countProductsInCart';
+import CartProductsCounter from '../../../helpers/cartProductsCounter';
 import Button from '../../common/Button';
-import LocalMallIcon from '@material-ui/icons/LocalMall';
 import { CartProduct } from '../../../redux/cart/types';
 import manageCartStorage from '../../../HOC/manageCartStorage';
 import { RootState } from '../../../redux/store';
+import CartSheet from './Cart.style';
 
 interface MapStateToProps {
   products: CartProduct[];
-  total: number;
 }
-type Props = MapStateToProps;
+interface Props extends MapStateToProps {
+  opened: boolean;
+  toggleCart: () => void;
+}
 
 export const Cart: React.FunctionComponent<Props> = ({
   products,
-  total,
+  opened,
+  toggleCart
 }: Props) => {
-  const [opened, setOpened] = useState(false);
-  const handleClick = () => setOpened(!opened);
   return (
-    <div>
-      <div className={styles.cartlink}>
-        <span>{total}&nbsp;zł</span>
-        <Button variant="fab" onClick={handleClick}>
-          <LocalMallIcon color="primary" />
-        </Button>
-      </div>
+    <>
       {opened ? (
-        <div className={`${styles.root} ${opened ? styles.expanded : ''}`}>
-          <div onClick={handleClick} className={`${styles.background}`}>
-            {' '}
-          </div>
-          <div className={`${styles.cart}`}>
-            <div className={styles.items}>
+        <CartSheet.Root expanded={opened}>
+          <CartSheet.Background onClick={toggleCart} />
+          <CartSheet.Cart>
+            <CartSheet.ProductsList>
               {products.length ?
                 products.map(product =>
-                  <CartItem product={product} key={product.id} />
+                  <li key={product.id}>
+                    <CartItem product={product} />
+                  </li>
                 ) :
-                <small className={styles.noProducts}>
+                <li>
+                <small>
                   <i>Brak produktów w koszyku </i>
                 </small>
+                </li>
               }
-            </div>
-            <div className={styles.summary}>
-              <p>Podsumowanie zamówienia</p>
+            </CartSheet.ProductsList>
+            <CartSheet.OrderSummary>
+              <h4>Podsumowanie zamówienia</h4>
               <div>
                 <span>ilość produktów: </span>
-                <span>{countProductsInCart(products)}</span>
+                <span>{CartProductsCounter.countProducts(products)}</span>
               </div>
               <div>
                 <span>Wartość zamówienia: </span>
-                <span> {total} zł </span>
+                <span> {CartProductsCounter.countTotalPrice(products)} zł </span>
               </div>
-              <NavLink className={styles.linkContinue} exact to="/order">
-                <Button
-                  disabled={products.length ? false : true}
-                  onClick={handleClick}
-                >
+              <Button
+                  disabled={!products.length}
+                  onClick={toggleCart}
+              >
+                <NavLink exact to="/order">
                   Kontynuuj zamówienie
-                </Button>
-              </NavLink>
-            </div>
-          </div>
-        </div>
+                </NavLink>
+              </Button>
+            </CartSheet.OrderSummary>
+          </CartSheet.Cart>
+        </CartSheet.Root>
       ) : null}
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state: RootState): MapStateToProps => ({
   products: getProducts(state),
-  total: getTotalPrice(state),
 });
 
 export default compose(

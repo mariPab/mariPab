@@ -82,4 +82,10 @@ export default {
       padding: 15px 20px;
     }
   `,
+  CartNav: styled.div`
+    ${shared.flexCenter};
+    button {
+      padding: calc((60px - 25px) / 2);
+    }
+  `,
 };

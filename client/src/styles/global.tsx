@@ -11,10 +11,14 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
     font-size: 10px;
+    /* @media (max-width: 576px) {
+      font-size: 5px;
+    } */
   }
 
   body {
     font: 100 1.4rem ${variables.fontText};
+    color: ${variables.colorText};
     margin: 0;
     &::-webkit-scrollbar {
       -webkit-appearance: none;
@@ -26,4 +30,22 @@ export const GlobalStyle = createGlobalStyle`
       background: ${lighten(0.1, variables.colorBorder)};
     }
   }
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  h2, h3, h4, h5, h6, span, p {
+    color: ${variables.colorText};
+  }
+  h4 {
+    font: 700 1.6rem ${variables.fontSupplemental};
+    letter-spacing: 0.3rem;
+    border-bottom: 1px solid ${variables.colorText};
+    padding-bottom: 10px;
+  }
+  span {
+    font-size: 1.2rem;
+  }
+
 `;

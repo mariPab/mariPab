@@ -26,7 +26,7 @@ export const Btn = styled(Button)`
 
 export const IconBtn = styled(IconButton)`
   &.MuiIconButton-root {
-    padding: 0;
+    /* padding: 0; */
     &:hover {
       background-color: transparent;
     }

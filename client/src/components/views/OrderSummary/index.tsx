@@ -1,10 +1,10 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState, useEffect } from 'react';
 import CartItem from '../../features/CartItem';
 import { connect } from 'react-redux';
-import { getCart, getTotalPrice } from '../../../redux/cart/reducer';
+import { getCart } from '../../../redux/cart/reducer';
 import { NavLink } from 'react-router-dom';
 import styles from './OrderSummary.module.scss';
-import { countProductsInCart } from '../../../utils/countProductsInCart';
+import CartProductsCounter from '../../../helpers/cartProductsCounter';
 import OrderForm from '../../features/OrderForm';
 import { RootState } from '../../../redux/store';
 import { CartStore } from '../../../redux/cart/types';
@@ -12,13 +12,13 @@ import { useHistory } from "react-router-dom";
 
 interface MapStateToProps {
   cart: CartStore;
-  total: number;
 }
 type Props = MapStateToProps;
 
-export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
+export const Component: FunctionComponent<Props> = ({ cart }: Props) => {
   let history = useHistory();
-  React.useEffect(() => {
+  const [total, setTotal] = useState(CartProductsCounter.countTotalPrice(cart.products));
+  useEffect(() => {
     if (total === 0 || !cart.products.length) {
       if (history.length > 1) {
         history.goBack()
@@ -26,7 +26,10 @@ export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
         history.replace('/')
       }
     }
-  }, [])
+  }, []);
+  useEffect(() => {
+    setTotal(CartProductsCounter.countTotalPrice(cart.products))
+  }, [cart.products])
   return (
     <div className={styles.wrapper}>
       {total !== 0 || cart.products.length ?
@@ -49,7 +52,7 @@ export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
       <h2>Podsumowanie zamówienia</h2>
       <div className={styles.summary}>
         <span>Ilość produktów: </span>
-        <span>{countProductsInCart(cart.products)}</span>
+        <span>{CartProductsCounter.countProducts(cart.products)}</span>
       </div>
       <div className={styles.summary}>
         <span>Wartość zamówienia: </span>
@@ -65,7 +68,6 @@ export const Component: FunctionComponent<Props> = ({ cart, total }: Props) => {
 
 const mapStateToProps = (state: RootState) => ({
   cart: getCart(state),
-  total: getTotalPrice(state),
 });
 
 export default connect(mapStateToProps, null)(Component);

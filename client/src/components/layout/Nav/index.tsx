@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import Cart from '../../features/Cart';
+import {IconBtn} from '../../common/UIElems.style';
 import Button from '../../common/Button';
-import MenuIcon from '@material-ui/icons/Menu';
+import { Menu, LocalMall } from '@material-ui/icons';
 import { useViewport } from "../../../context/viewport";
 import Navi from './Nav.style';
+import { connect } from 'react-redux';
+import { getTotalPrice } from '../../../redux/cart/reducer';
+import { RootState } from '../../../redux/store';
 
 const links = [
   { title: 'Strona główna', path: '/'},
@@ -11,7 +14,14 @@ const links = [
   { title: `O nas`, path: '/'},
 ];
 
-const Nav: React.FunctionComponent = () => {
+interface MapStateToProps {
+  total: number;
+}
+interface Props extends MapStateToProps {
+  toggleCart: () => void;
+}
+
+const Nav: React.FunctionComponent<Props> = (props: Props) => {
   const [expanded, setExpanded] = useState(false);
   const { viewport } = useViewport();
   return (
@@ -22,7 +32,7 @@ const Nav: React.FunctionComponent = () => {
           // className={`${styles.navlink} ${viewport === 'mobile' ? styles.openMenu : ''}`}
           onClick={setExpanded.bind(null, !expanded)}
         >
-          <MenuIcon fontSize="large" />
+          <Menu fontSize="large" />
         </Button> : ''}
       <Navi.LinkList
         mobile={viewport === 'mobile'}
@@ -42,9 +52,21 @@ const Nav: React.FunctionComponent = () => {
             </li>
             )}
       </Navi.LinkList>
-      <Cart />
+      <Navi.CartNav>
+        <span>{props.total}&nbsp;zł</span>
+        <IconBtn onClick={props.toggleCart}>
+          <LocalMall color="primary" fontSize="large" />
+        </IconBtn>
+      </Navi.CartNav>
   </Navi.Root>
   );
 };
 
-export default Nav;
+const mapStateToProps = (state: RootState): MapStateToProps => ({
+  total: getTotalPrice(state),
+});
+
+export default connect(
+    mapStateToProps,
+    null
+)(Nav) as React.ComponentType<any>;
