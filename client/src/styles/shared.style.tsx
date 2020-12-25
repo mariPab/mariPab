@@ -12,7 +12,7 @@ export default {
     -webkit-appearance: none;
     width: 4px;
     height: 4px;
-    background: ${variables.colorSupplemental};
+    background: ${variables.colorSoftBeige};
     `,
   srollthumb: css`
     background: ${lighten(0.1, variables.colorBorder)};

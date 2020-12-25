@@ -8,12 +8,15 @@ export const variables = {
   fontSupplemental: '"Lora", serif',
   fontDecorator: '"Amatic SC", cursive',
 
-  colorSupplemental: '#fafafa',
+  colorSoftBeige: '#fafafa',
   colorBorder: '#757575',
   colorSuccess: '#8bc34a',
   colorDanger: '#a72456',
-  colorNeutral: '#01579b',
-  colorText: '#212121',
+  colorUSAFABlue: '#01579b',
+  colorOxfordBlue: '#001E39',
+  colorLightSky: '#90CAF9',
+  colorSaharaSand: '#FFE0B2',
+  colorEerieBlack: '#212121',
 
   baseSize: '10px',
 };

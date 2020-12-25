@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 export default {
   Root: styled(({  expanded, ...rest }) => <nav {...rest} />)`
     position: fixed;
-    background-color: ${variables.colorSupplemental};
+    background-color: ${variables.colorSoftBeige};
     height: 60px;
     top: 0;
     width: 100vw;
@@ -49,7 +49,7 @@ export default {
     padding: calc((60px - 1.4rem) / 2) 30px;
     text-decoration: none;
     font-weight: 200;
-    color: ${variables.colorText};
+    color: ${variables.colorEerieBlack};
     letter-spacing: 0.4rem;
     display: inline-block;
     height: 100%;
@@ -62,17 +62,17 @@ export default {
       position: absolute;
       height: 3px;
       content:'';
-      background-color: ${variables.colorDanger};
+      background-color: ${variables.colorOxfordBlue};
     }
     &:hover {
-      color: ${variables.colorDanger};
+      color: ${variables.colorOxfordBlue};
     }
     ${({ mobile }) => mobile && `
-      background-color: ${variables.colorSupplemental};
+      background-color: ${variables.colorSoftBeige};
       width: 100%;
       &.active {
         font-weight: 600;
-        color: ${variables.colorDanger};
+        color: ${variables.colorOxfordBlue};
         &::after {
           content: none;
         }

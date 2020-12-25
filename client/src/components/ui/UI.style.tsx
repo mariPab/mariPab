@@ -18,7 +18,7 @@ export default {
   Button: styled(({ iconButton, noPadding, noBorder, floatRight, ...props }: ButtonType) =>
     <AntdButton shape={iconButton ? 'circle' : undefined} {...props} />)`
       ${shared.flexCenter};
-      border: 2px solid ${variables.colorText};
+      border: 2px solid ${variables.colorEerieBlack};
       padding: 8px 16px;
       height: unset;
       border-radius: 0;
@@ -42,10 +42,10 @@ export default {
         border: none;
       `};
       ${({ ghost }) => ghost && `
-        border-color: ${variables.colorSupplemental};
+        border-color: ${variables.colorSoftBeige};
         &:hover {
-          border-color: ${variables.colorSupplemental};
-          color: ${darken(0.2, variables.colorSupplemental)};
+          border-color: ${variables.colorSoftBeige};
+          color: ${darken(0.2, variables.colorSoftBeige)};
         }
       `};
   `,

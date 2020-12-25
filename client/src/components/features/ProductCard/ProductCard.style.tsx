@@ -23,7 +23,7 @@ export const ProductDetails = styled.div`
 `;
 
 export const ProductCardBox = styled.div`
-  background-color: ${variables.colorSupplemental};
+  background-color: ${variables.colorSoftBeige};
   margin: 10px;
   position: relative;
   flex: 0 0 45%;
@@ -33,7 +33,7 @@ export const ProductCardBox = styled.div`
     opacity: 1;
   }
   h3 {
-    color: ${variables.colorSupplemental};
+    color: ${variables.colorSoftBeige};
     text-align: center;
   }
 
@@ -48,7 +48,7 @@ export const ProductCardBox = styled.div`
   a:hover {
     font-weight: 600;
     text-decoration: none;
-    color: ${variables.colorSupplemental};
+    color: ${variables.colorSoftBeige};
   } */
 
   button {

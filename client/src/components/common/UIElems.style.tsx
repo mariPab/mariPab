@@ -12,8 +12,8 @@ import {
 import { variables } from '../../styles/settings';
 
 export const Btn = styled(Button)`
-  background: ${variables.colorSupplemental};
-  border: 3px solid ${variables.colorText};
+  background: ${variables.colorSoftBeige};
+  border: 3px solid ${variables.colorEerieBlack};
   text-align: center;
   line-height: 1.3;
   padding: 1rem;
@@ -35,7 +35,7 @@ export const IconBtn = styled(IconButton)`
   .MuiChip-label {
     font-size: 1.2rem;
     &:hover {
-      color: ${variables.colorNeutral};
+      color: ${variables.colorUSAFABlue};
     }
   }
 `;

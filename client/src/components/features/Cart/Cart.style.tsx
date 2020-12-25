@@ -23,7 +23,7 @@ export default {
     `}
   `,
   Background: styled.div`
-    background-color: ${transparentize(0.3, variables.colorText)};
+    background-color: ${transparentize(0.3, variables.colorEerieBlack)};
     height: 100%;
     width: calc(100% - 450px);
   `,
@@ -31,9 +31,9 @@ export default {
   height: 100%;
   width: 450px;
   transition: ${variables.transitionTransform};
-  background-color: ${variables.colorSupplemental};
+  background-color: ${variables.colorSoftBeige};
   padding: 4rem 2rem;
-  box-shadow: 0px 2px 4px 0px ${variables.colorText};
+  box-shadow: 0px 2px 4px 0px ${variables.colorEerieBlack};
   overflow: auto;
   @media (max-width: 576px) {
     width: 100vw;

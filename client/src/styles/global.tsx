@@ -19,7 +19,7 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font: 100 1.4rem ${variables.fontText};
-    color: ${variables.colorText};
+    color: ${variables.colorEerieBlack};
     margin: 0;
     &::-webkit-scrollbar {
       ${shared.scrollbar};
@@ -34,7 +34,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   h2, h3, h4, h6, span, p {
-    color: ${variables.colorText};
+    color: ${variables.colorEerieBlack};
   }
   h3 {
     font-size: 1.8rem;
@@ -44,11 +44,11 @@ export const GlobalStyle = createGlobalStyle`
   h4 {
     font: 700 1.6rem ${variables.fontSupplemental};
     letter-spacing: 0.3rem;
-    border-bottom: 1px solid ${variables.colorText};
+    border-bottom: 1px solid ${variables.colorEerieBlack};
     padding-bottom: 10px;
   }
   h5 {
-    color: ${variables.colorSupplemental};
+    color: ${variables.colorSoftBeige};
     font-size: 1.2rem;
     margin: 10px 0;
     letter-spacing: 0.1rem;

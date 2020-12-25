@@ -3,7 +3,7 @@ import { variables } from '../../../styles/settings';
 import { darken } from 'polished';
 
 export const FooterRoot = styled.footer`
-  background-color: ${variables.colorText};
+  background-color: ${variables.colorEerieBlack};
   display: flex;
   justify-content: flex-start;
   height: 200px;
@@ -13,7 +13,7 @@ export const FooterRoot = styled.footer`
     padding: 30px;
   }
   span {
-    color: ${darken(0.3, variables.colorSupplemental)};
+    color: ${darken(0.3, variables.colorSoftBeige)};
   }
   @media (max-width: 567px){
     height: 140px;
