@@ -8,6 +8,7 @@ import {
 // InputLabel
 } from '@material-ui/core';
 import { variables } from '../../../styles/settings';
+import shared from '../../../styles/shared.style';
 
 interface ProductsContainerProps {
   loading: boolean;
@@ -18,9 +19,17 @@ export const ProductsContainer = styled(({ loading, ...props }: ProductsContaine
   margin: 2rem auto;
   flex-wrap: wrap;
   display: flex;
+  height: calc(100vh - 200px - 60px - 90px);
+  overflow-y: auto;
   opacity: ${({ loading }: ProductsContainerProps): string => loading ? '0.2' : '1'};
   cursor: ${({ loading }: ProductsContainerProps): string => loading ? 'not-allowed' : 'auto'};
   pointer-events: ${({ loading }: ProductsContainerProps): string => loading ? 'none' : 'auto'};
+  &::-webkit-scrollbar {
+    ${shared.scrollbar};
+  }
+  &::-webkit-scrollbar-thumb {
+    ${shared.srollthumb};
+  }
 `;
 
 export const SearchContainer = styled.div`

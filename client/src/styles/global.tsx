@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import { variables } from './settings';
-import { lighten } from 'polished';
+import shared from './shared.style';
+import 'antd/dist/antd.css';
 
 export const GlobalStyle = createGlobalStyle`
   *,
@@ -21,13 +22,10 @@ export const GlobalStyle = createGlobalStyle`
     color: ${variables.colorText};
     margin: 0;
     &::-webkit-scrollbar {
-      -webkit-appearance: none;
-      width: 4px;
-      height: 4px;
-      background: ${variables.colorSupplemental};
+      ${shared.scrollbar};
     }
     &::-webkit-scrollbar-thumb {
-      background: ${lighten(0.1, variables.colorBorder)};
+      ${shared.srollthumb};
     }
   }
   ul {
@@ -35,8 +33,12 @@ export const GlobalStyle = createGlobalStyle`
     padding-left: 0;
     margin: 0;
   }
-  h2, h3, h4, h5, h6, span, p {
+  h2, h3, h4, h6, span, p {
     color: ${variables.colorText};
+  }
+  h3 {
+    font-family: ${variables.fontSupplemental};
+    letter-spacing: 0.1rem;
   }
   h4 {
     font: 700 1.6rem ${variables.fontSupplemental};
@@ -49,6 +51,9 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 1.2rem;
     margin: 10px 0;
     letter-spacing: 0.1rem;
+  }
+  p {
+    text-align: justify;
   }
   span {
     font-size: 1.2rem;
