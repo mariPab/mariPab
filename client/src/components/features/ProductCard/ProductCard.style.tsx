@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { variables } from '../../../styles/settings';
-import shared from '../../../styles/shared.style';
 
 export const ProductDetails = styled.div`
   background-color: rgba(75, 75, 75, 0.76);
@@ -9,7 +8,6 @@ export const ProductDetails = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  /* transform: translate(-50%, -50%); */
   opacity: 0;
   z-index: 1;
   display: flex;
@@ -43,13 +41,6 @@ export const ProductCardBox = styled.div`
     height: 250px;
     width: 100%;
   }
-
-  /* a,
-  a:hover {
-    font-weight: 600;
-    text-decoration: none;
-    color: ${variables.colorSoftBeige};
-  } */
 
   button {
     margin: 1rem 2rem;
