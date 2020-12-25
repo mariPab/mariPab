@@ -26,9 +26,7 @@ export default {
     padding-left: 0;
     width: calc(100% - 140px);
     margin: 0;
-    li {
-      width: 100%;
-    }
+
     ${({ mobile }) => mobile && `
       left: 0;
       background-color: rgba(0,0,0,0.3);
@@ -39,6 +37,9 @@ export default {
       transition: ${variables.transitionAll};
       display: none;
       flex-direction: column;
+      li {
+        width: 100%;
+      }
     `}
     ${({ expanded }) => expanded && `
       display: flex;
