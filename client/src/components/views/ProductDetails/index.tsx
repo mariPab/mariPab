@@ -58,7 +58,7 @@ class ProductDetails extends React.Component<Props> {
             />
           ))}
         </ProdDetails.Gallery>
-        <ProdDetails.DetailsContent>
+        <div>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <ProdDetails.ActionsBox spaceBetween>
@@ -89,7 +89,7 @@ class ProductDetails extends React.Component<Props> {
             Dodaj do koszyka
             <PlusCircleOutlined />
           </UI.Button>
-        </ProdDetails.DetailsContent>
+        </div>
       </ProdDetails.Container>
     ) : (
       <NotFound />
