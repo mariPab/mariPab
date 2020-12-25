@@ -10,17 +10,11 @@ import {
   ProductsContainer,
   SearchContainer,
   SearchField,
-  Chip,
 } from './Products.style';
-import {
-  InputAdornment,
-  Select,
-  Input,
-  InputLabel,
-  MenuItem,
-} from '@material-ui/core';
+import UI from '../../ui/UI.style';
 import { Search } from '@material-ui/icons';
 import debounce from 'debounce';
+import { Select, Input } from 'antd';
 
 interface MapStateToProps {
   products: Product[];
@@ -43,8 +37,8 @@ export class Products extends React.Component<Props> {
   }
   onSearch = debounce((value: string) =>
     this.props.setSearchValue(value), 500);
-  handleChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    this.props.filterByTags(event.target.value as string[]);
+  handleChange = (value: string[]) => {
+    this.props.filterByTags(value);
   };
   handleDelete = (value: string) => {
     const updatedTags = this.props.activeTags.filter(item => item !== value);
@@ -54,41 +48,23 @@ export class Products extends React.Component<Props> {
     return (
       <>
         <SearchContainer>
-          <SearchField
-            id="standard-basic"
-            label="Szukaj produktów..."
+          <Input
+            placeholder="Szukaj produktów..."
+            allowClear
             onChange={({ currentTarget: { value } }: React.ChangeEvent<HTMLInputElement>) => this.onSearch(value)}
-            InputProps={{
-              endAdornment:
-                <InputAdornment position="end">
-                  <Search color="primary" />
-                </InputAdornment>,
-            }}
+            suffix={<Search />}
           />
-          <InputLabel htmlFor="tags">Tag</InputLabel>
           <Select
-            id="tags"
-            multiple
-            value={this.props.activeTags}
+            mode="multiple"
+            allowClear
+            placeholder="Wyszukaj po tagach..."
             onChange={this.handleChange}
-            input={<Input />}
-            renderValue={() => (
-              <div>
-                {this.props.activeTags.map(tag => (
-                  <Chip
-                    key={tag}
-                    label={tag}
-                    onDelete={this.handleDelete.bind(null, tag)}
-                    onMouseDown={event => { event.stopPropagation();}}
-                  />
-                ))}
-              </div>
-            )}
+            defaultValue={this.props.activeTags}
           >
             {this.props.tags.map(tag =>
-              <MenuItem key={tag} value={tag}>
+              <option key={tag} value={tag}>
                 {tag}
-              </MenuItem>
+              </option>
             )}
           </Select>
         </SearchContainer>

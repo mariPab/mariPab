@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { variables } from '../../../styles/settings';
+// import { variables } from '../../../styles/settings';
 import shared from '../../../styles/shared.style';
 
 export default {
@@ -7,10 +7,8 @@ export default {
   padding: 30px 40px;
   display: flex;
   @media (max-width: 576px) {
-    .wrapper {
-      flex-direction: column;
-      padding: 30px 0;
-    }
+    flex-direction: column;
+    padding: 30px 0;
   }
 `,
 
@@ -23,30 +21,12 @@ export default {
   }
 `,
 
-  DetailsContent: styled.div`
+  DetailsContent: styled.div<{ spaceBetween?: boolean; }>`
     padding: 0 20px;
-  h3 {
-    font-family: ${variables.fontSupplemental};
-    letter-spacing: 0.1rem;
-  }
-
-  p {
-    text-align: justify;
-    font-family: ${variables.fontText};
-  }
-
-  & > div {
+  `,
+  ActionsBox: styled.div<{ spaceBetween?: boolean; }>`
     display: flex;
-    justify-content: space-between;
     padding-bottom: 40px;
-  }
-  button {
-    float: right;
-  }
-`,
-
-  TagsContainer: styled.div`
-  display: flex;
-  justify-content: flex-start;
-`,
+    justify-content: ${({ spaceBetween}) => spaceBetween ? 'space-between' : 'flex-start'};
+  `,
 };

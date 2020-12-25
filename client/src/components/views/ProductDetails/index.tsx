@@ -4,21 +4,19 @@ import { IMAGES_URL } from '../../../settings/config';
 import { NotFound } from '../NotFound/NotFound';
 import { GalleryPic } from '../../features/GalleryPic';
 import { connect } from 'react-redux';
-import {
-  getActiveProduct,
-} from '../../../redux/products/reducer';
-import {
-  getProductByIdStart,
-} from '../../../redux/products/actions';
+import { getActiveProduct } from '../../../redux/products/reducer';
+import { getProductByIdStart} from '../../../redux/products/actions';
 import { addProductToCart } from '../../../redux/cart/actions';
 import { NumberInput } from '../../common/NumberInput/NumberInput';
-import {Btn, IconBtn, Tag } from '../../common/UIElems.style';
+import UI from '../../ui/UI.style';
 import { Product } from '../../../redux/products/types';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../redux/store';
 import { NavLink } from 'react-router-dom';
 import { setActiveTags } from '../../../redux/products/actions';
 import ProdDetails from './ProductDetails.style';
+import { Tag } from 'antd';
+import { PlusCircleOutlined } from '@ant-design/icons';
 interface MatchProps {
   id: string;
 }
@@ -63,24 +61,34 @@ class ProductDetails extends React.Component<Props> {
         <ProdDetails.DetailsContent>
           <h3>{product.name}</h3>
           <p>{product.description}</p>
-          <div>
+          <ProdDetails.ActionsBox spaceBetween>
             <span>{product.price} zł</span>
             <span>
               Ilość:&nbsp;
               <NumberInput value={amount} onChange={this.updateTextField} />
             </span>
-          </div>
-          <ProdDetails.TagsContainer>
-
-          {product.tags ? product.tags?.map(tag =>
-            <NavLink exact to='/products'>
-              <IconBtn onClick={this.props.filterByTags.bind(null, [tag])}>
-              <Tag key={tag} label={tag} />
-              </IconBtn>
-            </NavLink>
-          ) : null}
-          </ProdDetails.TagsContainer>
-          <Btn onClick={() => addToCart(product, amount)}>Dodaj do koszyka</Btn>
+          </ProdDetails.ActionsBox>
+          <ProdDetails.ActionsBox>
+            {product.tags ? product.tags?.map(tag =>
+              <NavLink exact to='/products'>
+                <UI.Button
+                  noPadding
+                  noBorder
+                  onClick={this.props.filterByTags.bind(null, [tag])}
+                >
+                  <Tag color="blue" key={tag}>{tag}</Tag>
+                </UI.Button>
+              </NavLink>
+            ) : null}
+          </ProdDetails.ActionsBox>
+          <UI.Button
+            floatRight
+            noBorder
+            onClick={addToCart.bind(null, product, amount)}
+          >
+            Dodaj do koszyka
+            <PlusCircleOutlined />
+          </UI.Button>
         </ProdDetails.DetailsContent>
       </ProdDetails.Container>
     ) : (
