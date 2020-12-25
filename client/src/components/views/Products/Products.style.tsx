@@ -30,6 +30,9 @@ export const ProductsContainer = styled(({ loading, ...props }: ProductsContaine
   &::-webkit-scrollbar-thumb {
     ${shared.srollthumb};
   }
+  @media (max-width: 567px){
+    height: calc(100vh - 140px - 60px - 90px);
+  }
 `;
 
 export const SearchContainer = styled.div`
