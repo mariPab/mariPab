@@ -22,7 +22,7 @@ interface Props extends MapStateToProps {
 export const Cart: React.FunctionComponent<Props> = ({
   products,
   opened,
-  toggleCart
+  toggleCart,
 }: Props) => {
   return (
     <>
@@ -38,9 +38,9 @@ export const Cart: React.FunctionComponent<Props> = ({
                   </li>
                 ) :
                 <li>
-                <small>
-                  <i>Brak produktów w koszyku </i>
-                </small>
+                  <small>
+                    <i>Brak produktów w koszyku </i>
+                  </small>
                 </li>
               }
             </CartSheet.ProductsList>
@@ -55,8 +55,8 @@ export const Cart: React.FunctionComponent<Props> = ({
                 <span> {CartProductsCounter.countTotalPrice(products)} zł </span>
               </div>
               <Button
-                  disabled={!products.length}
-                  onClick={toggleCart}
+                disabled={!products.length}
+                onClick={toggleCart}
               >
                 <NavLink exact to="/order">
                   Kontynuuj zamówienie

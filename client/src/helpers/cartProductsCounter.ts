@@ -8,7 +8,7 @@ class CartProductsCounter {
   public countTotalPrice: CountProducts = productsList =>
     productsList.reduce((total, product) =>
       product.price * product.amount + total, 0
-  );
+    );
 }
 
 export default new CartProductsCounter();

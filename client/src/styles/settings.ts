@@ -1,7 +1,7 @@
 import { keyframes } from 'styled-components';
 
 export const variables = {
-  transitionTransform: 'transform 0.5s ease',
+  transitionTransform: 'transform 1s ease',
   transitionAll: 'all 0.5s ease',
 
   fontText: '"Open Sans Condensed", sans-serif',

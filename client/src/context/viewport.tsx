@@ -18,12 +18,12 @@ export const ViewportProvider = ({ children }: ViewportContextProps) => {
     } else {
       setViewport('fullhd');
     }
-  }
+  };
 
   React.useEffect(() => {
-    window.addEventListener("resize", handleWindowResize);
+    window.addEventListener('resize', handleWindowResize);
     handleWindowResize();
-    return () => window.removeEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
   return (
@@ -36,4 +36,4 @@ export const ViewportProvider = ({ children }: ViewportContextProps) => {
 export const useViewport = () => {
   const { /* width, height,  */viewport } = React.useContext(viewportContext);
   return { /* width, height, */ viewport };
-}
+};

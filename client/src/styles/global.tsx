@@ -37,6 +37,7 @@ export const GlobalStyle = createGlobalStyle`
     color: ${variables.colorText};
   }
   h3 {
+    font-size: 1.8rem;
     font-family: ${variables.fontSupplemental};
     letter-spacing: 0.1rem;
   }

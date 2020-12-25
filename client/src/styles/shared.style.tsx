@@ -1,5 +1,5 @@
 import {css} from 'styled-components';
-import { variables } from "./settings";
+import { variables } from './settings';
 import { lighten } from 'polished';
 
 export default {
@@ -17,4 +17,4 @@ export default {
   srollthumb: css`
     background: ${lighten(0.1, variables.colorBorder)};
   `,
-}
+};
