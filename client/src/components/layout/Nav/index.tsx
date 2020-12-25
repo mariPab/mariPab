@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {IconBtn} from '../../common/UIElems.style';
 import Button from '../../common/Button';
 import { Menu, LocalMall } from '@material-ui/icons';
-import { useViewport } from "../../../context/viewport";
+import { useViewport } from '../../../context/viewport';
 import Navi from './Nav.style';
 import { connect } from 'react-redux';
 import { getTotalPrice } from '../../../redux/cart/reducer';
@@ -49,8 +49,8 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
             >
               {link.title}
             </Navi.Link>
-            </li>
-            )}
+          </li>
+        )}
       </Navi.LinkList>
       <Navi.CartNav>
         <span>{props.total}&nbsp;zł</span>
@@ -58,7 +58,7 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
           <LocalMall color="primary" fontSize="large" />
         </IconBtn>
       </Navi.CartNav>
-  </Navi.Root>
+    </Navi.Root>
   );
 };
 
@@ -67,6 +67,6 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 });
 
 export default connect(
-    mapStateToProps,
-    null
+  mapStateToProps,
+  null
 )(Nav) as React.ComponentType<any>;
