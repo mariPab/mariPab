@@ -1,13 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TextField, Chip } from '@material-ui/core';
-import {
-// Select,
-// MenuItem,
-// Input,
-// InputLabel
-} from '@material-ui/core';
-import { variables } from '../../../styles/settings';
 import shared from '../../../styles/shared.style';
 
 interface ProductsContainerProps {
@@ -19,6 +11,7 @@ export const ProductsContainer = styled(({ loading, ...props }: ProductsContaine
   margin: 2rem auto;
   flex-wrap: wrap;
   display: flex;
+  /* VIEWPORT - FOOTER - NAV - REST PADDING */
   height: calc(100vh - 200px - 60px - 90px);
   overflow-y: auto;
   opacity: ${({ loading }: ProductsContainerProps): string => loading ? '0.2' : '1'};
@@ -42,19 +35,3 @@ export const SearchContainer = styled.div`
     flex: 0 0 30%;
   }
 `;
-
-export const SearchField = styled(TextField)`
-  .MuiFormLabel-root,
-  .MuiInputBase-input,
-  .MuiInputBase-inputMuiInputBase-adornedEnd {
-    font-size: 2rem;
-  }
-`;
-
-const CustomChip = styled(Chip)`
-  border: 1px solid ${variables.colorDanger};
-`;
-
-export {
-  CustomChip as Chip,
-};

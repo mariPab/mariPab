@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { IMAGES_URL } from '../../../settings/config';
-import Button from '../../common/Button';
 import { Product } from '../../../redux/products/types';
 import { addProductToCart } from '../../../redux/cart/actions';
 import { connect } from 'react-redux';

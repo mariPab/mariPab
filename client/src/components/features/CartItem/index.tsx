@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { IMAGES_URL } from '../../../settings/config';
-import Button from '../../common/Button';
-import { NumberInput } from '../../common/NumberInput/NumberInput';
+import { InputNumber } from 'antd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './CartItem.module.scss';
 import { connect } from 'react-redux';
@@ -12,6 +11,7 @@ import {
 } from '../../../redux/cart/actions';
 import EditIcon from '@material-ui/icons/Edit';
 import { CartProduct } from '../../../redux/cart/types';
+import UI from '../../ui/UI.style';
 
 interface MapDispatchToProps {
   changeAmount: (id: string, amount: number) => void;
@@ -28,7 +28,6 @@ export const CartItem: React.FunctionComponent<Props> = ({
   addNotes,
 }: Props): React.ReactElement => {
   const [expanded, setExpanded] = useState(false);
-  const handleExpandClick = () => setExpanded(!expanded);
   return (
     <div className={styles.root}>
       <div className={styles.productItem}>
@@ -38,28 +37,27 @@ export const CartItem: React.FunctionComponent<Props> = ({
         <div className={styles.productData}>
           <div className={styles.productInfo}>
             <span>{product.name}</span>
-            <small>{product.price}&nbsp;zł</small>
+            <span>{product.price}&nbsp;zł</span>
           </div>
           <div>
-            <small>Ilość:&nbsp;</small>
-            <NumberInput
+            <span>Ilość:&nbsp;</span>
+            <InputNumber
               value={product.amount}
-              onChange={(e) => changeAmount(product.id, parseInt(e.target.value))}
+              onChange={value => changeAmount(product.id, Number(value))}
             />
-            <Button
-              onClick={handleExpandClick}
-              variant="fab"
-              aria-label="add-notes"
-            >
-              <EditIcon color="primary" />
-            </Button>
-            <Button
+            <UI.Button
+              iconButton
+              noBorder
+              icon={<EditIcon color="primary" />}
+              onClick={setExpanded.bind(null, !expanded)}
+            />
+
+            <UI.Button
+              iconButton
+              noBorder
+              icon={<DeleteIcon color="primary" />}
               onClick={removeProduct.bind(null, product.id)}
-              variant="fab"
-              aria-label="delete"
-            >
-              <DeleteIcon color="primary" />
-            </Button>
+            />
           </div>
         </div>
       </div>

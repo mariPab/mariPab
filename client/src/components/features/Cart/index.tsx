@@ -5,11 +5,11 @@ import { getProducts } from '../../../redux/cart/reducer';
 import { NavLink } from 'react-router-dom';
 import CartItem from '../CartItem';
 import CartProductsCounter from '../../../helpers/cartProductsCounter';
-import Button from '../../common/Button';
 import { CartProduct } from '../../../redux/cart/types';
 import manageCartStorage from '../../../HOC/manageCartStorage';
 import { RootState } from '../../../redux/store';
 import CartSheet from './Cart.style';
+import UI from '../../ui/UI.style';
 
 interface MapStateToProps {
   products: CartProduct[];
@@ -54,14 +54,14 @@ export const Cart: React.FunctionComponent<Props> = ({
                 <span>Wartość zamówienia: </span>
                 <span> {CartProductsCounter.countTotalPrice(products)} zł </span>
               </div>
-              <Button
+              <UI.Button
                 disabled={!products.length}
                 onClick={toggleCart}
               >
                 <NavLink exact to="/order">
                   Kontynuuj zamówienie
                 </NavLink>
-              </Button>
+              </UI.Button>
             </CartSheet.OrderSummary>
           </CartSheet.Cart>
         </CartSheet.Root>

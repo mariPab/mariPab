@@ -8,10 +8,11 @@ import {
 } from '../../../redux/cart/reducer';
 import { updateOrderData, submitOrderStart } from '../../../redux/cart/actions';
 import { Customer } from '../../../redux/cart/types';
-import Button from '../../common/Button';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { RootState } from '../../../redux/store';
 import { CartProduct } from '../../../redux/cart/types';
+import UI from '../../ui/UI.style';
+
 import './OrderForm.scss';
 
 interface MapDispatchToProps {
@@ -29,15 +30,11 @@ class OrderForm extends React.Component<Props> {
     const { value, name } = target;
     this.props.updateOrderData(value, name);
   };
-  submit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    this.props.sendOrder();
-  };
   render() {
     const { updateTextField } = this;
     const { customer } = this.props;
     return (
-      <form noValidate onSubmit={this.submit}>
+      <form noValidate onSubmit={this.props.sendOrder}>
         <Grid container>
           <Grid item xs={12} md={6}>
             <label htmlFor="firstName">Imię</label>
@@ -100,7 +97,7 @@ class OrderForm extends React.Component<Props> {
             />
           </Grid>
         </Grid>
-        <Button type="submit">Zamawiam</Button>
+        <UI.Button htmlType="submit">Zamawiam</UI.Button>
       </form>
     );
   }

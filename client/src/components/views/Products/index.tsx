@@ -9,9 +9,8 @@ import { Product } from '../../../redux/products/types';
 import {
   ProductsContainer,
   SearchContainer,
-  SearchField,
 } from './Products.style';
-import UI from '../../ui/UI.style';
+// import UI from '../../ui/UI.style';
 import { Search } from '@material-ui/icons';
 import debounce from 'debounce';
 import { Select, Input } from 'antd';

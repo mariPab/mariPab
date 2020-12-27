@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import {IconBtn} from '../../common/UIElems.style';
-import Button from '../../common/Button';
+import UI from '../../ui/UI.style';
 import { Menu, LocalMall } from '@material-ui/icons';
 import { useViewport } from '../../../context/viewport';
 import Navi from './Nav.style';
@@ -27,13 +26,12 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
   return (
     <Navi.Root expanded={expanded}>
       {viewport === 'mobile' ?
-        <Button
-          variant="fab"
-          // className={`${styles.navlink} ${viewport === 'mobile' ? styles.openMenu : ''}`}
+        <UI.Button
+          iconButton
+          icon={<Menu fontSize="large" />}
+          noBorder
           onClick={setExpanded.bind(null, !expanded)}
-        >
-          <Menu fontSize="large" />
-        </Button> : ''}
+        /> : null}
       <Navi.LinkList
         mobile={viewport === 'mobile'}
         expanded={expanded}
@@ -54,9 +52,13 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
       </Navi.LinkList>
       <Navi.CartNav>
         <span>{props.total}&nbsp;zł</span>
-        <IconBtn onClick={props.toggleCart}>
-          <LocalMall color="primary" fontSize="large" />
-        </IconBtn>
+        <UI.Button
+          iconButton
+          icon={<LocalMall color="primary" fontSize="large" />}
+          noBorder
+          onClick={props.toggleCart}
+        />
+
       </Navi.CartNav>
     </Navi.Root>
   );

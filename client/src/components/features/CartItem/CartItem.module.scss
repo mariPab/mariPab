@@ -9,6 +9,7 @@
   button {
     margin: 0;
     padding: 0 15px;
+    displaY: inline-block;
   }
 }
 
@@ -40,13 +41,6 @@
   justify-content: space-between;
   align-items: center;
   height: 50%;
-  span {
-    color: $color-text;
-    font-size: 1.1rem;
-  }
-  small {
-    opacity: 0.6;
-  }
 }
 
 .notes {

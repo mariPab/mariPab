@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { getActiveProduct } from '../../../redux/products/reducer';
 import { getProductByIdStart} from '../../../redux/products/actions';
 import { addProductToCart } from '../../../redux/cart/actions';
-import { NumberInput } from '../../common/NumberInput/NumberInput';
 import UI from '../../ui/UI.style';
 import { Product } from '../../../redux/products/types';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
@@ -17,6 +16,8 @@ import { setActiveTags } from '../../../redux/products/actions';
 import ProdDetails from './ProductDetails.style';
 import { Tag } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
+import { InputNumber } from 'antd';
+
 interface MatchProps {
   id: string;
 }
@@ -41,9 +42,6 @@ class ProductDetails extends React.Component<Props> {
   componentDidMount(): void {
     this.props.loadProduct(this.props.match.params.id);
   }
-  updateTextField = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ amount: parseInt(target.value) });
-  };
   render() {
     const { product, addToCart } = this.props;
     const { amount } = this.state;
@@ -65,7 +63,10 @@ class ProductDetails extends React.Component<Props> {
             <span>{product.price} zł</span>
             <span>
               Ilość:&nbsp;
-              <NumberInput value={amount} onChange={this.updateTextField} />
+              <InputNumber
+                value={amount}
+                onChange={value => this.setState({ amount: Number(value) })}
+                />
             </span>
           </ProdDetails.ActionsBox>
           <ProdDetails.ActionsBox>
