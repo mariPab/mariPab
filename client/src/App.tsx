@@ -10,6 +10,7 @@ import Homepage from './components/views/Homepage';
 import Products from './components/views/Products';
 import ProductDetails from './components/views/ProductDetails';
 import OrderSummary from './components/views/OrderSummary';
+import AboutUs from './components/views/AboutUs';
 import { NotFound } from './components/views/NotFound/NotFound';
 import styles from './App.module.scss';
 import { GlobalStyle } from './styles/global';
@@ -39,6 +40,7 @@ const App: React.FunctionComponent = () => (
               <Route exact path='/products' component={Products} />
               <Route exact path='/product/:id' component={ProductDetails} />
               <Route exact path='/order' component={OrderSummary} />
+              <Route exact path='/aboutus' component={AboutUs} />
               <Route path='*' component={NotFound} />
             </AnimatedSwitch>
           </MainLayout>
