@@ -41,9 +41,18 @@ export const ProductCardBox = styled.div`
     height: 250px;
     width: 100%;
   }
-
+  svg {
+    fill: ${variables.colorSoftBeige};
+  }
   button {
     margin: 1rem 2rem;
+    .ant-btn-icon-only.ant-btn-lg {
+      font-size: 3rem;
+      fill: ${variables.colorSoftBeige};
+    }
+    &:hover svg {
+      fill: ${variables.colorSaharaSand};
+    }
   }
   span {
     opacity: 0.7;

@@ -41,21 +41,20 @@ export const CartItem: React.FunctionComponent<Props> = ({
           </div>
           <div>
             <span>Ilość:&nbsp;</span>
-            <InputNumber
+            <UI.InputNumber
               value={product.amount}
               onChange={value => changeAmount(product.id, Number(value))}
             />
             <UI.Button
               iconButton
               noBorder
-              icon={<EditIcon color="primary" />}
+              icon={<EditIcon />}
               onClick={setExpanded.bind(null, !expanded)}
             />
-
             <UI.Button
               iconButton
               noBorder
-              icon={<DeleteIcon color="primary" />}
+              icon={<DeleteIcon />}
               onClick={removeProduct.bind(null, product.id)}
             />
           </div>

@@ -59,5 +59,7 @@ export const GlobalStyle = createGlobalStyle`
   span {
     font-size: 1.2rem;
   }
-
+  svg {
+    fill: ${variables.colorEerieBlack};
+  }
 `;

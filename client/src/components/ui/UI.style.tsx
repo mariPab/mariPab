@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { variables } from '../../styles/settings';
 import { lighten, transparentize, darken } from 'polished';
 import { ButtonProps } from 'antd/lib/button/button';
-import { Button as AntdButton, Tooltip } from 'antd';
+import { Button as AntdButton, Tooltip, InputNumber } from 'antd';
 import shared from '../../styles/shared.style';
 
 interface ButtonType extends ButtonProps {
@@ -18,10 +18,24 @@ export default {
   Button: styled(({ iconButton, noPadding, noBorder, floatRight, ...props }: ButtonType) =>
     <AntdButton shape={iconButton ? 'circle' : undefined} {...props} />)`
       ${shared.flexCenter};
-      border: 2px solid ${variables.colorEerieBlack};
+      // border: 2px solid ${variables.colorEerieBlack};
+      border: none;
       padding: 8px 16px;
       height: unset;
       border-radius: 0;
+      background-color: inherit;
+      box-shadow: none;
+      &:hover,
+      &:focus {
+        box-shadow: none;
+        background-color: inherit;
+        color: ${variables.colorOxfordBlue};
+        border: none;
+      }
+      &::after {
+        box-shadow: none;
+        border: none;
+      }
       span:not(.ant-tag) {
         ${shared.flexCenter};
         font: 400 1.6rem ${variables.fontText};
@@ -50,4 +64,12 @@ export default {
       `};
   `,
   Tooltip: styled(Tooltip)``,
+  InputNumber: styled(InputNumber)`
+    background-color: inherit;
+    border: none;
+    width: 60px;
+    &:hover {
+      box-shadow: none;
+    }
+  `,
 };

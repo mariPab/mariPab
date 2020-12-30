@@ -10,7 +10,7 @@ import { RootState } from '../../../redux/store';
 const links = [
   { title: 'Strona główna', path: '/'},
   { title: 'Produkty', path: '/products'},
-  { title: `O nas`, path: '/'},
+  { title: `O nas`, path: '/aboutus'},
 ];
 
 interface MapStateToProps {
@@ -54,7 +54,7 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
         <span>{props.total}&nbsp;zł</span>
         <UI.Button
           iconButton
-          icon={<LocalMall color="primary" fontSize="large" />}
+          icon={<LocalMall fontSize="large" />}
           noBorder
           onClick={props.toggleCart}
         />
