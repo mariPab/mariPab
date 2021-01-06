@@ -6,6 +6,7 @@ import { lighten, transparentize, darken } from 'polished';
 import { ButtonProps } from 'antd/lib/button/button';
 import { Button as AntdButton, Tooltip, InputNumber } from 'antd';
 import shared from '../../styles/shared.style';
+import { NavLink } from 'react-router-dom';
 
 interface ButtonType extends ButtonProps {
   iconButton?: boolean;
@@ -70,6 +71,17 @@ export default {
     width: 60px;
     &:hover {
       box-shadow: none;
+    }
+  `,
+  InlineLink: styled(NavLink)`
+    color: ${variables.colorEerieBlack};
+    opacity: 0.6;
+    text-decoration: none;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    margin: 30px 0;
+    &:hover {
+      opacity: 1;
     }
   `,
 };
