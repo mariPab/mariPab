@@ -66,7 +66,7 @@ class ProductDetails extends React.Component<Props> {
               <InputNumber
                 value={amount}
                 onChange={value => this.setState({ amount: Number(value) })}
-                />
+              />
             </span>
           </ProdDetails.ActionsBox>
           <ProdDetails.ActionsBox>

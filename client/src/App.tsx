@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { AnimatedSwitch } from 'react-router-transition';
 import { Provider } from 'react-redux';
-// import { CssBaseline } from '@material-ui/core';
 import store from './redux/store';
 import MainLayout from './components/layout/MainLayout';
 import Homepage from './components/views/Homepage';
@@ -18,22 +17,21 @@ const App: React.FunctionComponent = () => (
   <Provider store={store}>
     <BrowserRouter>
       <GlobalStyle />
-          {/* <CssBaseline /> */}
-          <MainLayout>
-            <AnimatedSwitch
-              atEnter={{ opacity: 0 }}
-              atLeave={{ opacity: 0 }}
-              atActive={{ opacity: 1 }}
-              className={styles.switchWrapper}
-            >
-              <Route exact path='/' component={Homepage} />
-              <Route exact path='/products' component={Products} />
-              <Route exact path='/product/:id' component={ProductDetails} />
-              <Route exact path='/order' component={OrderSummary} />
-              <Route exact path='/aboutus' component={AboutUs} />
-              <Route path='*' component={NotFound} />
-            </AnimatedSwitch>
-          </MainLayout>
+      <MainLayout>
+        <AnimatedSwitch
+          atEnter={{ opacity: 0 }}
+          atLeave={{ opacity: 0 }}
+          atActive={{ opacity: 1 }}
+          className={styles.switchWrapper}
+        >
+          <Route exact path='/' component={Homepage} />
+          <Route exact path='/products' component={Products} />
+          <Route exact path='/product/:id' component={ProductDetails} />
+          <Route exact path='/order' component={OrderSummary} />
+          <Route exact path='/aboutus' component={AboutUs} />
+          <Route path='*' component={NotFound} />
+        </AnimatedSwitch>
+      </MainLayout>
     </BrowserRouter>
   </Provider>
 );

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { IMAGES_URL } from '../../../settings/config';
-import { InputNumber } from 'antd';
 import DeleteIcon from '@material-ui/icons/Delete';
 import styles from './CartItem.module.scss';
 import { connect } from 'react-redux';

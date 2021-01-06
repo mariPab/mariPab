@@ -11,7 +11,7 @@ export const ProductsContainer = styled(({ loading, ...props }: ProductsContaine
   margin: 2rem auto;
   flex-wrap: wrap;
   display: flex;
-  /* VIEWPORT - FOOTER - NAV - REST PADDING */
+  /* height: calc(viewport - footer - nav - rest padding) */
   height: calc(100vh - 200px - 60px - 90px);
   overflow-y: auto;
   opacity: ${({ loading }: ProductsContainerProps): string => loading ? '0.2' : '1'};
