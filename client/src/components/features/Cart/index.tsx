@@ -1,15 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { getProducts } from '../../../redux/cart/reducer';
 import { NavLink } from 'react-router-dom';
 import CartItem from '../CartItem';
-import CartProductsCounter from '../../../helpers/cartProductsCounter';
 import { CartProduct } from '../../../redux/cart/types';
 import manageCartStorage from '../../../HOC/manageCartStorage';
 import { RootState } from '../../../redux/store';
 import CartSheet from './Cart.style';
 import UI from '../../ui/UI.style';
+import { useCartProducts } from '../../../helpers/useCartProducts';
 
 interface MapStateToProps {
   products: CartProduct[];
@@ -24,6 +23,7 @@ export const Cart: React.FunctionComponent<Props> = ({
   opened,
   toggleCart,
 }: Props) => {
+  const { total, productsAmount } = useCartProducts(products);
   return (
     <>
       {opened ? (
@@ -48,11 +48,11 @@ export const Cart: React.FunctionComponent<Props> = ({
               <h4>Podsumowanie zamówienia</h4>
               <div>
                 <span>ilość produktów: </span>
-                <span>{CartProductsCounter.countProducts(products)}</span>
+                <span>{productsAmount}</span>
               </div>
               <div>
                 <span>Wartość zamówienia: </span>
-                <span> {CartProductsCounter.countTotalPrice(products)} zł </span>
+                <span> {total} zł </span>
               </div>
               <UI.Button
                 disabled={!products.length}
@@ -70,8 +70,8 @@ export const Cart: React.FunctionComponent<Props> = ({
   );
 };
 
-const mapStateToProps = (state: RootState): MapStateToProps => ({
-  products: getProducts(state),
+const mapStateToProps = ({ cart }: RootState): MapStateToProps => ({
+  products: cart.products,
 });
 
 export default compose(

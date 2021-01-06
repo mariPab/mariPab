@@ -4,8 +4,9 @@ import { Menu, LocalMall } from '@material-ui/icons';
 import { useViewport } from '../../../context/viewport';
 import Navi from './Nav.style';
 import { connect } from 'react-redux';
-import { getTotalPrice } from '../../../redux/cart/reducer';
 import { RootState } from '../../../redux/store';
+import { CartProduct } from '../../../redux/cart/types';
+import { useCartProducts } from '../../../helpers/useCartProducts';
 
 const links = [
   { title: 'Strona główna', path: '/'},
@@ -14,15 +15,16 @@ const links = [
 ];
 
 interface MapStateToProps {
-  total: number;
+  products: CartProduct[];
 }
 interface Props extends MapStateToProps {
   toggleCart: () => void;
 }
 
-const Nav: React.FunctionComponent<Props> = (props: Props) => {
+const Nav: React.FunctionComponent<Props> = ({ products, toggleCart }: Props) => {
   const [expanded, setExpanded] = useState(false);
   const { viewport } = useViewport();
+  const { total } = useCartProducts(products);
   return (
     <Navi.Root expanded={expanded}>
       {viewport === 'mobile' ?
@@ -51,21 +53,20 @@ const Nav: React.FunctionComponent<Props> = (props: Props) => {
         )}
       </Navi.LinkList>
       <Navi.CartNav>
-        <span>{props.total}&nbsp;zł</span>
+        <span>{total}&nbsp;zł</span>
         <UI.Button
           iconButton
           icon={<LocalMall fontSize="large" />}
           noBorder
-          onClick={props.toggleCart}
+          onClick={toggleCart}
         />
-
       </Navi.CartNav>
     </Navi.Root>
   );
 };
 
-const mapStateToProps = (state: RootState): MapStateToProps => ({
-  total: getTotalPrice(state),
+const mapStateToProps = ({ cart }: RootState): MapStateToProps => ({
+  products: cart.products,
 });
 
 export default connect(
