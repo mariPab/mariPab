@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { variables } from '../../../styles/settings';
+import { variables, settings } from '../../../styles/settings';
 import shared from '../../../styles/shared.style';
 import { NavLink } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ export default {
   Root: styled(({  expanded, ...rest }) => <nav {...rest} />)`
     position: fixed;
     background-color: ${variables.colorSoftBeige};
-    height: 60px;
+    height: ${settings.navHeight};
     top: 0;
     width: 100vw;
     padding: 0 20px;
@@ -43,11 +43,11 @@ export default {
     `}
     ${({ expanded }) => expanded && `
       display: flex;
-      top: 60px;
+      top: ${settings.navHeight};
     `}
   `,
   Link: styled(({ mobile, ...rest }) => <NavLink {...rest} />)`
-    padding: calc((60px - 1.4rem) / 2) 30px;
+    padding: calc((${settings.navHeight} - 1.4rem) / 2) 30px;
     text-decoration: none;
     font-weight: 200;
     color: ${variables.colorEerieBlack};
@@ -80,7 +80,7 @@ export default {
       }
     `}
     @media (max-width: 768px) {
-      padding: calc((60px - 1.4rem) / 2) 15px;
+      padding: calc((${settings.navHeight} - 1.4rem) / 2) 15px;
     }
     @media (max-width: 567px) {
       padding: 15px 20px;
@@ -89,7 +89,7 @@ export default {
   CartNav: styled.div`
     ${shared.flexCenter};
     button {
-      padding: calc((60px - 25px) / 2);
+      padding: calc((${settings.navHeight} - 25px) / 2);
     }
   `,
 };

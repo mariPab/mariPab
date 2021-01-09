@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { variables } from '../../../styles/settings';
+import { variables, settings } from '../../../styles/settings';
 import { transparentize } from 'polished';
 
 export default {
   Root: styled(({  expanded, ...rest }) => <div {...rest} />)`
     position: fixed;
-    height: calc(100vh - 60px);
-    top: 60px;
+    height: calc(100vh - ${settings.navHeight});
+    top: ${settings.navHeight};
     width: 100vw;
     left: 0;
     content: '';

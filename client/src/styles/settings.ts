@@ -29,3 +29,8 @@ export const viewsFromRight = keyframes`
     margin-left: 0;
   }
 `;
+
+export const settings = {
+  navHeight: '60px',
+  footerHeight: '200px',
+}
