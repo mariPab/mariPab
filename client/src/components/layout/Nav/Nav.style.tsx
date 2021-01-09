@@ -80,7 +80,7 @@ export default {
       }
     `}
     @media (max-width: 768px) {
-      padding: 0 15px;
+      padding: calc((60px - 1.4rem) / 2) 15px;
     }
     @media (max-width: 567px) {
       padding: 15px 20px;

@@ -15,7 +15,7 @@ export const FooterRoot = styled.footer`
   span {
     color: ${darken(0.3, variables.colorSoftBeige)};
   }
-  @media (max-width: 567px){
+  @media (max-width: 567px), (max-width: 830px) and (max-height: 420px) {
     height: 140px;
     & > div {
     padding: 15px;
