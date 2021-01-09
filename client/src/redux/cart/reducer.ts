@@ -6,7 +6,6 @@ import {
   RemoveFromCart,
   AddComments,
   LoadCart,
-  UpdateOrderData,
   CartProduct,
 } from './types';
 import { RootState } from '../store';
@@ -18,7 +17,6 @@ import {
   REMOVE_PRODUCT,
   SUBMIT_ORDER_SUCCESS,
   LOAD_CART,
-  UPDATE_ORDER_DATA,
   UPDATE_TOTAL,
 } from './actions';
 
@@ -32,20 +30,11 @@ export const getTotalPrice = ({ cart }: RootState) =>
     (total, product) => product.price * product.amount + total,
     0
   );
-export const getCustomerData = ({ cart }: RootState) => cart.customer;
 export const getProcessingState = ({ cart }: RootState) => cart.orderProcessing;
 
 const initState: CartStore = {
   products: [],
   orderProcessing: false,
-  customer: {
-    firstName: '',
-    lastName: '',
-    email: '',
-    address: '',
-    place: '',
-    postCode: '',
-  },
   total: 0,
 };
 
@@ -104,13 +93,6 @@ export default function cartReducer(
             return { ...product, notes: payload.notes };
           else return product;
         }),
-      };
-    }
-    case UPDATE_ORDER_DATA: {
-      const { payload } = action as UpdateOrderData;
-      return {
-        ...statePart,
-        customer: { ...statePart.customer, [payload.field]: payload.value },
       };
     }
     case REMOVE_PRODUCT: {

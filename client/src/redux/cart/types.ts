@@ -29,7 +29,6 @@ export interface Customer {
 export interface CartStore {
   products: CartProduct[];
   orderProcessing: boolean;
-  customer: Customer;
   total: number;
 }
 
@@ -40,6 +39,7 @@ export interface OrderPayload {
 }
 export interface SubmitOrderStart {
   type: typeof SUBMIT_ORDER_START;
+  payload: { customer: Customer };
 }
 export interface SubmitOrderSuccess {
   type: typeof SUBMIT_ORDER_SUCCESS;
@@ -60,13 +60,6 @@ export interface AddComments {
   payload: {
     id: string;
     notes: string;
-  };
-}
-export interface UpdateOrderData {
-  type: typeof UPDATE_ORDER_DATA;
-  payload: {
-    value: string;
-    field: string;
   };
 }
 export interface ChangeProductAmount {
@@ -99,7 +92,6 @@ export type CartReducerActionTypes =
   | SubmitOrderFail
   | AddProductToCart
   | AddComments
-  | UpdateOrderData
   | ChangeProductAmount
   | RemoveFromCart
   | LoadCart;

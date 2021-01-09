@@ -4,9 +4,9 @@ import {
   ChangeProductAmount,
   AddComments,
   RemoveFromCart,
-  UpdateOrderData,
   LoadCartStart,
   SaveCart,
+  Customer,
 } from './types';
 import { ProductBasic } from '../products/types';
 
@@ -33,8 +33,9 @@ export const LOAD_CART = createActionName('LOAD_CART');
 export const SAVE_CART = createActionName('SAVE_CART');
 
 /* action creators */
-export const submitOrderStart= (): SubmitOrderStart => ({
+export const submitOrderStart= (customer: Customer): SubmitOrderStart => ({
   type: SUBMIT_ORDER_START,
+  payload: { customer },
 });
 export const addProductToCart = (
   product: ProductBasic,
@@ -53,10 +54,6 @@ export const changeProductAmount = (
 export const addComments = (id: string, notes: string): AddComments => ({
   payload: { id, notes },
   type: ADD_COMMENTS,
-});
-export const updateOrderData = (value: string, field: string): UpdateOrderData => ({
-  payload: { value, field },
-  type: UPDATE_ORDER_DATA,
 });
 export const removeFromCart = (id: string): RemoveFromCart => ({
   payload: { id },

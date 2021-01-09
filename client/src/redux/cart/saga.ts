@@ -11,7 +11,7 @@ import {
   LOAD_CART,
   LOAD_CART_START,
 } from './actions';
-import { CartStore } from './types';
+import { CartStore, SubmitOrderStart } from './types';
 import { getCart } from './reducer';
 import CodesHandler from '../../helpers/codesHandler';
 import { select, takeEvery, put, all, fork, delay } from 'redux-saga/effects';
@@ -33,8 +33,8 @@ export function* updateTotal({ type }: AnyAction) {
 export function* submitOrderWatcher(): Generator {
   yield takeEvery(SUBMIT_ORDER_START, submitOrder);
 }
-export function* submitOrder() {
-  const { products, customer, total } = (yield select(getCart)) as CartStore;
+export function* submitOrder({ payload }: SubmitOrderStart) {
+  const { products, total } = (yield select(getCart)) as CartStore;
   try {
     const orderAttributes = {
       products: products.map(product => ({
@@ -42,7 +42,7 @@ export function* submitOrder() {
         amount: product.amount,
         notes: product.notes,
       })),
-      customer,
+      customer: payload.customer,
       total,
     };
     const res = yield axios.post(`${API_URL}/order/submit`, orderAttributes);

@@ -9,13 +9,18 @@ import { useHistory } from 'react-router-dom';
 import Summary from './OrderSummary.style';
 import { useCartProducts } from '../../../helpers/useCartProducts';
 import UI from '../../ui/UI.style';
+import { submitOrderStart } from '../../../redux/cart/actions';
+import { Customer } from "../../../redux/cart/types";
 
 interface MapStateToProps {
   cart: CartStore;
 }
-type Props = MapStateToProps;
+interface MapDispatchToProps {
+  submitOrder: (customerData: Customer) => void;
+}
+type Props = MapStateToProps & MapDispatchToProps;
 
-export const OrderSummary: FunctionComponent<Props> = ({ cart }: Props) => {
+export const OrderSummary: FunctionComponent<Props> = ({ cart, submitOrder }: Props) => {
   const history = useHistory();
   const { total, productsAmount } = useCartProducts(cart.products);
   useEffect(() => {
@@ -27,8 +32,14 @@ export const OrderSummary: FunctionComponent<Props> = ({ cart }: Props) => {
       }
     }
   }, [cart.products.length, history, total]);
+
   return (
     <Summary.Container>
+      <Summary.TransparentBackground orderProcessing={cart.orderProcessing}>
+        {cart.orderProcessing &&
+          <UI.Loader centered />
+        }
+      </Summary.TransparentBackground>
       <div>
         <Summary.Section>
           <h2>Moje produkty</h2>
@@ -55,14 +66,18 @@ export const OrderSummary: FunctionComponent<Props> = ({ cart }: Props) => {
       </div>
       <div>
         <h2>Dane kontaktowe</h2>
-        <OrderForm />
+        <OrderForm onOrderSubmission={submitOrder}/>
       </div>
-    </Summary.Container>
+        </Summary.Container>
+
   );
 };
 
 const mapStateToProps = (state: RootState) => ({
   cart: getCart(state),
 });
-
-export default connect(mapStateToProps, null)(OrderSummary);
+const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
+  submitOrder: (customerData: Customer) =>
+    dispatch(submitOrderStart(customerData)),
+});
+export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);
