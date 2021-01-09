@@ -3,14 +3,13 @@ import { connect } from 'react-redux';
 import { getProductsListStart, setSearchValue, setActiveTags } from '../../../redux/products/actions';
 import { getAll, getLoadingState } from '../../../redux/products/reducer';
 import ProductCard from '../../features/ProductCard';
-import Loader from '../../common/Loader/Loader.style';
 import { RootState } from '../../../redux/store';
 import { Product } from '../../../redux/products/types';
 import {
   ProductsContainer,
   SearchContainer,
 } from './Products.style';
-// import UI from '../../ui/UI.style';
+import UI from '../../ui/UI.style';
 import { Search } from '@material-ui/icons';
 import debounce from 'debounce';
 import { Select, Input } from 'antd';
@@ -67,7 +66,7 @@ export class Products extends React.Component<Props> {
             )}
           </Select>
         </SearchContainer>
-        {this.props.loading ? <Loader position='center' height={80} width={100} /> : null}
+        {this.props.loading ? <UI.Loader centered height={80} width={100} /> : null}
         <ProductsContainer loading={this.props.loading}>
           {this.props.products.length ? this.props.products.map(product =>
             <ProductCard key={product.id} product={product} />

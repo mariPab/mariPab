@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { Select } from 'antd';
 import { variables } from '../../styles/settings';
 import { lighten, transparentize, darken } from 'polished';
 import { ButtonProps } from 'antd/lib/button/button';
-import { Button as AntdButton, Tooltip, InputNumber } from 'antd';
+import { Button as AntdButton, Tooltip, InputNumber, Input, Form } from 'antd';
 import shared from '../../styles/shared.style';
 import { NavLink } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
 
 interface ButtonType extends ButtonProps {
   iconButton?: boolean;
@@ -14,6 +14,14 @@ interface ButtonType extends ButtonProps {
   noBorder?: boolean;
   floatRight?: boolean;
 }
+
+interface LoaderProps  {
+  color: string;
+  centered: boolean;
+  [key: string]: unknown;
+}
+
+const { Item } = Form;
 
 export default {
   Button: styled(({ iconButton, noPadding, noBorder, floatRight, ...props }: ButtonType) =>
@@ -44,7 +52,7 @@ export default {
       }
       span.anticon {
         font-size: 1.6rem;
-        margin-left: ${props => props.iconButton ? '0' : '10px' };
+        margin-left: ${props => props.iconButton ? '0' : '10px'};
       }
       ${({ floatRight }) => floatRight && `
         float: right;
@@ -84,4 +92,32 @@ export default {
       opacity: 1;
     }
   `,
+  Input: styled(Input)`
+
+  `,
+  FormItem: styled(Item)`
+    flex-direction: column;
+    justify-content: flex-start;
+    .ant-form-item-label {
+      text-align: left;
+    }
+    label {
+      font-weight: 100;
+      letter-spacing: 0.1rem;
+      text-transform: capitalize;
+
+    }
+  `,
+  Loader: styled(({ centered, ...props }: LoaderProps) =>
+    <Loader
+      {...props}
+      type='ThreeDots'
+      color={props.color ? props.color : variables.colorLightSky}
+  />)`
+  ${({ centered }) => centered && `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  `};
+`
 };
