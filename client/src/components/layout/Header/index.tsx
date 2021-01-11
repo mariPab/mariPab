@@ -1,11 +1,10 @@
 import React from 'react';
-// import Nav from '../Nav';
-import styles from './Header.module.scss';
+import { HeaderRoot } from './Header.style';
 
 const Header: React.FunctionComponent = () => (
-  <div className={styles.root}>
+  <HeaderRoot>
     <h1>Natural Beauty Shop</h1>
-  </div>
+  </HeaderRoot>
 );
 
 export default Header;

@@ -30,6 +30,12 @@ export const GlobalStyle = createGlobalStyle`
     padding-left: 0;
     margin: 0;
   }
+  h1 {
+    font-family: ${variables.fontDecorator};
+    color: ${variables.colorSoftBeige};
+    font-size: 4rem;
+    letter-spacing: 0.2rem;
+  }
   h2, h3, h4, h6, span, p {
     color: ${variables.colorEerieBlack};
   }
