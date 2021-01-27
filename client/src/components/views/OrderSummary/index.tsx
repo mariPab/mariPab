@@ -4,19 +4,17 @@ import { connect } from 'react-redux';
 import { getCart } from '../../../redux/cart/reducer';
 import OrderForm from '../../features/OrderForm';
 import { RootState } from '../../../redux/store';
-import { CartStore } from '../../../redux/cart/types';
 import { useHistory } from 'react-router-dom';
 import Summary from './OrderSummary.style';
 import { useCartProducts } from '../../../helpers/useCartProducts';
 import UI from '../../ui/UI.style';
 import { submitOrderStart } from '../../../redux/cart/actions';
-import { Customer } from "../../../redux/cart/types";
 
 interface MapStateToProps {
-  cart: CartStore;
+  cart: Cart.Store;
 }
 interface MapDispatchToProps {
-  submitOrder: (customerData: Customer) => void;
+  submitOrder: (customerData: Cart.Customer) => void;
 }
 type Props = MapStateToProps & MapDispatchToProps;
 
@@ -77,7 +75,7 @@ const mapStateToProps = (state: RootState) => ({
   cart: getCart(state),
 });
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  submitOrder: (customerData: Customer) =>
+  submitOrder: (customerData: Cart.Customer) =>
     dispatch(submitOrderStart(customerData)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(OrderSummary);

@@ -5,7 +5,6 @@ import { useViewport } from '../../../context/viewport';
 import Navi from './Nav.style';
 import { connect } from 'react-redux';
 import { RootState } from '../../../redux/store';
-import { CartProduct } from '../../../redux/cart/types';
 import { useCartProducts } from '../../../helpers/useCartProducts';
 
 const links = [
@@ -15,7 +14,7 @@ const links = [
 ];
 
 interface MapStateToProps {
-  products: CartProduct[];
+  products: Cart.CartProduct[];
 }
 interface Props extends MapStateToProps {
   toggleCart: () => void;

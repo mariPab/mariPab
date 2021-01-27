@@ -11,33 +11,12 @@ import {
   SET_ACTIVE_TAGS,
 } from './actions';
 
-export interface ProductBasic {
-  id: string;
-  name: string;
-  description: string;
-  images: string[];
-  price: number;
-}
-
-export interface Product extends ProductBasic {
-  tags?: string[];
-}
-export interface ProductStore {
-  init: boolean;
-  data: Product[];
-  loading: boolean;
-  search: string;
-  error: boolean;
-  tags: string[];
-  activeTags: string[];
-  activeProduct: Product | null;
-}
 export interface GetProductsListStart {
   type: typeof GET_PRODUCTS_LIST_START;
 }
 export interface GetProductsListSuccess {
   type: typeof GET_PRODUCTS_LIST_SUCCESS;
-  payload: Product[];
+  payload: Product.Product[];
 }
 export interface SetAvailableTags {
   type: typeof SET_AVAILABLE_TAGS;
@@ -52,7 +31,7 @@ export interface GetProductByIdStart {
 }
 export interface GetProductByIdSuccess {
   type: typeof GET_PRODUCT_BY_ID_SUCCESS;
-  payload: Product;
+  payload: Product.Product;
 }
 export interface GetProductByIdFail {
   type: typeof GET_PRODUCT_BY_ID_FAIL;
@@ -68,13 +47,3 @@ export interface SetActiveTags {
 export interface ResetActiveProduct {
   type: typeof RESET_ACTIVE_PRODUCT;
 }
-export type ProductReducerActionTypes =
-  | GetProductsListStart
-  | GetProductsListSuccess
-  | GetProductsListFail
-  | GetProductByIdStart
-  | GetProductByIdSuccess
-  | GetProductByIdFail
-  | SetSearchValue
-  | SetAvailableTags
-  | SetActiveTags;

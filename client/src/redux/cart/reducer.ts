@@ -1,12 +1,9 @@
 import {
-  CartStore,
-  CartReducerActionTypes,
   AddProductToCart,
   ChangeProductAmount,
   RemoveFromCart,
   AddComments,
   LoadCart,
-  CartProduct,
 } from './types';
 import { RootState } from '../store';
 import {
@@ -19,6 +16,7 @@ import {
   LOAD_CART,
   UPDATE_TOTAL,
 } from './actions';
+import { AnyAction } from 'redux';
 
 /* selectors */
 export const getCart = ({ cart }: RootState) => cart;
@@ -32,16 +30,16 @@ export const getTotalPrice = ({ cart }: RootState) =>
   );
 export const getProcessingState = ({ cart }: RootState) => cart.orderProcessing;
 
-const initState: CartStore = {
+const initState: Cart.Store = {
   products: [],
   orderProcessing: false,
   total: 0,
 };
 
 export default function cartReducer(
-  statePart: CartStore = initState,
-  action: CartReducerActionTypes
-): CartStore {
+  statePart: Cart.Store = initState,
+  action: AnyAction
+): Cart.Store {
   switch (action.type) {
     case LOAD_CART:
       const { payload } = action as LoadCart;
@@ -49,7 +47,7 @@ export default function cartReducer(
         ...statePart,
         products: payload.length ? payload.map(({ tags, ...rest}) => ({
           ...rest,
-        } as CartProduct
+        } as Cart.CartProduct
         )) : [],
       };
     case ADD_PRODUCT: {

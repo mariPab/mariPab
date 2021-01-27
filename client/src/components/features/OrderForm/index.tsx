@@ -1,10 +1,9 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
-import { Customer } from '../../../redux/cart/types';
+import { Form, Input } from 'antd';
 import UI from '../../ui/UI.style';
 
 interface Props {
-  onOrderSubmission: (customer: Customer) => void;
+  onOrderSubmission: (customer: Cart.Customer) => void;
 }
 
 const OrderForm = ({ onOrderSubmission }: Props) => {

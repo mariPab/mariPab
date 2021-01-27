@@ -1,6 +1,4 @@
-import { CartProduct } from '../redux/cart/types';
-
-type CountProducts = (productList: CartProduct[]) => number;
+type CountProducts = (productList: Cart.CartProduct[]) => number;
 
 class CartProductsCounter {
   public countProducts: CountProducts = productsList =>

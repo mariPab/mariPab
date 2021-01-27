@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { CartProduct } from '../redux/cart/types';
 import CartProductsCounter from './cartProductsCounter';
 
-export function useCartProducts(products: CartProduct[]) {
+export function useCartProducts(products: Cart.CartProduct[]) {
   const [total, setTotal] = useState(CartProductsCounter.countTotalPrice(products));
   const [productsAmount, setProductsAmount] = useState(CartProductsCounter.countProducts(products));
   useEffect(() => {

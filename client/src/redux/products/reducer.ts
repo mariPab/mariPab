@@ -1,4 +1,3 @@
-import { ProductStore, ProductReducerActionTypes } from './types';
 import {
   GET_PRODUCTS_LIST_START,
   GET_PRODUCTS_LIST_SUCCESS,
@@ -20,6 +19,7 @@ import {
   SetActiveTags,
 } from './types';
 import { RootState } from '../store';
+import { AnyAction } from 'redux';
 
 /* selectors */
 export const getAll = ({ products }: RootState) => products.data;
@@ -27,7 +27,7 @@ export const getLoadingState = ({ products }: RootState) => products.loading;
 export const getActiveProduct = ({ products }: RootState) => products.activeProduct;
 export const getProductsState = ({ products }: RootState) => products;
 
-const initState: ProductStore = {
+const initState: Product.Store = {
   init: true,
   data: [],
   loading: false,
@@ -39,9 +39,9 @@ const initState: ProductStore = {
 };
 
 export default function productsReducer(
-  statePart: ProductStore = initState,
-  action: ProductReducerActionTypes
-): ProductStore {
+  statePart: Product.Store = initState,
+  action: AnyAction
+): Product.Store {
   switch (action.type) {
     case GET_PRODUCTS_LIST_START:
     case GET_PRODUCT_BY_ID_START: {

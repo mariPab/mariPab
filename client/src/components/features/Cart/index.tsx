@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { NavLink } from 'react-router-dom';
 import CartItem from '../CartItem';
-import { CartProduct } from '../../../redux/cart/types';
 import manageCartStorage from '../../../HOC/manageCartStorage';
 import { RootState } from '../../../redux/store';
 import CartSheet from './Cart.style';
@@ -11,7 +10,7 @@ import UI from '../../ui/UI.style';
 import { useCartProducts } from '../../../helpers/useCartProducts';
 
 interface MapStateToProps {
-  products: CartProduct[];
+  products: Cart.CartProduct[];
 }
 interface Props extends MapStateToProps {
   opened: boolean;
@@ -26,7 +25,7 @@ export const Cart: React.FunctionComponent<Props> = ({
   const { total, productsAmount } = useCartProducts(products);
   return (
     <>
-      {opened ? (
+      {opened ?
         <CartSheet.Root expanded={opened}>
           <CartSheet.Background onClick={toggleCart} />
           <CartSheet.Cart>
@@ -65,7 +64,7 @@ export const Cart: React.FunctionComponent<Props> = ({
             </CartSheet.OrderSummary>
           </CartSheet.Cart>
         </CartSheet.Root>
-      ) : null}
+     : null}
     </>
   );
 };

@@ -6,9 +6,9 @@ import {
   RemoveFromCart,
   LoadCartStart,
   SaveCart,
-  Customer,
+  // Customer,
 } from './types';
-import { ProductBasic } from '../products/types';
+// import { Product.Product } from '../products/types';
 
 /* action name creator */
 const reducerName = 'CART';
@@ -33,12 +33,12 @@ export const LOAD_CART = createActionName('LOAD_CART');
 export const SAVE_CART = createActionName('SAVE_CART');
 
 /* action creators */
-export const submitOrderStart= (customer: Customer): SubmitOrderStart => ({
+export const submitOrderStart= (customer: Cart.Customer): SubmitOrderStart => ({
   type: SUBMIT_ORDER_START,
   payload: { customer },
 });
 export const addProductToCart = (
-  product: ProductBasic,
+  product: Product.Product,
   amount: number
 ): AddProductToCart => ({
   payload: { product, amount },

@@ -11,7 +11,7 @@ import {
   LOAD_CART,
   LOAD_CART_START,
 } from './actions';
-import { CartStore, SubmitOrderStart } from './types';
+import { SubmitOrderStart } from './types';
 import { getCart } from './reducer';
 import CodesHandler from '../../helpers/codesHandler';
 import { select, takeEvery, put, all, fork, delay } from 'redux-saga/effects';
@@ -34,7 +34,7 @@ export function* submitOrderWatcher(): Generator {
   yield takeEvery(SUBMIT_ORDER_START, submitOrder);
 }
 export function* submitOrder({ payload }: SubmitOrderStart) {
-  const { products, total } = (yield select(getCart)) as CartStore;
+  const { products, total } = (yield select(getCart)) as Cart.Store;
   try {
     const orderAttributes = {
       products: products.map(product => ({
@@ -72,7 +72,7 @@ export function* saveCartWatcher(): Generator {
   yield takeEvery(SAVE_CART, saveCart);
 }
 export function* saveCart() {
-  const { products } = (yield select(getCart)) as CartStore;
+  const { products } = (yield select(getCart)) as Cart.Store;
   localStorage.setItem('cart', JSON.stringify(products));
 }
 

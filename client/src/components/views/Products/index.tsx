@@ -4,7 +4,6 @@ import { getProductsListStart, setSearchValue, setActiveTags } from '../../../re
 import { getAll, getLoadingState } from '../../../redux/products/reducer';
 import ProductCard from '../../features/ProductCard';
 import { RootState } from '../../../redux/store';
-import { Product } from '../../../redux/products/types';
 import {
   ProductsContainer,
   SearchContainer,
@@ -15,7 +14,7 @@ import debounce from 'debounce';
 import { Select, Input } from 'antd';
 
 interface MapStateToProps {
-  products: Product[];
+  products: Product.Product[];
   loading: boolean;
   tags: string[];
   activeTags: string[];

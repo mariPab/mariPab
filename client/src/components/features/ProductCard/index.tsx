@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { IMAGES_URL } from '../../../settings/config';
-import { Product } from '../../../redux/products/types';
 import { addProductToCart } from '../../../redux/cart/actions';
 import { connect } from 'react-redux';
 import {AddShoppingCart, ArrowForward} from '@material-ui/icons';
@@ -9,10 +8,10 @@ import { ProductCardBox, ProductDetails } from './ProductCard.style';
 import UI from '../../ui/UI.style';
 
 interface MapDispatchToProps {
-  addToCart: (product: Product, amount: number) => void;
+  addToCart: (product: Product.Product, amount: number) => void;
 }
 interface Props extends MapDispatchToProps {
-  product: Product;
+  product: Product.Product;
 }
 export const ProductCard: React.FunctionComponent<Props> = ({ product, addToCart }: Props) => (
   <ProductCardBox>
@@ -30,9 +29,7 @@ export const ProductCard: React.FunctionComponent<Props> = ({ product, addToCart
               icon={<ArrowForward />}
               noBorder
               noPadding
-            >
-              {/* Przejdź do produktu */}
-            </UI.Button>
+            />
           </UI.Tooltip>
         </NavLink>
         <UI.Tooltip title="Dodaj do koszyka">
@@ -51,7 +48,7 @@ export const ProductCard: React.FunctionComponent<Props> = ({ product, addToCart
 );
 
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  addToCart: (product: Product, amount: number) =>
+  addToCart: (product: Product.Product, amount: number) =>
     dispatch(addProductToCart(product, amount)),
 });
 

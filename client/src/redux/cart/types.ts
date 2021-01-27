@@ -11,35 +11,10 @@ import {
   LOAD_CART_START,
   SAVE_CART,
 } from './actions';
-import { Product, ProductBasic } from '../products/types';
 
-export interface CartProduct extends Product {
-  amount: number;
-  notes: string;
-}
-export interface Customer {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  place: string;
-  postCode: string;
-}
-
-export interface CartStore {
-  products: CartProduct[];
-  orderProcessing: boolean;
-  total: number;
-}
-
-export interface OrderPayload {
-  products: CartProduct[];
-  client: any;
-  total: number;
-}
 export interface SubmitOrderStart {
   type: typeof SUBMIT_ORDER_START;
-  payload: { customer: Customer };
+  payload: { customer: Cart.Customer };
 }
 export interface SubmitOrderSuccess {
   type: typeof SUBMIT_ORDER_SUCCESS;
@@ -50,11 +25,10 @@ export interface SubmitOrderFail {
 export interface AddProductToCart {
   type: typeof ADD_PRODUCT;
   payload: {
-    product: ProductBasic;
+    product: Product.Product;
     amount: number;
   };
 }
-
 export interface AddComments {
   type: typeof ADD_COMMENTS;
   payload: {
@@ -77,7 +51,7 @@ export interface RemoveFromCart {
 }
 export interface LoadCart {
   type: typeof LOAD_CART;
-  payload: Product[];
+  payload: Product.Product[];
 }
 export interface LoadCartStart {
   type: typeof LOAD_CART_START;
@@ -85,13 +59,3 @@ export interface LoadCartStart {
 export interface SaveCart {
   type: typeof SAVE_CART;
 }
-
-export type CartReducerActionTypes =
-  | SubmitOrderStart
-  | SubmitOrderSuccess
-  | SubmitOrderFail
-  | AddProductToCart
-  | AddComments
-  | ChangeProductAmount
-  | RemoveFromCart
-  | LoadCart;

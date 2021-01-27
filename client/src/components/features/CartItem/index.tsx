@@ -9,7 +9,6 @@ import {
   addComments,
 } from '../../../redux/cart/actions';
 import EditIcon from '@material-ui/icons/Edit';
-import { CartProduct } from '../../../redux/cart/types';
 import UI from '../../ui/UI.style';
 
 interface MapDispatchToProps {
@@ -18,7 +17,7 @@ interface MapDispatchToProps {
   addNotes: (id: string, notes: string) => void;
 }
 interface Props extends MapDispatchToProps {
-  product: CartProduct;
+  product: Cart.CartProduct;
 }
 export const CartItem: React.FunctionComponent<Props> = ({
   product,
