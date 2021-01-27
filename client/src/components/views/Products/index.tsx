@@ -69,7 +69,7 @@ export class Products extends React.Component<Props> {
         <ProductsContainer loading={this.props.loading}>
           {this.props.products.length ? this.props.products.map(product =>
             <ProductCard key={product.id} product={product} />
-          ) : <p>Przykro nam! :( Nie znaleźliśmy produktów spełniających Twoje kryteria.</p>}
+          ) : <p>Nie znaleziono produktów spełniających Twoje kryteria.</p>}
         </ProductsContainer>
       </>
     );
