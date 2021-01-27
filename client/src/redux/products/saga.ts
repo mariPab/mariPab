@@ -1,38 +1,28 @@
 import axios from 'axios';
 import { API_URL } from '../../settings/config';
-import {
-  GET_PRODUCTS_LIST_START,
-  GET_PRODUCTS_LIST_FAIL,
-  GET_PRODUCTS_LIST_SUCCESS,
-  GET_PRODUCT_BY_ID_FAIL,
-  GET_PRODUCT_BY_ID_START,
-  GET_PRODUCT_BY_ID_SUCCESS,
-  SET_SEARCH_VALUE,
-  SET_AVAILABLE_TAGS,
-  INIT_PRODUCTS_FINISH,
-  SET_ACTIVE_TAGS,
-} from './actions';
-import { GetProductByIdStart } from './types';
+import { productActionsInterfaces, productActionTypes, productSelectors } from '.';
 import { takeEvery, put, all, fork, select } from 'redux-saga/effects';
 import UrlBuilder from '../../helpers/urlBuilder';
-import { getProductsState } from './reducer';
 import CodesHandler from '../../helpers/codesHandler';
 
 const { build } = UrlBuilder;
 
 export function* getProductsListWatcher(): Generator {
-  yield takeEvery(GET_PRODUCTS_LIST_START, getProductsList);
+  yield takeEvery(productActionTypes.GET_PRODUCTS_LIST_START, getProductsList);
 }
 export function* getProductsList() {
   try {
-    const { search, init, activeTags } = (yield select(getProductsState)) as Product.Store;
+    const { search, init, activeTags } = (yield select(productSelectors.getProductsState)) as Product.Store;
     const requestParams = { search, activeTags };
     const address = build(`${API_URL}/products/all`, requestParams);
     const res = yield axios.get(address);
     const data = res.data.map((item: any) => ({
       ...item, id: item._id,
     })) as Product.Product[];
-    yield put({ type: GET_PRODUCTS_LIST_SUCCESS, payload: data });
+    yield put({
+      type: productActionTypes.GET_PRODUCTS_LIST_SUCCESS,
+      payload: data
+    });
     if (init) {
       const tags: string[] = [];
       data.forEach(item => {
@@ -41,42 +31,45 @@ export function* getProductsList() {
         }
       });
       yield put({
-        type: SET_AVAILABLE_TAGS,
+        type: productActionTypes.SET_AVAILABLE_TAGS,
         payload: tags.filter((item, idx) => tags.indexOf(item) == idx),
       });
-      yield put({ type: INIT_PRODUCTS_FINISH });
+      yield put({ type: productActionTypes.INIT_PRODUCTS_FINISH });
 
     }
   } catch (err) {
     console.log(err);
-    yield put({ type: GET_PRODUCTS_LIST_FAIL });
+    yield put({ type: productActionTypes.GET_PRODUCTS_LIST_FAIL });
     yield CodesHandler.executeErrorCodes(err.response.data.errorCode);
   }
 }
 
 export function* getProductByIdWatcher(): Generator {
-  yield takeEvery(GET_PRODUCT_BY_ID_START, getProductById);
+  yield takeEvery(productActionTypes.GET_PRODUCT_BY_ID_START, getProductById);
 }
-export function* getProductById({ payload }: GetProductByIdStart) {
+export function* getProductById({ payload }: productActionsInterfaces.GetProductByIdStart) {
   try {
     const res = yield axios.get(`${API_URL}/products/product/${payload.id}`);
     const data = { ...res.data, id: res.data._id };
     delete data._id;
     yield put({
-      type: GET_PRODUCT_BY_ID_SUCCESS,
+      type: productActionTypes.GET_PRODUCT_BY_ID_SUCCESS,
       payload: data,
     });
   } catch (e) {
-    yield put({ type: GET_PRODUCT_BY_ID_FAIL });
+    yield put({ type: productActionTypes.GET_PRODUCT_BY_ID_FAIL });
   }
 }
 
 export function* refreshProductsListWatcher(): Generator {
-  yield takeEvery([SET_SEARCH_VALUE, SET_ACTIVE_TAGS], refreshProductsList);
+  yield takeEvery([
+    productActionTypes.SET_SEARCH_VALUE,
+    productActionTypes.SET_ACTIVE_TAGS
+  ], refreshProductsList);
 }
 export function* refreshProductsList() {
   yield put({
-    type: GET_PRODUCTS_LIST_START,
+    type: productActionTypes.GET_PRODUCTS_LIST_START,
   });
 }
 

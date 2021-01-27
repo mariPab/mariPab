@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getProductsListStart, setSearchValue, setActiveTags } from '../../../redux/products/actions';
-import { getAll, getLoadingState } from '../../../redux/products/reducer';
+import { productActions } from '../../../redux/products';
 import ProductCard from '../../features/ProductCard';
 import { RootState } from '../../../redux/store';
 import {
@@ -76,14 +75,14 @@ export class Products extends React.Component<Props> {
   }
 }
 const mapStateToProps = (state: RootState): MapStateToProps => ({
-  products: getAll(state),
-  loading: getLoadingState(state),
+  products: state.products.data,
+  loading: state.products.loading,
   tags: state.products.tags,
   activeTags: state.products.activeTags,
 });
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
-  getProductsList: () => dispatch(getProductsListStart()),
-  setSearchValue: (value: string) => dispatch(setSearchValue(value)),
-  filterByTags: (tags: string[]) => dispatch(setActiveTags(tags)),
+  getProductsList: () => dispatch(productActions.getProductsListStart()),
+  setSearchValue: (value: string) => dispatch(productActions.setSearchValue(value)),
+  filterByTags: (tags: string[]) => dispatch(productActions.setActiveTags(tags)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

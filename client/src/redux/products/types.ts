@@ -1,49 +1,19 @@
-import {
-  GET_PRODUCTS_LIST_SUCCESS,
-  GET_PRODUCTS_LIST_START,
-  GET_PRODUCT_BY_ID_START,
-  GET_PRODUCT_BY_ID_SUCCESS,
-  GET_PRODUCTS_LIST_FAIL,
-  GET_PRODUCT_BY_ID_FAIL,
-  RESET_ACTIVE_PRODUCT,
-  SET_SEARCH_VALUE,
-  SET_AVAILABLE_TAGS,
-  SET_ACTIVE_TAGS,
-} from './actions';
+const reducerName = 'PRODUCT';
+const createActionName = (name: string) => `APP/${reducerName}/${name}`;
 
-export interface GetProductsListStart {
-  type: typeof GET_PRODUCTS_LIST_START;
-}
-export interface GetProductsListSuccess {
-  type: typeof GET_PRODUCTS_LIST_SUCCESS;
-  payload: Product.Product[];
-}
-export interface SetAvailableTags {
-  type: typeof SET_AVAILABLE_TAGS;
-  payload: string[];
-}
-export interface GetProductsListFail {
-  type: typeof GET_PRODUCTS_LIST_FAIL;
-}
-export interface GetProductByIdStart {
-  type: typeof GET_PRODUCT_BY_ID_START;
-  payload: { id: string; };
-}
-export interface GetProductByIdSuccess {
-  type: typeof GET_PRODUCT_BY_ID_SUCCESS;
-  payload: Product.Product;
-}
-export interface GetProductByIdFail {
-  type: typeof GET_PRODUCT_BY_ID_FAIL;
-}
-export interface SetSearchValue {
-  type: typeof SET_SEARCH_VALUE;
-  payload: { value: string; };
-}
-export interface SetActiveTags {
-  type: typeof SET_ACTIVE_TAGS;
-  payload: { tags: string[]; };
-}
-export interface ResetActiveProduct {
-  type: typeof RESET_ACTIVE_PRODUCT;
-}
+export const INIT_PRODUCTS_FINISH = createActionName('INIT_PRODUCTS_FINISH');
+
+export const GET_PRODUCTS_LIST_START = createActionName('GET_PRODUCTS_LIST_START');
+export const GET_PRODUCTS_LIST_SUCCESS = createActionName('GET_PRODUCTS_LIST_SUCCESS');
+export const GET_PRODUCTS_LIST_FAIL = createActionName('GET_PRODUCTS_LIST_FAIL');
+
+export const SET_AVAILABLE_TAGS = createActionName('SET_AVAILABLE_TAGS');
+export const SET_ACTIVE_TAGS = createActionName('SET_ACTIVE_TAGS');
+
+export const SET_SEARCH_VALUE = createActionName('SET_SEARCH_VALUE');
+
+export const GET_PRODUCT_BY_ID_START = createActionName('GET_PRODUCT_BY_ID_START');
+export const GET_PRODUCT_BY_ID_SUCCESS = createActionName('GET_PRODUCT_BY_ID_SUCCESS');
+export const GET_PRODUCT_BY_ID_FAIL = createActionName('GET_PRODUCT_BY_ID_FAIL');
+
+export const RESET_ACTIVE_PRODUCT = createActionName('RESET_ACTIVE_PRODUCT');

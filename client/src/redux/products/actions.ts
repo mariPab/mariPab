@@ -1,50 +1,26 @@
-import {
-  GetProductByIdStart,
-  GetProductsListStart,
-  SetActiveTags,
-  SetSearchValue,
-  ResetActiveProduct,
-} from './types';
+import { productActionsInterfaces, productActionTypes} from '.';
 
-/* action name creator */
-const reducerName = 'PRODUCT';
-const createActionName = (name: string) => `APP/${reducerName}/${name}`;
-
-/* action types */
-export const INIT_PRODUCTS_FINISH = createActionName('INIT_PRODUCTS_FINISH');
-
-export const GET_PRODUCTS_LIST_START = createActionName('GET_PRODUCTS_LIST_START');
-export const GET_PRODUCTS_LIST_SUCCESS = createActionName('GET_PRODUCTS_LIST_SUCCESS');
-export const GET_PRODUCTS_LIST_FAIL = createActionName('GET_PRODUCTS_LIST_FAIL');
-
-export const SET_AVAILABLE_TAGS = createActionName('SET_AVAILABLE_TAGS');
-export const SET_ACTIVE_TAGS = createActionName('SET_ACTIVE_TAGS');
-
-export const SET_SEARCH_VALUE = createActionName('SET_SEARCH_VALUE');
-
-export const GET_PRODUCT_BY_ID_START = createActionName('GET_PRODUCT_BY_ID_START');
-export const GET_PRODUCT_BY_ID_SUCCESS = createActionName('GET_PRODUCT_BY_ID_SUCCESS');
-export const GET_PRODUCT_BY_ID_FAIL = createActionName('GET_PRODUCT_BY_ID_FAIL');
-
-export const RESET_ACTIVE_PRODUCT = createActionName('RESET_ACTIVE_PRODUCT');
-
-/* action creators */
-export const getProductsListStart = (): GetProductsListStart => ({
-  type: GET_PRODUCTS_LIST_START,
+export const getProductsListStart =
+  (): productActionsInterfaces.GetProductsListStart => ({
+  type: productActionTypes.GET_PRODUCTS_LIST_START,
 });
-export const getProductByIdStart = (id: string): GetProductByIdStart => ({
-  type: GET_PRODUCT_BY_ID_START,
+export const getProductByIdStart =
+  (id: string): productActionsInterfaces.GetProductByIdStart => ({
+  type: productActionTypes.GET_PRODUCT_BY_ID_START,
   payload: { id },
 });
-export const setSearchValue = (value: string): SetSearchValue  => ({
-  type: SET_SEARCH_VALUE,
+export const setSearchValue =
+  (value: string): productActionsInterfaces.SetSearchValue => ({
+  type: productActionTypes.SET_SEARCH_VALUE,
   payload: { value },
 });
-export const setActiveTags = (tags: string[]): SetActiveTags  => ({
-  type: SET_ACTIVE_TAGS,
+export const setActiveTags =
+  (tags: string[]): productActionsInterfaces.SetActiveTags => ({
+  type: productActionTypes.SET_ACTIVE_TAGS,
   payload: { tags },
 });
-export const resetActiveProduct = (): ResetActiveProduct => ({
-  type: RESET_ACTIVE_PRODUCT,
+export const resetActiveProduct =
+  (): productActionsInterfaces.ResetActiveProduct => ({
+  type: productActionTypes.RESET_ACTIVE_PRODUCT,
 });
 
