@@ -1,7 +1,6 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import CartItem from '../../features/CartItem';
 import { connect } from 'react-redux';
-import { getCart } from '../../../redux/cart/reducer';
 import OrderForm from '../../features/OrderForm';
 import { RootState } from '../../../redux/store';
 import { useHistory } from 'react-router-dom';
@@ -72,7 +71,7 @@ export const OrderSummary: FunctionComponent<Props> = ({ cart, submitOrder }: Pr
 };
 
 const mapStateToProps = (state: RootState) => ({
-  cart: getCart(state),
+  cart: state.cart,
 });
 const mapDispatchToProps = (dispatch: any): MapDispatchToProps => ({
   submitOrder: (customerData: Cart.Customer) =>

@@ -1,34 +1,5 @@
-import {
-  AddProductToCart,
-  ChangeProductAmount,
-  RemoveFromCart,
-  AddComments,
-  LoadCart,
-} from './types';
-import { RootState } from '../store';
-import {
-  SUBMIT_ORDER_START,
-  ADD_COMMENTS,
-  ADD_PRODUCT,
-  CHANGE_PRODUCT_AMOUNT,
-  REMOVE_PRODUCT,
-  SUBMIT_ORDER_SUCCESS,
-  LOAD_CART,
-  UPDATE_TOTAL,
-} from './actions';
 import { AnyAction } from 'redux';
-
-/* selectors */
-export const getCart = ({ cart }: RootState) => cart;
-export const getProducts = ({ cart }: RootState) => cart.products;
-export const getProductFromCart = ({ cart }: RootState, productId: string) =>
-  cart.products.filter(product => product.id === productId)[0];
-export const getTotalPrice = ({ cart }: RootState) =>
-  cart.products.reduce(
-    (total, product) => product.price * product.amount + total,
-    0
-  );
-export const getProcessingState = ({ cart }: RootState) => cart.orderProcessing;
+import { cartActionTypes, cartActionsInterfaces } from '.';
 
 const initState: Cart.Store = {
   products: [],
@@ -41,8 +12,8 @@ export default function cartReducer(
   action: AnyAction
 ): Cart.Store {
   switch (action.type) {
-    case LOAD_CART:
-      const { payload } = action as LoadCart;
+    case cartActionTypes.LOAD_CART:
+      const { payload } = action as cartActionsInterfaces.LoadCart;
       return {
         ...statePart,
         products: payload.length ? payload.map(({ tags, ...rest}) => ({
@@ -50,9 +21,9 @@ export default function cartReducer(
         } as Cart.CartProduct
         )) : [],
       };
-    case ADD_PRODUCT: {
+    case cartActionTypes.ADD_PRODUCT: {
       const { products } = statePart;
-      const { payload } = action as AddProductToCart;
+      const { payload } = action as cartActionsInterfaces.AddProductToCart;
       if (products.length) {
         let isProductInCart = false;
         for (const item of products) {
@@ -71,8 +42,8 @@ export default function cartReducer(
         };
       }
     }
-    case CHANGE_PRODUCT_AMOUNT: {
-      const { payload } = action as ChangeProductAmount;
+    case cartActionTypes.CHANGE_PRODUCT_AMOUNT: {
+      const { payload } = action as cartActionsInterfaces.ChangeProductAmount;
       return {
         ...statePart,
         products: statePart.products.map((product) => {
@@ -82,8 +53,8 @@ export default function cartReducer(
         }),
       };
     }
-    case ADD_COMMENTS: {
-      const { payload } = action as AddComments;
+    case cartActionTypes.ADD_COMMENTS: {
+      const { payload } = action as cartActionsInterfaces.AddComments;
       return {
         ...statePart,
         products: statePart.products.map((product) => {
@@ -93,8 +64,8 @@ export default function cartReducer(
         }),
       };
     }
-    case REMOVE_PRODUCT: {
-      const { payload } = action as RemoveFromCart;
+    case cartActionTypes.REMOVE_PRODUCT: {
+      const { payload } = action as cartActionsInterfaces.RemoveFromCart;
       return {
         ...statePart,
         products: statePart.products.filter(
@@ -102,19 +73,19 @@ export default function cartReducer(
         ),
       };
     }
-    case UPDATE_TOTAL:
+    case cartActionTypes.UPDATE_TOTAL:
       return {
         ...statePart,
         total: statePart.products.reduce((total, product) =>
           product.price * product.amount + total,0),
       };
-    case SUBMIT_ORDER_START: {
+    case cartActionTypes.SUBMIT_ORDER_START: {
       return {
         ...statePart,
         orderProcessing: true,
       };
     }
-    case SUBMIT_ORDER_SUCCESS:
+    case cartActionTypes.SUBMIT_ORDER_SUCCESS:
       return {
         ...initState,
       };
