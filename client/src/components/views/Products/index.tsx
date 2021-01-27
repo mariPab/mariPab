@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { productActions } from '../../../redux/products';
 import ProductCard from '../../features/ProductCard';
-import { RootState } from '../../../redux/store';
 import {
   ProductsContainer,
   SearchContainer,

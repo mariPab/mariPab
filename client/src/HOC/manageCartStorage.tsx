@@ -1,7 +1,6 @@
 import React, { ComponentType } from 'react';
 import { cartSelectors, cartActions } from '../redux/cart';
 import { connect, ConnectedComponent } from 'react-redux';
-import { RootState } from '../redux/store';
 
 interface MapStateToProps {
   products: Cart.CartProduct[];

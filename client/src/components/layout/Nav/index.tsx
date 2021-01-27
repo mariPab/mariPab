@@ -4,7 +4,6 @@ import { Menu, LocalMall } from '@material-ui/icons';
 import { useViewport } from '../../../context/viewport';
 import Navi from './Nav.style';
 import { connect } from 'react-redux';
-import { RootState } from '../../../redux/store';
 import { useCartProducts } from '../../../helpers/useCartProducts';
 
 const links = [

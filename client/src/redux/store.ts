@@ -5,11 +5,6 @@ import cartReducer from './cart/reducer';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 
-export interface RootState {
-  readonly products: Product.Store;
-  readonly cart: Cart.Store;
-}
-
 const sagaMiddleware = createSagaMiddleware();
 
 const reducers = combineReducers({

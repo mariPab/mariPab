@@ -2,7 +2,6 @@ import React, { FunctionComponent, useState, useEffect } from 'react';
 import CartItem from '../../features/CartItem';
 import { connect } from 'react-redux';
 import OrderForm from '../../features/OrderForm';
-import { RootState } from '../../../redux/store';
 import { useHistory } from 'react-router-dom';
 import Summary from './OrderSummary.style';
 import { useCartProducts } from '../../../helpers/useCartProducts';

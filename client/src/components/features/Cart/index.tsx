@@ -4,7 +4,6 @@ import { compose } from 'redux';
 import { NavLink } from 'react-router-dom';
 import CartItem from '../CartItem';
 import manageCartStorage from '../../../HOC/manageCartStorage';
-import { RootState } from '../../../redux/store';
 import CartSheet from './Cart.style';
 import UI from '../../ui/UI.style';
 import { useCartProducts } from '../../../helpers/useCartProducts';

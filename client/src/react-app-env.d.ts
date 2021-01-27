@@ -1,4 +1,5 @@
 /// <reference types="react-scripts" />
+/// <reference path="./types/global.d.ts" />
 /// <reference path="./types/product/product.d.ts" />
 /// <reference path="./types/cart/cart.d.ts" />
 declare module 'react-router-transition';

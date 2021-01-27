@@ -1,5 +1,3 @@
-import { RootState } from '../store';
-
 export const getCart = ({ cart }: RootState) => cart;
 export const getProducts = ({ cart }: RootState) => cart.products;
 export const getProductFromCart = ({ cart }: RootState, productId: string) =>
